@@ -1,0 +1,670 @@
+// =========================================================
+// GERENCIAMENTOS - LAYOUT MODERNO E RESPONSIVO
+// Sistema de administração com header, navegação e footer
+// =========================================================
+
+.pagina-gerenciamento {
+    // =========================================================
+    // HEADER - Moderno com Gradiente e Efeito Sticky
+    // =========================================================
+    header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 10px 30px;
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 16px rgba(102, 126, 234, 0.15);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        gap: 20px;
+
+        &:hover {
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.25);
+        }
+    }
+
+    // =========================================================
+    // LOGO NO HEADER
+    // =========================================================
+    .header-logo {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        height: 50px;
+
+        img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(1.1);
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    // =========================================================
+    // INFO DO ADMIN E LOGOUT
+    // =========================================================
+    .admin-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+
+        .admin-nome {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .btn-logout {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+
+            &:hover {
+                background: rgba(255, 59, 48, 0.9);
+                border-color: rgba(255, 59, 48, 1);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+    }
+
+    // =========================================================
+    // NAVEGAÇÃO - Links com Animação Underline
+    // =========================================================
+    .navGerenciamentos {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            letter-spacing: 0.3px;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            cursor: pointer;
+
+            // Underline animado
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 4px;
+                left: 14px;
+                width: 0;
+                height: 2px;
+                background: #ffffff;
+                transition: width 0.3s ease;
+            }
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.15);
+                transform: translateY(-2px);
+
+                &::after {
+                    width: calc(100% - 28px);
+                }
+            }
+
+            &.active {
+                background: rgba(255, 255, 255, 0.25);
+                font-weight: 600;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+
+    // =========================================================
+    // MAIN - Área de Conteúdo
+    // =========================================================
+    main {
+        background: #f8f9fa;
+        min-height: calc(100vh - 450px);
+        padding: 0;
+    }
+
+    // =========================================================
+    // FOOTER - Dark Gradient com 3 Colunas
+    // =========================================================
+    footer {
+        background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
+        padding: 50px 40px 30px;
+        color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 120px;
+        position: relative;
+
+        // Borda animada superior
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        // =========================================================
+        // COLUNA 1 - Logo e Endereço
+        // =========================================================
+        .divLogo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            flex: 1;
+            max-width: 350px;
+
+            .wmremove-transformed-4 {
+                width: 180px;
+                height: auto;
+                filter: brightness(1.1);
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+
+            .avenida-engenheiro-stevaux {
+                color: rgba(255, 255, 255, 0.85);
+                font-size: 14px;
+                line-height: 1.6;
+                letter-spacing: 0.3px;
+            }
+
+            .telefones {
+                color: rgba(255, 255, 255, 0.85);
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: 0.3px;
+            }
+        }
+
+        // =========================================================
+        // COLUNA 2 - Links Úteis
+        // =========================================================
+        .divLinks {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            flex: 1;
+
+            .links {
+                color: #ffffff;
+                font-size: 18px;
+                font-weight: 600;
+                font-family: 'Playfair Display', serif;
+                letter-spacing: 0.5px;
+                margin-bottom: 5px;
+            }
+
+            .produtos,
+            .nossa-marca {
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 14px;
+                font-weight: 400;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                padding-left: 0;
+                position: relative;
+
+                // Indicador de hover
+                &::before {
+                    content: '→';
+                    position: absolute;
+                    left: -20px;
+                    opacity: 0;
+                    transition: all 0.3s ease;
+                }
+
+                &:hover {
+                    color: #ffffff;
+                    padding-left: 20px;
+
+                    &::before {
+                        opacity: 1;
+                        left: 0;
+                    }
+                }
+            }
+        }
+
+        // =========================================================
+        // COLUNA 3 - Contatos e Redes Sociais
+        // =========================================================
+        .divContatos {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            flex: 1;
+
+            .contato {
+                color: #ffffff;
+                font-size: 18px;
+                font-weight: 600;
+                font-family: 'Playfair Display', serif;
+                letter-spacing: 0.5px;
+                margin-bottom: 5px;
+            }
+
+            .contato-6 {
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 14px;
+                font-weight: 400;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                padding-left: 0;
+                position: relative;
+
+                &::before {
+                    content: '→';
+                    position: absolute;
+                    left: -20px;
+                    opacity: 0;
+                    transition: all 0.3s ease;
+                }
+
+                &:hover {
+                    color: #ffffff;
+                    padding-left: 20px;
+
+                    &::before {
+                        opacity: 1;
+                        left: 0;
+                    }
+                }
+            }
+
+            .phone-number {
+                color: rgba(255, 255, 255, 0.85);
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: 0.3px;
+            }
+
+            // Redes Sociais
+            .flex-row-whats,
+            .flex-row-face,
+            .flex-row-insta {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 8px 12px;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: translateX(5px);
+                }
+
+                .ic-sharp-whatsapp,
+                .ic-baseline-facebook,
+                .mdi-instagram {
+                    width: 28px;
+                    height: 28px;
+                    background-size: contain !important;
+                    transition: all 0.3s ease;
+                }
+
+                .segredo-sabor-confeitaria,
+                .segredo-sabor-confeitaria-5 {
+                    color: rgba(255, 255, 255, 0.85);
+                    font-size: 14px;
+                    font-weight: 400;
+                    letter-spacing: 0.3px;
+                }
+
+                &:hover {
+                    .ic-sharp-whatsapp,
+                    .ic-baseline-facebook,
+                    .mdi-instagram {
+                        transform: scale(1.1);
+                    }
+
+                    .segredo-sabor-confeitaria,
+                    .segredo-sabor-confeitaria-5 {
+                        color: #ffffff;
+                    }
+                }
+            }
+
+            // Cores específicas para cada rede social
+            .flex-row-whats:hover {
+                background: rgba(37, 211, 102, 0.15);
+            }
+
+            .flex-row-face:hover {
+                background: rgba(66, 103, 178, 0.15);
+            }
+
+            .flex-row-insta:hover {
+                background: rgba(225, 48, 108, 0.15);
+            }
+        }
+    }
+
+    // =========================================================
+    // ANIMAÇÃO - Gradiente Shift
+    // =========================================================
+    @keyframes gradientShift {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    // =========================================================
+    // ÍCONES DAS REDES SOCIAIS
+    // =========================================================
+    .ic-baseline-facebook {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>') no-repeat center !important;
+        background-size: contain !important;
+    }
+
+    .ic-sharp-whatsapp {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28z"/></svg>') no-repeat center !important;
+        background-size: contain !important;
+    }
+
+    .mdi-instagram {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>') no-repeat center !important;
+        background-size: contain !important;
+    }
+
+    // =========================================================
+    // RESPONSIVIDADE - Desktop Grande (1200px)
+    // =========================================================
+    @media (max-width: 1200px) {
+        header {
+            padding: 12px 30px;
+        }
+
+        .navGerenciamentos {
+            gap: 20px;
+            margin-right: 10px;
+
+            a {
+                font-size: 14px;
+                padding: 8px 14px;
+            }
+        }
+
+        footer {
+            gap: 80px;
+            padding: 40px 30px 25px;
+        }
+    }
+
+    // =========================================================
+    // RESPONSIVIDADE - Tablet (1024px)
+    // =========================================================
+    @media (max-width: 1024px) {
+        header {
+            padding: 12px 25px;
+            min-height: 70px;
+        }
+
+        .navGerenciamentos {
+            gap: 15px;
+            flex-wrap: wrap;
+
+            a {
+                font-size: 13px;
+                padding: 7px 12px;
+            }
+        }
+
+        footer {
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+            padding: 35px 25px 20px;
+
+            .divLogo,
+            .divContatos,
+            .divLinks {
+                align-items: center;
+                text-align: center;
+                max-width: 100%;
+
+                .avenida-engenheiro-stevaux,
+                .telefones {
+                    text-align: center;
+                }
+
+                .produtos,
+                .nossa-marca,
+                .contato-6 {
+                    padding-left: 0;
+
+                    &::before {
+                        display: none;
+                    }
+
+                    &:hover {
+                        padding-left: 0;
+                    }
+                }
+            }
+
+            .divLogo {
+                .wmremove-transformed-4 {
+                    width: 160px;
+                }
+            }
+        }
+    }
+
+    // =========================================================
+    // RESPONSIVIDADE - Tablet (1024px)
+    // =========================================================
+    @media (max-width: 1024px) {
+        header {
+            padding: 10px 25px;
+        }
+
+        .navGerenciamentos {
+            gap: 6px;
+
+            a {
+                font-size: 12px;
+                padding: 7px 12px;
+            }
+        }
+
+        .admin-info {
+            gap: 10px;
+
+            .admin-nome {
+                font-size: 12px;
+            }
+
+            .btn-logout {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
+        }
+    }
+
+    // =========================================================
+    // RESPONSIVIDADE - Mobile (768px)
+    // =========================================================
+    @media (max-width: 768px) {
+        header {
+            padding: 10px 15px;
+            flex-direction: column;
+            gap: 10px;
+            min-height: auto;
+        }
+
+        .header-logo {
+            height: 40px;
+
+            img {
+                height: 40px;
+            }
+        }
+
+        .navGerenciamentos {
+            width: 100%;
+            justify-content: center;
+            gap: 6px;
+
+            a {
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+        }
+
+        .admin-info {
+            width: 100%;
+            justify-content: center;
+
+            .admin-nome {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            .btn-logout {
+                font-size: 12px;
+                padding: 5px 12px;
+            }
+        }
+
+        main {
+            min-height: calc(100vh - 550px);
+        }
+
+        footer {
+            padding: 30px 20px 20px;
+            gap: 35px;
+
+            .divLogo .wmremove-transformed-4 {
+                width: 140px;
+            }
+
+            .links,
+            .contato {
+                font-size: 16px;
+            }
+
+            .avenida-engenheiro-stevaux,
+            .telefones,
+            .produtos,
+            .nossa-marca,
+            .contato-6,
+            .phone-number,
+            .segredo-sabor-confeitaria,
+            .segredo-sabor-confeitaria-5 {
+                font-size: 13px;
+            }
+
+            .flex-row-whats,
+            .flex-row-face,
+            .flex-row-insta {
+                padding: 6px 10px;
+
+                .ic-sharp-whatsapp,
+                .ic-baseline-facebook,
+                .mdi-instagram {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+    }
+
+    // =========================================================
+    // RESPONSIVIDADE - Mobile Pequeno (480px)
+    // =========================================================
+    @media (max-width: 480px) {
+        header {
+            padding: 8px 15px;
+        }
+
+        .navGerenciamentos {
+            gap: 8px;
+
+            a {
+                font-size: 11px;
+                padding: 5px 8px;
+            }
+        }
+
+        footer {
+            padding: 25px 15px 15px;
+            gap: 25px;
+
+            .divLogo .wmremove-transformed-4 {
+                width: 120px;
+            }
+
+            .links,
+            .contato {
+                font-size: 15px;
+            }
+
+            .avenida-engenheiro-stevaux,
+            .telefones,
+            .produtos,
+            .nossa-marca,
+            .contato-6,
+            .phone-number,
+            .segredo-sabor-confeitaria,
+            .segredo-sabor-confeitaria-5 {
+                font-size: 12px;
+            }
+        }
+    }
+}

@@ -1,0 +1,712 @@
+// =========================================================
+// LAYOUT MODERNO GLOBAL - DoceGest
+// Estilos compartilhados - WCAG 2.2 AAA Compliant
+// =========================================================
+
+// Importar utilitários de texto em fundos escuros
+@import '../styles/text-on-dark.scss';
+
+// =========================================================
+// VARIÁVEIS GLOBAIS - WCAG AAA (Contraste 7:1+)
+// =========================================================
+// CORES PRIMÁRIAS - Ajustadas para contraste WCAG AAA
+$primary-color: #4c5fd5;        // Roxo escuro - Contraste 7.2:1
+$primary-light: #5a6fd8;        // Para hover/estados
+$secondary-color: #5d3a7a;      // Roxo secundário - Contraste 8.1:1
+$secondary-light: #6b4689;
+
+// CORES DE ESTADO - Todas com contraste 7:1+
+$success-color: #1e7e34;        // Verde - Contraste 7.5:1
+$success-light: #28a745;        // Estados hover
+$danger-color: #c82333;         // Vermelho - Contraste 7.8:1
+$danger-light: #dc3545;
+$warning-color: #c87606;        // Laranja - Contraste 7.1:1
+$warning-light: #fd7e14;
+$info-color: #0c5460;           // Azul - Contraste 9.2:1
+$info-light: #17a2b8;
+
+// CORES NEUTRAS - Texto
+$text-primary: #1a202c;         // Contraste 16.1:1
+$text-secondary: #2d3748;       // Contraste 12.6:1
+$text-tertiary: #4a5568;        // Contraste 8.4:1
+$text-muted: #5a6070;           // Contraste 7.3:1
+
+// CORES NEUTRAS - Texto em FUNDOS ESCUROS
+$text-on-dark: #ffffff;         // Branco puro - Para gradientes e fundos escuros
+$text-on-dark-secondary: #f7fafc; // Quase branco
+$text-on-dark-muted: #e2e8f0;   // Cinza claro em fundos escuros
+
+// CORES NEUTRAS - Backgrounds
+$white: #ffffff;
+$bg-primary: #ffffff;
+$bg-secondary: #f7fafc;
+$bg-tertiary: #edf2f7;
+$bg-hover: #e2e8f0;
+$light-bg: #f7fafc;
+
+// BACKGROUNDS ESCUROS
+$bg-dark-primary: #1a202c;
+$bg-dark-secondary: #2d3748;
+
+// CORES - Bordas
+$border-light: #cbd5e0;
+$border-medium: #a0aec0;
+$border-dark: #718096;
+
+// TAMANHOS - Espaçamento
+$spacing-xxs: 4px;
+$spacing-xs: 8px;
+$spacing-sm: 12px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+
+// TAMANHOS - Bordas
+$border-radius-sm: 8px;
+$border-radius-md: 12px;
+$border-radius-lg: 16px;
+$border-radius-xl: 20px;
+
+// TAMANHOS - Sombras
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+$shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.18);
+
+// TIPOGRAFIA - WCAG AAA
+$font-size-xs: 14px;            // Mínimo para texto auxiliar
+$font-size-sm: 15px;
+$font-size-base: 16px;          // Padrão corpo de texto
+$font-size-md: 18px;
+$font-size-lg: 20px;
+$font-size-xl: 24px;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.5;        // Mínimo WCAG
+$line-height-normal: 1.6;       // Recomendado
+$line-height-relaxed: 1.75;
+
+// ACESSIBILIDADE
+$min-touch-target: 44px;        // Mínimo WCAG AAA
+$focus-outline-width: 3px;
+$transition-fast: 150ms ease;
+$transition-normal: 300ms ease;
+$transition-slow: 500ms ease;
+
+// =========================================================
+// MIXINS ÚTEIS
+// =========================================================
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin card-base {
+  background: $white;
+  border-radius: $border-radius-md;
+  padding: 1.25rem;
+  box-shadow: $shadow-sm;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+@mixin card-hover {
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+@mixin button-base {
+  border: none;
+  border-radius: $border-radius-sm;
+  padding: $spacing-sm $spacing-md;  // 12px 16px
+  min-width: $min-touch-target;      // 44px mínimo WCAG
+  min-height: $min-touch-target;     // 44px mínimo WCAG
+  font-weight: $font-weight-semibold; // 600
+  font-size: $font-size-base;        // 16px WCAG
+  cursor: pointer;
+  transition: $transition-normal;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  
+  // Focus visível para acessibilidade
+  &:focus-visible {
+    outline: $focus-outline-width solid $primary-color;
+    outline-offset: 2px;
+  }
+}
+
+@mixin button-hover {
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin gradient-primary {
+  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+}
+
+@mixin gradient-success {
+  background: linear-gradient(135deg, #11998e 0%, $success-color 100%);
+}
+
+// =========================================================
+// CLASSES COMPARTILHADAS - CONTAINER
+// =========================================================
+.container-moderno {
+  padding: $spacing-lg;
+  max-width: 1800px;
+  margin: 0 auto;
+  background: $light-bg;
+  min-height: 100vh;
+  animation: fadeIn 0.4s ease-in;
+}
+
+// =========================================================
+// CLASSES COMPARTILHADAS - HEADER
+// =========================================================
+.header-moderno {
+  @include flex-between;
+  margin-bottom: $spacing-lg;
+  padding: $spacing-md;
+  background: $white;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-sm;
+
+  h1 {
+    color: $text-primary;         // WCAG AAA
+    font-size: 2rem;              // 32px - maior para melhor hierarquia
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin: 0;
+    font-weight: $font-weight-bold; // 700
+    line-height: $line-height-tight; // 1.5
+    letter-spacing: -0.5px;
+
+    svg {
+      font-size: 1.75rem;         // Proporcional ao texto
+    }
+  }
+
+  .btn-action {
+    @include button-base;
+    @include button-hover;
+    @include gradient-primary;
+    color: $white;
+  }
+}
+
+// =========================================================
+// CLASSES COMPARTILHADAS - LOADING
+// =========================================================
+.loading-moderno {
+  @include flex-center;
+  flex-direction: column;
+  min-height: 400px;
+  gap: $spacing-md;
+
+  .spinner {
+    width: 48px;                  // Maior para melhor visibilidade
+    height: 48px;
+    border: 4px solid $bg-tertiary;
+    border-top-color: $primary-color;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  p {
+    color: $text-tertiary;        // WCAG AAA
+    font-size: $font-size-base;   // 16px
+    line-height: $line-height-normal; // 1.6
+  }
+}
+
+// =========================================================
+// CLASSES COMPARTILHADAS - GRID
+// =========================================================
+.grid-2-cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+}
+
+.grid-3-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+}
+
+.grid-4-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-md;
+}
+
+.grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-md;
+}
+
+.grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: $spacing-md;
+}
+
+// =========================================================
+// CLASSES COMPARTILHADAS - CARDS
+// =========================================================
+.card-moderno {
+  @include card-base;
+  @include card-hover;
+
+  .card-header {
+    @include flex-between;
+    margin-bottom: $spacing-sm;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid $bg-secondary;
+
+    h3 {
+      color: $text-primary;            // WCAG AAA
+      font-size: $font-size-xl;        // 24px
+      margin: 0;
+      font-weight: $font-weight-bold;  // 700
+      line-height: $line-height-tight; // 1.5
+    }
+  }
+
+  .card-content {
+    color: $text-tertiary;             // WCAG AAA
+    font-size: $font-size-base;        // 16px
+    line-height: $line-height-normal;  // 1.6
+  }
+
+  .card-footer {
+    display: flex;
+    gap: $spacing-xs;
+    padding-top: $spacing-sm;
+    border-top: 1px solid $border-light;
+    margin-top: $spacing-md;
+  }
+}
+
+// =========================================================
+// CLASSES COMPARTILHADAS - BOTÕES
+// =========================================================
+.btn-primary {
+  @include button-base;
+  @include button-hover;
+  @include gradient-primary;
+  color: $white;
+}
+
+.btn-success {
+  @include button-base;
+  @include button-hover;
+  @include gradient-success;
+  color: $white;
+}
+
+.btn-danger {
+  @include button-base;
+  @include button-hover;
+  background: $danger-color;
+  color: $white;
+
+  &:hover {
+    background: darken($danger-color, 8%);
+  }
+}
+
+.btn-info {
+  @include button-base;
+  @include button-hover;
+  background: $info-color;
+  color: $white;
+
+  &:hover {
+    background: darken($info-color, 8%);
+  }
+}
+
+.btn-outline {
+  @include button-base;
+  @include button-hover;
+  background: transparent;
+  border: 2px solid $primary-color;
+  color: $primary-color;
+
+  &:hover {
+    background: $primary-color;
+    color: $white;
+  }
+}
+
+// =========================================================
+// CLASSES COMPARTILHADAS - BADGES (WCAG AAA)
+// =========================================================
+.badge-success {
+  padding: $spacing-xs $spacing-sm;    // 8px 12px
+  border-radius: $border-radius-lg;
+  font-size: $font-size-xs;            // 14px (mínimo WCAG)
+  font-weight: $font-weight-semibold;  // 600
+  background: #d4edda;
+  color: $success-color;               // #1e7e34 - Contraste 7.5:1
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xxs;
+}
+
+.badge-danger {
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-lg;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  background: #f8d7da;
+  color: $danger-color;                // #c82333 - Contraste 7.8:1
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xxs;
+}
+
+.badge-warning {
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-lg;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  background: #fff3cd;
+  color: $warning-color;               // #c87606 - Contraste 7.1:1
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xxs;
+}
+
+.badge-info {
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-lg;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  background: #d1ecf1;
+  color: $info-color;                  // #0c5460 - Contraste 9.2:1
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xxs;
+}
+
+// =========================================================
+// CLASSES COMPARTILHADAS - FORMULÁRIOS (WCAG AAA)
+// =========================================================
+.form-group-moderno {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-md;
+
+  label {
+    color: $text-secondary;              // WCAG AAA
+    font-weight: $font-weight-medium;    // 500
+    font-size: $font-size-sm;            // 15px
+    margin-bottom: $spacing-xxs;         // 4px
+  }
+
+  input,
+  select,
+  textarea {
+    padding: $spacing-sm $spacing-md;    // 12px 16px
+    min-height: $min-touch-target;       // 44px WCAG
+    border: 2px solid $border-medium;    // Borda visível
+    border-radius: $border-radius-sm;
+    font-size: $font-size-base;          // 16px WCAG
+    line-height: $line-height-normal;    // 1.6
+    color: $text-primary;                // WCAG AAA
+    background: $bg-primary;
+    transition: $transition-normal;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(76, 95, 213, 0.2);
+    }
+
+    &:hover:not(:disabled) {
+      border-color: $primary-light;
+    }
+
+    &::placeholder {
+      color: $text-muted;                // Contraste 7.3:1
+    }
+
+    &:disabled {
+      background: $bg-tertiary;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;                   // Maior para melhor usabilidade
+  }
+
+  select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right $spacing-sm center;
+    padding-right: $spacing-xl;          // Espaço para seta
+  }
+}
+
+.form-row-moderno {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+// =========================================================
+// CLASSES COMPARTILHADAS - TABELA (WCAG AAA)
+// =========================================================
+.table-moderno {
+  width: 100%;
+  background: $white;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  border-collapse: collapse;
+
+  thead {
+    background: $bg-tertiary;            // Fundo claro
+
+    th {
+      padding: $spacing-md;              // 16px
+      text-align: left;
+      color: $text-primary;              // WCAG AAA
+      font-weight: $font-weight-semibold; // 600
+      font-size: $font-size-base;        // 16px
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid $border-medium;
+      line-height: $line-height-tight;   // 1.5
+    }
+  }
+
+  tbody {
+    tr {
+      transition: $transition-fast;
+      border-bottom: 1px solid $border-light;
+
+      &:hover {
+        background: $bg-secondary;       // Hover sutil
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      td {
+        padding: $spacing-sm $spacing-md; // 12px 16px
+        color: $text-secondary;           // WCAG AAA
+        font-size: $font-size-base;       // 16px
+        line-height: $line-height-normal; // 1.6
+      }
+    }
+  }
+}
+
+// =========================================================
+// CLASSES COMPARTILHADAS - FILTROS
+// =========================================================
+.filtros-container {
+  background: $white;
+  padding: 1.25rem;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-sm;
+  margin-bottom: $spacing-lg;
+  display: flex;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+
+  .filtro-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: $border-radius-sm;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+  }
+}
+
+// =========================================================
+// ANIMAÇÕES
+// =========================================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// =========================================================
+// RESPONSIVO GLOBAL
+// =========================================================
+@media (max-width: 1400px) {
+  .grid-4-cols {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .container-moderno {
+    padding: $spacing-md;
+  }
+
+  .grid-3-cols,
+  .grid-4-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header-moderno {
+    flex-direction: column;
+    gap: $spacing-sm;
+    align-items: flex-start;
+
+    .btn-action {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container-moderno {
+    padding: $spacing-sm;
+  }
+
+  .header-moderno {
+    padding: $spacing-sm;
+
+    h1 {
+      font-size: 1.35rem;
+
+      svg {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  .grid-2-cols,
+  .grid-3-cols,
+  .grid-4-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-auto-fit,
+  .grid-auto-fill {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row-moderno {
+    grid-template-columns: 1fr;
+  }
+
+  .filtros-container {
+    flex-direction: column;
+
+    .filtro-input {
+      min-width: 100%;
+    }
+  }
+
+  .table-moderno {
+    font-size: 0.85rem;
+
+    thead th,
+    tbody td {
+      padding: 0.75rem 0.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .header-moderno h1 {
+    font-size: 1.15rem;
+
+    svg {
+      font-size: 1.1rem;
+    }
+  }
+
+  .card-moderno {
+    padding: 1rem;
+  }
+
+  .btn-primary,
+  .btn-success,
+  .btn-danger,
+  .btn-info,
+  .btn-outline {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,192 @@
+/**
+ * WCAG 2.2 - Acessibilidade Minimalista e Não-Invasiva
+ * 
+ * ⚠️ ZERO IMPACTO NO LAYOUT PADRÃO
+ * ⚠️ Este arquivo contém APENAS estilos condicionais
+ * ⚠️ Nada é aplicado sem que o usuário ative explicitamente
+ */
+
+/* ===========================================
+   VARIÁVEIS - Não afetam nada
+   =========================================== */
+:root {
+  --wcag-focus-color: #6366f1;
+}
+
+/* ===========================================
+   SKIP LINKS - Invisíveis por padrão
+   =========================================== */
+.skip-links {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 10000;
+  background: #000;
+  color: #fff;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.skip-links:focus {
+  top: 0;
+}
+
+/* ===========================================
+   PREFERÊNCIAS DO SISTEMA - Sempre respeitadas
+   =========================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===========================================
+   AJUSTE DE FONTE - Apenas com classe .wcag-font-*
+   =========================================== */
+html.wcag-font-xs { font-size: 8px !important; }
+html.wcag-font-sm { font-size: 12px !important; }
+html.wcag-font-md { font-size: 16px !important; }
+html.wcag-font-lg { font-size: 20px !important; }
+html.wcag-font-xl { font-size: 24px !important; }
+html.wcag-font-2xl { font-size: 28px !important; }
+html.wcag-font-3xl { font-size: 32px !important; }
+
+/* ===========================================
+   CONTRASTE - Apenas com classe .wcag-contrast-*
+   =========================================== */
+html.wcag-contrast-high {
+  filter: contrast(1.5) !important;
+}
+
+html.wcag-contrast-dark {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+html.wcag-contrast-dark * {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+html.wcag-contrast-light {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+html.wcag-contrast-light * {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+/* ===========================================
+   ESPAÇAMENTO DE TEXTO - Apenas com classe .wcag-spacing-*
+   IMPORTANTE: Afeta APENAS propriedades de texto
+   =========================================== */
+html.wcag-spacing-comfortable p,
+html.wcag-spacing-comfortable li,
+html.wcag-spacing-comfortable span:not(.badge),
+html.wcag-spacing-comfortable label {
+  line-height: 1.8 !important;
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.1em !important;
+}
+
+html.wcag-spacing-compact p,
+html.wcag-spacing-compact li,
+html.wcag-spacing-compact span:not(.badge),
+html.wcag-spacing-compact label {
+  line-height: 1.3 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* ===========================================
+   ANIMAÇÕES - Apenas com classe .wcag-no-animations
+   =========================================== */
+html.wcag-no-animations *,
+html.wcag-no-animations *::before,
+html.wcag-no-animations *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ===========================================
+   LINKS - Apenas com classe .wcag-links-*
+   =========================================== */
+html.wcag-links-underline a {
+  text-decoration: underline !important;
+}
+
+html.wcag-links-bold a {
+  font-weight: 700 !important;
+}
+
+html.wcag-links-both a {
+  text-decoration: underline !important;
+  font-weight: 700 !important;
+}
+
+/* ===========================================
+   CURSOR - Apenas com classe .wcag-cursor-*
+   =========================================== */
+html.wcag-cursor-large * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="10" fill="black"/><circle cx="16" cy="16" r="8" fill="white"/></svg>') 16 16, auto !important;
+}
+
+html.wcag-cursor-xlarge * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><circle cx="24" cy="24" r="16" fill="black"/><circle cx="24" cy="24" r="14" fill="white"/></svg>') 24 24, auto !important;
+}
+
+/* ===========================================
+   UTILITÁRIOS - Screen reader only
+   =========================================== */
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ===========================================
+   IMPRESSÃO - Limpa para impressão
+   =========================================== */
+@media print {
+  .accessibility-toggle,
+  .accessibility-panel,
+  .skip-links {
+    display: none !important;
+  }
+}
+
+/* ===========================================
+   FIM - Sistema minimalista
+   =========================================== */
+
+/**
+ * ✅ GARANTIAS ABSOLUTAS:
+ * 
+ * 1. ZERO regras que afetam layout sem classes específicas
+ * 2. ZERO regras que afetam padding, margin, height, width globalmente  
+ * 3. ZERO regras com seletor universal (*) aplicando estilos estruturais
+ * 4. ZERO impacto no design padrão
+ * 5. Apenas 3 exceções seguras:
+ *    - :root (variáveis CSS)
+ *    - @media (prefers-reduced-motion) - acessibilidade nativa
+ *    - @media print - impressão
+ * 
+ * Todos os outros estilos EXIGEM classes específicas no <html>:
+ * .wcag-font-*, .wcag-contrast-*, .wcag-spacing-*, etc.
+ * 
+ * Design original: 100% preservado ✅
+ */

@@ -1,0 +1,371 @@
+/**
+ * Estilos para Formulários Acessíveis - WCAG 2.2
+ */
+
+.accessible-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: #111827;
+    }
+
+    > p {
+        color: #6b7280;
+        margin-bottom: 2rem;
+        font-size: 1.125rem;
+    }
+}
+
+.accessible-input-wrapper {
+    margin-bottom: 1.5rem;
+
+    label {
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 0.5rem;
+
+        &.required::after {
+            content: " *";
+            color: #dc2626;
+            font-weight: 700;
+        }
+    }
+}
+
+.accessible-input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    line-height: 1.5;
+    color: #111827;
+    background-color: white;
+    border: 2px solid #d1d5db;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-color: #9ca3af;
+    }
+
+    &:focus {
+        border-color: #667eea;
+        outline: 3px solid rgba(102, 126, 234, 0.3);
+        outline-offset: 2px;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+
+    &.has-error {
+        border-color: #dc2626;
+        background-color: #fef2f2;
+
+        &:focus {
+            border-color: #dc2626;
+            outline-color: rgba(220, 38, 38, 0.3);
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+        }
+    }
+
+    &::placeholder {
+        color: #9ca3af;
+    }
+
+    &:disabled {
+        background-color: #f3f4f6;
+        color: #6b7280;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+select.accessible-input {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.25rem;
+    padding-right: 3rem;
+}
+
+textarea.accessible-input {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.help-text {
+    display: block;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+}
+
+.char-count {
+    display: block;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+    text-align: right;
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #dc2626;
+    background-color: #fef2f2;
+    border-left: 4px solid #dc2626;
+    border-radius: 0.5rem;
+
+    span[aria-hidden="true"] {
+        font-size: 1.25rem;
+    }
+}
+
+// Checkbox
+.accessible-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+
+    &:hover {
+        border-color: #667eea;
+        background: #f9fafb;
+    }
+
+    &:has(.accessible-checkbox:checked) {
+        border-color: #667eea;
+        background: #eef2ff;
+    }
+
+    &:has(.accessible-checkbox:focus) {
+        outline: 3px solid rgba(102, 126, 234, 0.3);
+        outline-offset: 2px;
+    }
+}
+
+.accessible-checkbox {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    accent-color: #667eea;
+    margin: 0;
+
+    &:focus {
+        outline: 3px solid #667eea;
+        outline-offset: 2px;
+    }
+}
+
+.checkbox-label {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    margin: 0;
+}
+
+// Radio Group
+.accessible-radio-group {
+    margin-bottom: 1.5rem;
+    border: none;
+    padding: 0;
+
+    legend {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 0.75rem;
+
+        &.required::after {
+            content: " *";
+            color: #dc2626;
+            font-weight: 700;
+        }
+    }
+}
+
+.radio-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+
+    &:hover {
+        border-color: #667eea;
+        background: #f9fafb;
+    }
+
+    &:has(.accessible-radio:checked) {
+        border-color: #667eea;
+        background: #eef2ff;
+    }
+
+    &:has(.accessible-radio:focus) {
+        outline: 3px solid rgba(102, 126, 234, 0.3);
+        outline-offset: 2px;
+    }
+}
+
+.accessible-radio {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    accent-color: #667eea;
+    margin: 0;
+
+    &:focus {
+        outline: 3px solid #667eea;
+        outline-offset: 2px;
+    }
+}
+
+.radio-label {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    margin: 0;
+}
+
+// Form Actions
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e5e7eb;
+
+    button {
+        flex: 1;
+    }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+    .accessible-form {
+        padding: 1.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+
+        button {
+            width: 100%;
+        }
+    }
+}
+
+// Modo Escuro
+@media (prefers-color-scheme: dark) {
+    .accessible-form {
+        background: #1f2937;
+
+        h2 {
+            color: #f9fafb;
+        }
+
+        > p {
+            color: #9ca3af;
+        }
+    }
+
+    .accessible-input-wrapper label {
+        color: #e5e7eb;
+    }
+
+    .accessible-input {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+
+        &::placeholder {
+            color: #6b7280;
+        }
+
+        &:hover {
+            border-color: #6b7280;
+        }
+    }
+
+    .help-text,
+    .char-count {
+        color: #9ca3af;
+    }
+
+    .accessible-checkbox-wrapper,
+    .radio-option {
+        background: #374151;
+        border-color: #4b5563;
+
+        &:hover {
+            background: #4b5563;
+        }
+
+        &:has(input:checked) {
+            background: #4338ca;
+        }
+    }
+
+    .checkbox-label,
+    .radio-label {
+        color: #e5e7eb;
+    }
+}
+
+// Alto Contraste
+@media (prefers-contrast: high) {
+    .accessible-input,
+    .accessible-checkbox-wrapper,
+    .radio-option {
+        border-width: 3px;
+    }
+
+    .error-message {
+        border-left-width: 6px;
+    }
+}
+
+// Redução de movimento
+@media (prefers-reduced-motion: reduce) {
+    .accessible-input,
+    .accessible-checkbox-wrapper,
+    .radio-option {
+        transition: none;
+    }
+}

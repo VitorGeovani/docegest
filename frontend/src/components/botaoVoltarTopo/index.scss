@@ -1,0 +1,69 @@
+.botao-voltar-topo {
+  position: fixed;
+  bottom: 40px;
+  right: 110px; // Posicionado à esquerda do botão do carrinho (60px do carrinho + 30px de espaço + 20px de margem)
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  z-index: 998; // Menor que o carrinho (999)
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100px);
+
+  &.visivel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  }
+
+  &:active {
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  svg {
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  // Animação do ícone
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  // Responsividade
+  @media (max-width: 768px) {
+    bottom: 24px;
+    right: 90px; // Ajustado para mobile (50px do carrinho + 40px de espaço)
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  @media (max-width: 480px) {
+    bottom: 100px; // Movido para cima do botão do carrinho
+    right: 20px; // Alinhado com o carrinho
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+}

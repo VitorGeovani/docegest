@@ -1,0 +1,817 @@
+.pagina-reserva {
+
+
+  header {
+    background-color: FFFFFF;
+    padding: 20px;
+    height: 100px;
+    border-bottom: 1px solid #41629f;
+  }
+
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+    margin-bottom: 100px;
+    gap: 20px;
+  }
+
+
+  .minha-reserva {
+    height: 50px;
+    color: #000000;
+    font-family: Princess Sofia;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 49.5px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 65;
+  }
+
+  .produtos-escolhidos {
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 2;
+  }
+
+  .rectangle0 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+    width: 921px;
+    height: 42px;
+    background: rgba(217, 217, 217, 0);
+    border: 1px solid #41629f;
+    z-index: 7;
+  }
+
+  .quantidade {
+    width: 170px;
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 4;
+  }
+
+  .imagem {
+    margin-left: 20px;
+    width: 170px;
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 3;
+
+  }
+
+  .produto {
+    width: 170px;
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 3;
+  }
+
+  .preco {
+    width: 170px;
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 5;
+  }
+
+  .total {
+    width: 170px;
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 6;
+  }
+
+
+
+  .rectangle-5 {
+    position: relative;
+    width: 921px;
+    height: 125px;
+    background: rgba(217, 217, 217, 0);
+    border: 1px solid #41629f;
+    z-index: 25;
+    overflow: visible auto;
+  }
+
+  //--------------------------------------------
+
+  .flex-row-a {
+    width: 859px;
+    height: 24px;
+    z-index: 66;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 25px;
+    margin-top: 20px;
+  }
+
+  .conjunto {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 3px;
+    margin-right: 70px;
+    margin-left: 20px;
+  }
+
+  .tabler-sun-moon {
+    width: 24px;
+    height: 24px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/125056/sun-moon-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 57;
+    overflow: hidden;
+  }
+
+  .icon-park-outline-paper-money-two {
+    width: 24px;
+    height: 24px;
+    z-index: 62;
+    overflow: hidden;
+  }
+
+  .regroup-colon {
+    width: 62px;
+    height: 24px;
+    z-index: 66;
+  }
+
+  .mdi-calendar {
+    flex-shrink: 0;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/125056/calendar-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 66;
+    overflow: hidden;
+  }
+
+  .data {
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 58;
+  }
+
+  .entrega {
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 26;
+  }
+
+  .periodo {
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 27;
+  }
+
+  .tabler-clock-hour {
+    width: 21px;
+    height: 21px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/125056/clock-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 61;
+    overflow: hidden;
+  }
+
+  .horario {
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 28;
+  }
+
+  .pagamento {
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 29;
+  }
+
+  .delivery-truck-speed-outline {
+    width: 19px;
+    height: 19px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/125056/delivery-truck-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 41;
+    overflow: hidden;
+  }
+
+  .group {
+    width: 19px;
+    height: 19px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/125056/payment-group-icon.svg) no-repeat center;
+    z-index: 41;
+
+  }
+
+
+
+  //--------------------------------------------
+
+  .flex-row-e {
+    position: relative;
+    width: 873px;
+    height: 28px;
+    z-index: 59;
+    margin-left: 20px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 30px;
+  }
+
+  .select-alimentacao {
+    width: 156px;
+    height: 28px;
+    background: rgba(217, 217, 217, 0);
+    border: 1px solid #41629f;
+    z-index: 30;
+    font-family: Playfair Display;
+  }
+
+  .p-alimentacao {
+    height: 19px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.662px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 33;
+  }
+
+
+
+
+
+  .input-data {
+    width: 114px;
+    height: 28px;
+    background: rgba(217, 217, 217, 0);
+    border: 1px solid #41629f;
+    z-index: 59;
+    font-family: Playfair Display;
+    color: #000000;
+    margin-right: 40px;
+  }
+
+
+
+  .select-turno {
+    width: 114px;
+    height: 28px;
+    background: rgba(217, 217, 217, 0);
+    border: 1px solid #41629f;
+    z-index: 34;
+    font-family: Playfair Display;
+    color: #000000;
+    margin-right: 50px;
+  }
+
+  .manha {
+    height: 19px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.662px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 39;
+  }
+
+
+  .input-horario {
+    width: 114px;
+    height: 28px;
+    background: rgba(217, 217, 217, 0);
+    border: 1px solid #41629f;
+    z-index: 35;
+    font-family: Playfair Display;
+    font-size: 16px;
+    margin-right: 50px;
+  }
+
+
+
+  .select-pagamento {
+    width: 114px;
+    height: 28px;
+    background: rgba(217, 217, 217, 0);
+    border: 1px solid #41629f;
+    z-index: 36;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+  }
+
+  //-------------------------------
+
+
+
+  .rectangle-d {
+    width: 921px;
+    height: 125px;
+    background: rgba(217, 217, 217, 0);
+    border: 1px solid #41629f;
+    z-index: 43;
+    overflow: visible auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flex-row-ff {
+    width: 614px;
+    height: 24px;
+    z-index: 55;
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .conjunto-2 {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+  }
+
+  .whatsapp {
+    width: 24px;
+    height: 24px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/125056/whatsapp-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 55;
+    overflow: hidden;
+  }
+
+  .regroup {
+    width: 77px;
+    height: 24px;
+    z-index: 54;
+  }
+
+  .edit-name {
+    flex-shrink: 0;
+    position: relative;
+    width: 21px;
+    height: 21px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/125056/edit-email-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 54;
+    overflow: hidden;
+  }
+
+  .email {
+    flex-shrink: 0;
+    position: relative;
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 52;
+  }
+
+  .edit-name-e {
+    width: 21px;
+    height: 21px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/125056/edit-name-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 51;
+    overflow: hidden;
+  }
+
+  .name {
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 44;
+  }
+
+  .phone {
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 45;
+  }
+
+  .flex-row-ee {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+    justify-content: center;
+    align-items: center;
+
+    width: 649px;
+    height: 29px;
+    z-index: 53;
+  }
+
+  .input-ddd,
+  .input-numero,
+  .input-nome {
+    width: 156px;
+    height: 28px;
+    background: rgba(217, 217, 217, 0);
+    border: 1px solid #41629f;
+    z-index: 46;
+  }
+
+
+
+  .rectangle-13 {
+    width: 921px;
+    height: 82px;
+    background: rgba(217, 217, 217, 0);
+    border: 1px solid #41629f;
+    z-index: 12;
+    overflow: visible auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .flex-row-e-14 {
+    display: flex;
+    align-items: center;
+    width: 172px;
+    height: 24px;
+    z-index: 56;
+  }
+
+  .shopping-bag-heart {
+    flex-shrink: 0;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/125056/shopping-bag-heart-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 56;
+    overflow: hidden;
+  }
+
+  .resumo-da-reserva {
+    flex-shrink: 0;
+    position: relative;
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 8;
+  }
+
+  .flex-row-db {
+    position: relative;
+    width: 852px;
+    height: 27px;
+    z-index: 11;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 100px;
+  }
+
+  .total-r {
+    height: 27px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 26.66px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 9;
+  }
+
+  .pagamento-no-credito {
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  .p-alimentacao-15 {
+    height: 21px;
+    color: #000000;
+    font-family: Playfair Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 11;
+  }
+
+  .rectangle-16 {
+    width: 921px;
+    height: 38px;
+    background: #41629f;
+    z-index: 49;
+    border: #41629f;
+  }
+
+  .finalizar-reserva {
+    height: 32px;
+    color: #ffffff;
+    font-family: Playfair Display;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 31.992px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 50;
+  }
+
+
+  footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 200px;
+    position: relative;
+    height: 299px;
+    background: rgba(217, 217, 217, 0);
+    border-top: 1px solid #41629f;
+  }
+
+  .divLogo,
+  .divContatos,
+  .divLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+
+  .wmremove-transformed-4 {
+    width: 206.593px;
+    height: 124px;
+    background-size: cover;
+    z-index: 20;
+  }
+
+  .links {
+    height: 27px;
+    color: #000000;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 26.66px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 21;
+  }
+
+  .contato {
+    height: 27px;
+    color: #000000;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 26.66px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 22;
+  }
+
+
+
+  .ic-baseline-facebook {
+    width: 31px;
+    height: 31px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/135535/facebook-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 16;
+    overflow: hidden;
+  }
+
+
+
+  .avenida-engenheiro-stevaux {
+    width: 281px;
+    height: 63px;
+    color: #000000;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21.328px;
+    text-align: left;
+    z-index: 19;
+  }
+
+  .produtos {
+    height: 21px;
+    color: #000000;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 13;
+  }
+
+  .mdi-instagram {
+    width: 31px;
+    height: 31px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/135535/instagram-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 15;
+    overflow: hidden;
+  }
+
+  .segredo-sabor-confeitaria-5,
+  .segredo-sabor-confeitaria {
+    height: 21px;
+    color: #000000;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 24;
+  }
+
+  .contato-6 {
+    height: 21px;
+    color: #000000;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 14;
+  }
+
+  .telefones {
+    height: 21px;
+    color: #000000;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 18;
+  }
+
+  .flex-row-whats,
+  .flex-row-face,
+  .flex-row-insta {
+    display: flex;
+    justify-content: space-between;
+    height: 31px;
+    z-index: 23;
+    gap: 5px;
+  }
+
+  .ic-sharp-whatsapp {
+    flex-shrink: 0;
+    position: relative;
+    width: 31px;
+    height: 31px;
+    background: url(https://static.codia.ai/custom_image/2025-04-09/135535/whatsapp-icon.svg) no-repeat center;
+    background-size: cover;
+    z-index: 17;
+    overflow: hidden;
+  }
+
+  .phone-number {
+    flex-shrink: 0;
+    position: relative;
+    height: 21px;
+    color: #000000;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 23;
+  }
+
+  .nossa-marca {
+    height: 21px;
+    color: #000000;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 12;
+  }
+
+
+}

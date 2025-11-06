@@ -1,0 +1,643 @@
+.Financas {
+
+    flex-direction: column;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+
+    .flex-row-c {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 45;
+        gap: 100px;
+    }
+
+    .financeiro-1 {
+        height: 62px;
+        color: #000000;
+        font-family: Princess Sofia;
+        font-size: 40px;
+        font-weight: 400;
+        line-height: 61.875px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 3;
+    }
+
+    .rectangle3 {
+        width: 255px;
+        height: 55px;
+        background: #41629f;
+        border: 1px solid #41629f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+
+    .detalhamento-financeiro {
+        height: 27px;
+        color: #ffffff;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 26.66px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 24;
+    }
+
+    
+    
+
+    .flex-row-ae {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 1335px;
+        height: 113px;
+        z-index: 45;
+    }
+
+    .rectangle-a {
+        flex-shrink: 0;
+        position: relative;
+        width: 300px;
+        height: 113px;
+        background: rgba(217, 217, 217, 0);
+        border: 1px solid #41629f;
+        z-index: 30;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .flex-row-fde {
+        position: relative;
+        width: 199px;
+        height: 42px;
+        margin: 17px 0 0 38px;
+        z-index: 70;
+    }
+
+    .cash-register {
+        position: absolute;
+        width: 42px;
+        height: 42px;
+        top: 0;
+        left: 0;
+        background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-07/tg1FuOtgHv.png) no-repeat center;
+        background-size: cover;
+        z-index: 70;
+        overflow: hidden;
+    }
+
+    .text-receita-total {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        height: 17px;
+        top: 5px;
+        left: 62px;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 17px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 34;
+    }
+
+    .text-r-4-464-00 {
+        display: block;
+        position: relative;
+        height: 16px;
+        margin: 11px 0 0 104px;
+        color: #000000;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 16px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 38;
+    }
+
+    .rectangle-b {
+        flex-shrink: 0;
+        position: relative;
+        width: 300px;
+        height: 113px;
+        background: rgba(217, 217, 217, 0);
+        border: 1px solid #41629f;
+        z-index: 39;
+    }
+
+    .cash-remove {
+        position: absolute;
+        width: 42px;
+        height: 42px;
+        top: 16px;
+        left: 37px;
+        background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-07/Vxrt9CAwrk.png) no-repeat center;
+        background-size: cover;
+        z-index: 75;
+        overflow: hidden;
+    }
+
+    .flex-column-cab {
+        position: absolute;
+        width: 116px;
+        height: 63px;
+        top: 21px;
+        left: 101px;
+        font-size: 0px;
+        z-index: 41;
+    }
+
+    .text-custo-total {
+        display: block;
+        position: relative;
+        height: 17px;
+        margin: 0 0 0 0;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 17px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 40;
+    }
+
+    .text-r-1-216-44 {
+        display: block;
+        position: relative;
+        height: 16px;
+        margin: 30px 0 0 2px;
+        color: #000000;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 16px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 41;
+    }
+
+    .rectangle-c {
+        flex-shrink: 0;
+        position: relative;
+        width: 300px;
+        height: 113px;
+        background: rgba(217, 217, 217, 0);
+        border: 1px solid #41629f;
+        z-index: 42;
+    }
+
+    .flex-row-ca {
+        position: relative;
+        width: 195px;
+        height: 41px;
+        margin: 18px 0 0 38px;
+        z-index: 72;
+    }
+
+    .tabler-cash-plus {
+        position: absolute;
+        width: 41px;
+        height: 41px;
+        top: 0;
+        left: 0;
+        background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-07/FPbvVRktAT.png) no-repeat center;
+        background-size: cover;
+        z-index: 72;
+        overflow: hidden;
+    }
+
+    .lucro-liquido {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        height: 17px;
+        top: 4px;
+        left: 55px;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 17px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 43;
+    }
+
+    .r-3-247-56 {
+        display: block;
+        position: relative;
+        height: 16px;
+        margin: 11px 0 0 104px;
+        color: #000000;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 16px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 44;
+    }
+
+    .rectangle-d {
+        flex-shrink: 0;
+        position: relative;
+        width: 300px;
+        height: 113px;
+        background: rgba(217, 217, 217, 0);
+        border: 1px solid #41629f;
+        z-index: 45;
+    }
+
+    .flex-row-e {
+        position: relative;
+        width: 196px;
+        height: 42px;
+        margin: 17px 0 0 31px;
+        z-index: 73;
+    }
+
+    .tabler-paper-bag-f {
+        position: absolute;
+        width: 42px;
+        height: 42px;
+        top: 0;
+        left: 0;
+        background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-07/4DiH5vnafR.png) no-repeat center;
+        background-size: cover;
+        z-index: 73;
+        overflow: hidden;
+    }
+
+    .total-pedidos {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        height: 17px;
+        top: 5px;
+        left: 64px;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 17px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 46;
+    }
+
+    .text-11 {
+        display: block;
+        position: relative;
+        height: 16px;
+        margin: 11px 0 0 139px;
+        color: #000000;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 16px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 47;
+    }
+
+    .flex-row-10 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        width: 1355px;
+        height: 269px;
+        z-index: 33;
+    }
+
+    .rectangle-11 {
+        flex-shrink: 0;
+        position: relative;
+        width: 645px;
+        height: 269px;
+        background: rgba(217, 217, 217, 0);
+        border: 1px solid #41629f;
+        z-index: 31;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .flex-column-ec {
+        z-index: 76;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 30px;
+    }
+
+    .mdi-podium {
+        width: 42px;
+        height: 42px;
+        background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-07/QeeuADuYTA.png) no-repeat center;
+        background-size: cover;
+        z-index: 76;
+        overflow: hidden;
+    }
+
+    .produto-nome,.produto-quantidade{
+        height: 27px;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 26.66px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 48;
+    }
+
+ 
+
+    .produtos-mais-vendidos {
+        height: 17px;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 17px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 35;
+    }
+
+    .flex-column-b {
+        position: absolute;
+        width: 35px;
+        height: 117px;
+        top: 114px;
+        left: 557px;
+        font-size: 0px;
+        z-index: 69;
+    }
+
+    .produto-item{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    .text-16 {
+        display: block;
+        position: relative;
+        height: 23px;
+        margin: 0 0 0 0;
+        color: #000000;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 23px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 59;
+    }
+
+    .text-17 {
+        display: block;
+        position: relative;
+        height: 23px;
+        margin: 23px 0 0 0;
+        color: #000000;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 23px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 68;
+    }
+
+    .text-18 {
+        display: block;
+        position: relative;
+        height: 23px;
+        margin: 25px 0 0 0;
+        color: #000000;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 23px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 69;
+    }
+
+    .rectangle-12 {
+        flex-shrink: 0;
+        position: relative;
+        width: 645px;
+        height: 269px;
+        background: rgba(217, 217, 217, 0);
+        border: 1px solid #41629f;
+        z-index: 33;
+    }
+
+    .sun-moon-stars {
+        position: absolute;
+        width: 45px;
+        height: 45px;
+        top: 39px;
+        left: 143px;
+        background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-07/oHuRWYiBju.png) no-repeat center;
+        background-size: cover;
+        z-index: 85;
+        overflow: hidden;
+    }
+
+    .vendas-por-periodo {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        height: 17px;
+        top: 45px;
+        left: 216px;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 17px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 37;
+    }
+
+    .flex-column-e {
+        position: absolute;
+        width: 63px;
+        height: 127px;
+        top: 98px;
+        left: 29px;
+        font-size: 0px;
+        z-index: 57;
+    }
+
+    .manha {
+        display: block;
+        position: relative;
+        height: 27px;
+        margin: 0 0 0 0;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 26.66px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 55;
+    }
+
+    .tarde {
+        display: block;
+        position: relative;
+        height: 27px;
+        margin: 25px 0 0 3px;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 26.66px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 56;
+    }
+
+    .noite {
+        display: block;
+        position: relative;
+        height: 27px;
+        margin: 21px 0 0 7px;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 26.66px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 57;
+    }
+
+    .flex-column-aa {
+        position: absolute;
+        width: 35px;
+        height: 115px;
+        top: 102px;
+        left: 554px;
+        font-size: 0px;
+        z-index: 67;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .empty {
+        display: block;
+        position: relative;
+        height: 23px;
+        margin: 0 0 0 0;
+        color: #000000;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 23px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 65;
+    }
+
+    .empty-13 {
+        display: block;
+        position: relative;
+        height: 23px;
+        margin: 21px 0 0 5px;
+        color: #000000;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 23px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 67;
+    }
+
+    .empty-14 {
+        display: block;
+        position: relative;
+        height: 23px;
+        margin: 25px 0 0 0;
+        color: #000000;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 23px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 66;
+    }
+
+    .rectangle-15 {
+        width: 810px;
+        height: 210px;
+        font-size: 0px;
+        background: rgba(217, 217, 217, 0);
+        border: 1px solid #41629f;
+        z-index: 64;
+        overflow: visible auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tipos-de-pagamentos {
+        height: 17px;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 17px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 36;
+    }
+
+    .pagamento-item {
+        height: 27px;
+        color: #000000;
+        font-family: Playfair Display;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 26.66px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 52;
+    }
+
+}

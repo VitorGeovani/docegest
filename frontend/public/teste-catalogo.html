@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Catálogo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .produto-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .produto-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .produto-nome {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .produto-preco {
+            color: #27ae60;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .debug {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .debug pre {
+            background: #f8f8f8;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Catálogo - Segredos do Sabor</h1>
+    
+    <div id="status"></div>
+    <div id="debug"></div>
+    <div id="produtos" class="produtos-grid"></div>
+
+    <script>
+        const API_URL = 'http://localhost:5000';
+        
+        async function testarAPI() {
+            const statusDiv = document.getElementById('status');
+            const debugDiv = document.getElementById('debug');
+            const produtosDiv = document.getElementById('produtos');
+            
+            try {
+                statusDiv.innerHTML = '<div class="status warning">🔄 Carregando produtos...</div>';
+                
+                // Buscar produtos
+                const response = await fetch(`${API_URL}/produto/listar`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const produtos = await response.json();
+                
+                // Status
+                statusDiv.innerHTML = `<div class="status success">✅ API respondeu! ${produtos.length} produtos encontrados</div>`;
+                
+                // Debug
+                debugDiv.innerHTML = `
+                    <div class="debug">
+                        <h3>🔍 Debug - Primeiro Produto:</h3>
+                        <pre>${JSON.stringify(produtos[0], null, 2)}</pre>
+                        <h3>📊 Campos disponíveis:</h3>
+                        <pre>${Object.keys(produtos[0] || {}).join(', ')}</pre>
+                    </div>
+                `;
+                
+                // Renderizar produtos
+                if (produtos.length === 0) {
+                    produtosDiv.innerHTML = '<div class="status warning">⚠️ Nenhum produto encontrado</div>';
+                    return;
+                }
+                
+                produtosDiv.innerHTML = produtos.map(p => `
+                    <div class="produto-card">
+                        <img 
+                            src="${p.imagem ? `${API_URL}/storage/${p.imagem}` : '/imgs/placeholder.png'}"
+                            alt="${p.nome}"
+                            onerror="this.src='/imgs/placeholder.png'"
+                        />
+                        <div class="produto-nome">${p.nome}</div>
+                        <div class="produto-descricao" style="font-size: 14px; color: #666; margin: 5px 0;">
+                            ${p.descricao || 'Sem descrição'}
+                        </div>
+                        <div class="produto-preco">R$ ${(p.valor || p.preco || 0).toFixed(2)}</div>
+                        <div style="font-size: 12px; color: #888; margin-top: 5px;">
+                            ID: ${p.id} | Categoria: ${p.categoria || p.id_categoria} | Ativo: ${p.ativo ? '✅' : '❌'}
+                        </div>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Erro:', error);
+                statusDiv.innerHTML = `
+                    <div class="status error">
+                        ❌ Erro ao carregar produtos!<br>
+                        <small>${error.message}</small>
+                    </div>
+                `;
+                debugDiv.innerHTML = `
+                    <div class="debug">
+                        <h3>🐛 Detalhes do Erro:</h3>
+                        <pre>${error.stack}</pre>
+                    </div>
+                `;
+            }
+        }
+        
+        // Executar ao carregar a página
+        testarAPI();
+    </script>
+</body>
+</html>
