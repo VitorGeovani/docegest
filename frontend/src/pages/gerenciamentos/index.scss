@@ -423,7 +423,12 @@
     }
 
     // =========================================================
-    // RESPONSIVIDADE - Desktop Grande (1200px)
+    // RESPONSIVIDADE COMPLETA E APRIMORADA
+    // Sistema mobile-first com 6 breakpoints + landscape + a11y
+    // =========================================================
+
+    // =========================================================
+    // BREAKPOINT 1: Desktop Grande (≤ 1200px)
     // =========================================================
     @media (max-width: 1200px) {
         header {
@@ -431,37 +436,74 @@
         }
 
         .navGerenciamentos {
-            gap: 20px;
-            margin-right: 10px;
+            gap: 6px;
 
             a {
-                font-size: 14px;
-                padding: 8px 14px;
+                font-size: 13px;
+                padding: 7px 12px;
+            }
+        }
+
+        .admin-info {
+            .admin-nome {
+                font-size: 13px;
+            }
+
+            .btn-logout {
+                font-size: 13px;
             }
         }
 
         footer {
             gap: 80px;
-            padding: 40px 30px 25px;
+            padding: 45px 35px 28px;
+
+            .divLogo .wmremove-transformed-4 {
+                width: 160px;
+            }
         }
     }
 
     // =========================================================
-    // RESPONSIVIDADE - Tablet (1024px)
+    // BREAKPOINT 2: Tablet e Desktop Médio (≤ 1024px)
     // =========================================================
     @media (max-width: 1024px) {
         header {
             padding: 12px 25px;
             min-height: 70px;
+            gap: 15px;
+        }
+
+        .header-logo {
+            height: 45px;
+
+            img {
+                height: 45px;
+            }
         }
 
         .navGerenciamentos {
-            gap: 15px;
+            gap: 5px;
             flex-wrap: wrap;
+            justify-content: center;
 
             a {
-                font-size: 13px;
-                padding: 7px 12px;
+                font-size: 12px;
+                padding: 7px 11px;
+            }
+        }
+
+        .admin-info {
+            gap: 10px;
+
+            .admin-nome {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            .btn-logout {
+                font-size: 12px;
+                padding: 6px 12px;
             }
         }
 
@@ -498,61 +540,29 @@
                 }
             }
 
-            .divLogo {
-                .wmremove-transformed-4 {
-                    width: 160px;
-                }
+            .divLogo .wmremove-transformed-4 {
+                width: 160px;
             }
         }
     }
 
     // =========================================================
-    // RESPONSIVIDADE - Tablet (1024px)
-    // =========================================================
-    @media (max-width: 1024px) {
-        header {
-            padding: 10px 25px;
-        }
-
-        .navGerenciamentos {
-            gap: 6px;
-
-            a {
-                font-size: 12px;
-                padding: 7px 12px;
-            }
-        }
-
-        .admin-info {
-            gap: 10px;
-
-            .admin-nome {
-                font-size: 12px;
-            }
-
-            .btn-logout {
-                font-size: 12px;
-                padding: 6px 14px;
-            }
-        }
-    }
-
-    // =========================================================
-    // RESPONSIVIDADE - Mobile (768px)
+    // BREAKPOINT 3: Tablet Pequeno e Mobile Grande (≤ 768px)
     // =========================================================
     @media (max-width: 768px) {
         header {
-            padding: 10px 15px;
+            padding: 12px 20px;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             min-height: auto;
         }
 
         .header-logo {
-            height: 40px;
+            height: 42px;
+            order: 1;
 
             img {
-                height: 40px;
+                height: 42px;
             }
         }
 
@@ -560,30 +570,51 @@
             width: 100%;
             justify-content: center;
             gap: 6px;
+            order: 2;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
             a {
                 font-size: 11px;
                 padding: 6px 10px;
+                min-width: 44px; // WCAG AA
+                min-height: 44px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &::after {
+                    left: 10px;
+                }
+
+                &:hover::after {
+                    width: calc(100% - 20px);
+                }
             }
         }
 
         .admin-info {
             width: 100%;
             justify-content: center;
+            order: 3;
+            gap: 8px;
 
             .admin-nome {
-                font-size: 12px;
+                font-size: 11px;
                 padding: 5px 10px;
             }
 
             .btn-logout {
-                font-size: 12px;
-                padding: 5px 12px;
+                font-size: 11px;
+                padding: 6px 12px;
+                min-height: 44px;
             }
         }
 
         main {
-            min-height: calc(100vh - 550px);
+            min-height: calc(100vh - 500px);
         }
 
         footer {
@@ -597,6 +628,7 @@
             .links,
             .contato {
                 font-size: 16px;
+                margin-bottom: 12px;
             }
 
             .avenida-engenheiro-stevaux,
@@ -608,51 +640,167 @@
             .segredo-sabor-confeitaria,
             .segredo-sabor-confeitaria-5 {
                 font-size: 13px;
+                line-height: 1.6;
             }
 
             .flex-row-whats,
             .flex-row-face,
             .flex-row-insta {
-                padding: 6px 10px;
+                padding: 10px 14px;
+                min-height: 48px; // WCAG AAA
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:active {
+                    transform: scale(0.95);
+                }
 
                 .ic-sharp-whatsapp,
                 .ic-baseline-facebook,
                 .mdi-instagram {
-                    width: 24px;
-                    height: 24px;
+                    width: 26px;
+                    height: 26px;
                 }
             }
         }
     }
 
     // =========================================================
-    // RESPONSIVIDADE - Mobile Pequeno (480px)
+    // BREAKPOINT 4: Mobile Médio (≤ 640px)
     // =========================================================
-    @media (max-width: 480px) {
+    @media (max-width: 640px) {
         header {
-            padding: 8px 15px;
+            padding: 10px 16px;
+            gap: 10px;
+        }
+
+        .header-logo {
+            height: 38px;
+
+            img {
+                height: 38px;
+            }
         }
 
         .navGerenciamentos {
-            gap: 8px;
+            gap: 4px;
+            padding: 8px 0;
 
             a {
-                font-size: 11px;
+                font-size: 10px;
                 padding: 5px 8px;
+                min-width: 48px; // WCAG AAA
+                min-height: 48px;
+                border-radius: 6px;
+            }
+        }
+
+        .admin-info {
+            flex-wrap: wrap;
+            gap: 6px;
+
+            .admin-nome {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+
+            .btn-logout {
+                font-size: 10px;
+                padding: 6px 10px;
+                min-height: 48px;
             }
         }
 
         footer {
-            padding: 25px 15px 15px;
+            gap: 30px;
+
+            .divLogo .wmremove-transformed-4 {
+                width: 130px;
+            }
+
+            .flex-row-whats,
+            .flex-row-face,
+            .flex-row-insta {
+                .ic-sharp-whatsapp,
+                .ic-baseline-facebook,
+                .mdi-instagram {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+        }
+    }
+
+    // =========================================================
+    // BREAKPOINT 5: Mobile Pequeno (≤ 480px)
+    // =========================================================
+    @media (max-width: 480px) {
+        header {
+            padding: 10px 12px;
+            gap: 8px;
+        }
+
+        .header-logo {
+            height: 36px;
+
+            img {
+                height: 36px;
+            }
+        }
+
+        .navGerenciamentos {
+            gap: 4px;
+            padding: 6px 0;
+
+            a {
+                font-size: 9px;
+                padding: 5px 6px;
+                min-width: 48px;
+                min-height: 48px;
+                letter-spacing: 0.1px;
+            }
+        }
+
+        .admin-info {
+            width: 100%;
+            flex-direction: column;
+            gap: 6px;
+
+            .admin-nome,
+            .btn-logout {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .admin-nome {
+                font-size: 10px;
+                padding: 6px 10px;
+            }
+
+            .btn-logout {
+                font-size: 11px;
+                padding: 10px 12px;
+                min-height: 48px;
+            }
+        }
+
+        main {
+            min-height: calc(100vh - 480px);
+        }
+
+        footer {
+            padding: 25px 12px 15px;
             gap: 25px;
 
             .divLogo .wmremove-transformed-4 {
-                width: 120px;
+                width: 110px;
             }
 
             .links,
             .contato {
                 font-size: 15px;
+                margin-bottom: 10px;
             }
 
             .avenida-engenheiro-stevaux,
@@ -664,7 +812,200 @@
             .segredo-sabor-confeitaria,
             .segredo-sabor-confeitaria-5 {
                 font-size: 12px;
+                line-height: 1.5;
             }
+
+            .flex-row-whats,
+            .flex-row-face,
+            .flex-row-insta {
+                padding: 12px 16px;
+                min-height: 52px;
+
+                .ic-sharp-whatsapp,
+                .ic-baseline-facebook,
+                .mdi-instagram {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+    }
+
+    // =========================================================
+    // BREAKPOINT 6: Mobile Extra Pequeno (≤ 360px)
+    // Galaxy S8, iPhone SE 1st gen
+    // =========================================================
+    @media (max-width: 360px) {
+        header {
+            padding: 8px 10px;
+        }
+
+        .header-logo {
+            height: 32px;
+
+            img {
+                height: 32px;
+            }
+        }
+
+        .navGerenciamentos {
+            gap: 3px;
+
+            a {
+                font-size: 8px;
+                padding: 4px 5px;
+                min-width: 48px;
+                min-height: 48px;
+            }
+        }
+
+        .admin-info {
+            .admin-nome {
+                font-size: 9px;
+                padding: 5px 8px;
+            }
+
+            .btn-logout {
+                font-size: 10px;
+                padding: 10px;
+                min-height: 48px;
+            }
+        }
+
+        footer {
+            padding: 20px 10px 12px;
+            gap: 20px;
+
+            .divLogo .wmremove-transformed-4 {
+                width: 100px;
+            }
+
+            .links,
+            .contato {
+                font-size: 14px;
+            }
+
+            .avenida-engenheiro-stevaux,
+            .telefones,
+            .produtos,
+            .nossa-marca,
+            .contato-6,
+            .phone-number,
+            .segredo-sabor-confeitaria,
+            .segredo-sabor-confeitaria-5 {
+                font-size: 11px;
+            }
+        }
+    }
+
+    // =========================================================
+    // MODO PAISAGEM (Landscape) - Smartphones
+    // Otimizado para uso horizontal em mobile
+    // =========================================================
+    @media (max-width: 896px) and (orientation: landscape) {
+        header {
+            padding: 6px 20px;
+            min-height: 50px;
+            gap: 10px;
+        }
+
+        .header-logo {
+            height: 32px;
+
+            img {
+                height: 32px;
+            }
+        }
+
+        .navGerenciamentos {
+            padding: 4px 0;
+            gap: 4px;
+
+            a {
+                font-size: 10px;
+                padding: 4px 8px;
+                min-height: 40px;
+            }
+        }
+
+        .admin-info {
+            flex-direction: row;
+            gap: 6px;
+
+            .admin-nome,
+            .btn-logout {
+                width: auto;
+                font-size: 10px;
+                min-height: 40px;
+            }
+        }
+
+        main {
+            min-height: 50vh;
+        }
+
+        footer {
+            padding: 20px 20px 12px;
+            gap: 30px;
+        }
+    }
+
+    // =========================================================
+    // ACESSIBILIDADE - Reduce Motion
+    // Para usuários com sensibilidade a movimento
+    // =========================================================
+    @media (prefers-reduced-motion: reduce) {
+        header,
+        .navGerenciamentos a,
+        .admin-info .btn-logout,
+        footer::before,
+        .flex-row-whats,
+        .flex-row-face,
+        .flex-row-insta {
+            transition: none !important;
+            animation: none !important;
+        }
+
+        .navGerenciamentos a::after {
+            transition: none !important;
+        }
+
+        .header-logo img:hover {
+            transform: none !important;
+        }
+    }
+
+    // =========================================================
+    // ACESSIBILIDADE - High Contrast Mode
+    // Para usuários com baixa visão
+    // =========================================================
+    @media (prefers-contrast: high) {
+        header {
+            border-bottom: 3px solid #ffffff;
+        }
+
+        .navGerenciamentos a {
+            border: 2px solid transparent;
+
+            &.active,
+            &:focus {
+                border-color: #ffffff;
+                outline: 3px solid #ffffff;
+                outline-offset: 2px;
+            }
+        }
+
+        .admin-info .btn-logout {
+            border-width: 3px;
+
+            &:focus {
+                outline: 3px solid #ffffff;
+                outline-offset: 2px;
+            }
+        }
+
+        footer {
+            border-top: 3px solid rgba(255, 255, 255, 0.5);
         }
     }
 }
