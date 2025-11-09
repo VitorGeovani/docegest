@@ -41,9 +41,7 @@ const pool = mysql.createPool({
   debug: process.env.NODE_ENV === 'development' ? ['ComQueryPacket'] : false,
   
   // Configurações de timeout
-  connectTimeout: 10000,             // 10s para conectar
-  acquireTimeout: 10000,             // 10s para adquirir conexão do pool
-  timeout: 60000,                    // 60s timeout geral
+  connectTimeout: 10000              // 10s para conectar
 });
 
 // =========================================================
@@ -74,18 +72,20 @@ pool.on('error', (err) => {
 });
 
 // =========================================================
-// TESTAR CONEXÃO INICIAL
+// TESTAR CONEXÃO INICIAL (de forma assíncrona)
 // =========================================================
 
-try {
-  const connection = await pool.getConnection();
-  console.log('🚀 Pool de conexões criado com sucesso!');
-  console.log(`📊 Conexões ativas: ${pool._allConnections.length}/${pool.config.connectionLimit}`);
-  connection.release();
-} catch (error) {
-  console.error('❌ Erro ao criar pool de conexões:', error);
-  process.exit(1);
-}
+(async () => {
+  try {
+    const connection = await pool.getConnection();
+    console.log('🚀 Pool de conexões criado com sucesso!');
+    console.log('Conexão com banco realizada!');
+    connection.release();
+  } catch (error) {
+    console.error('❌ Erro ao criar pool de conexões:', error.message);
+    console.error('⚠️ Verifique as configurações do banco de dados no arquivo .env');
+  }
+})();
 
 // =========================================================
 // HELPER FUNCTIONS
