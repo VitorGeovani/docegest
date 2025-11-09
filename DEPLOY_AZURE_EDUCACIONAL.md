@@ -1,10 +1,11 @@
 # 🎓 DEPLOY AZURE - CONTA EDUCACIONAL
 
-## Segredo do Sabor v5.0 - Deploy Gratuito para Apresentação Acadêmica
+## Segredo do Sabor v5.0 UNIFICADA - Deploy Gratuito para Apresentação Acadêmica
 
 **Crédito disponível**: $100 USD  
 **Objetivo**: Deploy 100% GRATUITO usando Azure for Students  
-**Duração da apresentação**: Temporário (apresentação + avaliação)
+**Duração da apresentação**: Temporário (apresentação + avaliação)  
+**Última atualização**: 09/11/2025 ✅ **NOVA VERSÃO COM BANCO UNIFICADO**
 
 ---
 
@@ -192,19 +193,33 @@ cp /var/www/segredodosabor/.env.backend .env
 # Instalar dependências
 npm install
 
-# Importar banco de dados
+# ✅ NOVO: Importar banco de dados UNIFICADO (tudo em 1 arquivo!)
 cd /var/www/segredodosabor
-sudo mysql -u segredo_user -pP@\$\$w0rd segredodosabor < BANCO_DADOS_COMPLETO.sql
-sudo mysql -u segredo_user -pP@\$\$w0rd segredodosabor < criar-tabela-mensagens-whatsapp-completa.sql
+sudo mysql -u segredo_user -pP@\$\$w0rd < INSTALACAO_BANCO_COMPLETO.sql
 
-# Criar admin
-cd backend
-sudo mysql -u segredo_user -pP@\$\$w0rd segredodosabor << 'EOF'
-INSERT INTO cliente (nome, telefone, email, senha, tipo, ativo, criado_em) VALUES
-('Administrador', '5511967696744', 'admin@segredodosabor.com', 
-'$2b$10$rKJZQY9K5F8vXr5h.X6t3.jN1ZGy7hD8kP0mNxQ6fW8zL9vE4tC2S', 
-'admin', 1, NOW());
-EOF
+# ✅ Banco criado com TUDO incluído:
+# • Todas as 21 tabelas
+# • Todos os relacionamentos
+# • Todas as 7 views
+# • Todas as 5 procedures
+# • Todos os 5 triggers
+# • Todas as 2 events (limpeza automática)
+# • Dados iniciais (categorias, ingredientes, configurações)
+# • Administrador padrão (admin@segredodosabor.com / Admin@123)
+# • Bot WhatsApp configurado
+# • Sistema de personalização completo
+# • Sistema de preferências de clientes
+
+# Verificar instalação
+sudo mysql -u segredo_user -pP@\$\$w0rd segredodosabor -e "SHOW TABLES;"
+
+# Deve mostrar 21 tabelas:
+# administrador, cliente, refresh_tokens, categoria, produto, 
+# produto_imagens, reserva, ingrediente, receita, movimentacao_estoque,
+# personalizacao_produto, personalizacao_ingredientes, 
+# cliente_preferencias, cliente_preferencias_historico,
+# tb_mensagens_whatsapp, tb_whatsapp_webhooks, tb_whatsapp_bot_config,
+# tb_whatsapp_comandos, tb_whatsapp_estatisticas, custo_indireto, configuracao
 
 # Iniciar backend com PM2
 pm2 start src/server.js --name segredo-backend
@@ -347,16 +362,18 @@ sudo truncate -s 0 /var/log/nginx/*.log
 ### Credenciais
 
 ```
-Admin:
+✅ Admin (NOVO - já incluído no banco):
 Email: admin@segredodosabor.com
-Senha: Admin@2025
+Senha: Admin@123
 
 MySQL:
 User: segredo_user
 Password: P@$$w0rd
+Database: segredodosabor
 
 WhatsApp:
 Número: +55 11 96769-6744
+Status: Bot pré-configurado (inativo até conectar)
 ```
 
 ---
@@ -381,11 +398,17 @@ Número: +55 11 96769-6744
 
 4. **Painel Administrativo** (6 min)
    - Login como admin
-   - Dashboard com métricas
+   - Dashboard com métricas em tempo real
    - CRUD de produtos
-   - Gestão de pedidos
-   - **NOVO: Simulador de Custos** ⭐
-   - **NOVO: Bot WhatsApp** ⭐
+   - Gestão de pedidos e status
+   - **✅ NOVO: Sistema de Receitas (BOM)**
+   - **✅ NOVO: Gestão de Ingredientes**
+   - **✅ NOVO: Cálculo Automático de Custos**
+   - **✅ NOVO: Movimentação de Estoque**
+   - **✅ NOVO: Relatórios Financeiros**
+   - **✅ NOVO: Bot WhatsApp Integrado**
+   - **✅ NOVO: Sistema de Personalização**
+   - **✅ NOVO: Preferências de Clientes**
 
 5. **Recursos Técnicos** (3 min)
    - Arquitetura 3 camadas
@@ -396,12 +419,20 @@ Número: +55 11 96769-6744
 ### 2. Pontos Fortes para Destacar
 
 ✅ **100% Completo** - 65/65 requisitos implementados  
-✅ **Acessibilidade WCAG 2.2 AAA** - VLibras + controles  
-✅ **Arquitetura Profissional** - MVC + Repository Pattern  
-✅ **Segurança** - JWT + Bcrypt + HTTPS  
-✅ **Inovação** - Bot WhatsApp inteligente  
-✅ **Gestão Inteligente** - Simulador de custos  
-✅ **Deploy Profissional** - Azure Cloud  
+✅ **Acessibilidade WCAG 2.2 AAA** - VLibras + controles + skip links  
+✅ **Arquitetura Profissional** - MVC + Repository Pattern + Pool de Conexões  
+✅ **Segurança Enterprise** - JWT + Bcrypt + Refresh Tokens + HTTPS  
+✅ **Inovação** - Bot WhatsApp inteligente com comandos  
+✅ **Gestão Inteligente** - BOM (Bill of Materials) completo  
+✅ **Cálculo Automático** - Custos calculados com triggers  
+✅ **Deploy Profissional** - Azure Cloud + PM2 + Nginx  
+✅ **✨ NOVO: Banco Unificado** - 1 arquivo SQL com tudo  
+✅ **✨ NOVO: Pool de Conexões** - 10 conexões simultâneas  
+✅ **✨ NOVO: Limpeza Automática** - Events MySQL para tokens e histórico  
+✅ **✨ NOVO: 21 Tabelas Completas** - Sistema empresarial robusto  
+✅ **✨ NOVO: 7 Views de Relatórios** - Dashboards automáticos  
+✅ **✨ NOVO: 5 Procedures** - Lógica de negócio no banco  
+✅ **✨ NOVO: 5 Triggers** - Automação total  
 
 ### 3. Preparar Backup
 
@@ -557,12 +588,15 @@ Crédito restante: $100,00 ✅
 
 ### Arquivos para Entregar
 
-1. **TUTORIAL_DEPLOY_AZURE.md** - Tutorial completo
-2. **DEPLOY_AZURE_EDUCACIONAL.md** - Este guia (estudantes)
-3. **ARQUITETURA_SISTEMA.md** - Arquitetura técnica
-4. **ANALISE_REQUISITOS_FUNCIONAIS.md** - 65/65 RFs
-5. **ROTEIRO_VIDEO_DEMONSTRACAO.md** - Roteiro completo
-6. **README.md** - Visão geral do projeto
+1. **✅ INSTALACAO_BANCO_COMPLETO.sql** - Banco unificado v5.0
+2. **TUTORIAL_DEPLOY_AZURE.md** - Tutorial completo
+3. **DEPLOY_AZURE_EDUCACIONAL.md** - Este guia (estudantes)
+4. **ARQUITETURA_SISTEMA.md** - Arquitetura técnica
+5. **ANALISE_REQUISITOS_FUNCIONAIS.md** - 65/65 RFs
+6. **ROTEIRO_VIDEO_DEMONSTRACAO.md** - Roteiro completo
+7. **README.md** - Visão geral do projeto
+8. **✅ NOVO: CORRECAO_BANCO_DADOS.sql** - Script de correções
+9. **✅ NOVO: GUIA_EXECUCAO_CORRECOES.md** - Guia de manutenção
 
 ### Prints Importantes
 
@@ -583,27 +617,39 @@ Crédito restante: $100,00 ✅
 3. ✅ Arquitetura escalável (pronta para produção)
 4. ✅ Monitoramento automatizado (PM2)
 5. ✅ Backup automático diário
-6. ✅ Segurança enterprise (JWT + SSL pronto)
+6. ✅ Segurança enterprise (JWT + Refresh Tokens + SSL pronto)
 7. ✅ CI/CD ready (estrutura preparada)
+8. ✅ **✨ NOVO: Pool de Conexões MySQL** (10 conexões simultâneas)
+9. ✅ **✨ NOVO: Banco Unificado** (deploy em 1 comando)
+10. ✅ **✨ NOVO: Limpeza Automática** (MySQL Events)
+11. ✅ **✨ NOVO: Triggers Inteligentes** (automação total)
+12. ✅ **✨ NOVO: Views de Relatórios** (dashboards prontos)
 
 ### Diferenciais Funcionais
 
 1. ✅ Bot WhatsApp inteligente (reconhece intenções)
-2. ✅ Simulador de custos (ajuda precificação)
-3. ✅ Acessibilidade AAA (inclusão digital)
-4. ✅ Gestão completa de estoque
-5. ✅ Cálculo automático de custos (BOM)
-6. ✅ Relatórios exportáveis (PDF)
+2. ✅ Sistema BOM completo (Bill of Materials)
+3. ✅ Cálculo automático de custos (triggers)
+4. ✅ Acessibilidade AAA (inclusão digital)
+5. ✅ Gestão completa de estoque com histórico
+6. ✅ Relatórios exportáveis (PDF + Excel)
 7. ✅ Sistema de favoritos persistente
+8. ✅ **✨ NOVO: Personalização de Produtos** (ingredientes extras)
+9. ✅ **✨ NOVO: Preferências de Clientes** (histórico completo)
+10. ✅ **✨ NOVO: Refresh Tokens** (sessão persistente)
+11. ✅ **✨ NOVO: Múltiplas Imagens por Produto**
+12. ✅ **✨ NOVO: Sistema de Reservas Avançado** (JSON otimizado)
+13. ✅ **✨ NOVO: Estatísticas WhatsApp** (métricas detalhadas)
+14. ✅ **✨ NOVO: Webhook WhatsApp** (integração real-time)
 
 ---
 
 ## 🎯 RESUMO EXECUTIVO
 
 ```
-Projeto: Segredo do Sabor v5.0
-Tipo: Sistema de Gestão para Confeitarias
-Status: 100% Completo (65/65 RFs)
+Projeto: Segredo do Sabor v5.0 UNIFICADA
+Tipo: Sistema de Gestão para Confeitarias (ERP + E-commerce)
+Status: 100% Completo (65/65 RFs implementados)
 
 Deploy:
 • Plataforma: Microsoft Azure
@@ -613,29 +659,116 @@ Deploy:
 • Crédito usado: $0,00 de $100,00
 
 Tecnologias:
-• Frontend: React 18 + SCSS
-• Backend: Node.js + Express
-• Banco: MySQL 8.0
-• Cloud: Azure
-• Containers: Docker (Evolution API)
+• Frontend: React 18 + SCSS + WCAG AAA
+• Backend: Node.js 18 + Express + Pool MySQL2
+• Banco: MySQL 8.0 (21 tabelas, 7 views, 5 procedures, 5 triggers, 2 events)
+• Cloud: Azure (VM + Disco SSD + IP Público)
+• Containers: Docker (Evolution API WhatsApp)
 • Process Manager: PM2
 • Reverse Proxy: Nginx
+• Autenticação: JWT + Refresh Tokens + Bcrypt
+
+✨ NOVIDADES v5.0 UNIFICADA:
+• ✅ Banco de dados em 1 arquivo único (INSTALACAO_BANCO_COMPLETO.sql)
+• ✅ Pool de conexões MySQL (10 simultâneas)
+• ✅ Sistema de personalização completo
+• ✅ Preferências de clientes com histórico
+• ✅ Refresh tokens para sessão persistente
+• ✅ Bot WhatsApp pré-configurado
+• ✅ Limpeza automática (MySQL Events)
+• ✅ Múltiplas imagens por produto
+• ✅ Estatísticas WhatsApp detalhadas
+• ✅ 7 views de relatórios prontas
+• ✅ Triggers automáticos de custos
+• ✅ Administrador já incluído no banco
+
+Banco de Dados Completo:
+• 21 Tabelas (todas as funcionalidades)
+• 7 Views (dashboards e relatórios)
+• 5 Stored Procedures (lógica de negócio)
+• 5 Triggers (automação)
+• 2 Events (limpeza automática)
+• Dados Iniciais:
+  - 9 categorias de produtos
+  - 24 ingredientes cadastrados
+  - 21 configurações do sistema
+  - 6 custos indiretos
+  - 1 administrador (admin@segredodosabor.com / Admin@123)
+  - Bot WhatsApp configurado
+  - 5 comandos do bot
 
 Tempo de Deploy: ~30 minutos
 Complexidade: Média
-Resultado: Sistema profissional pronto para demonstração
+Resultado: Sistema empresarial completo pronto para demonstração
 
-Links:
+Links Importantes:
+• Banco Unificado: INSTALACAO_BANCO_COMPLETO.sql ⭐ NOVO
 • Tutorial: TUTORIAL_DEPLOY_AZURE.md
 • Guia Rápido: GUIA_RAPIDO_DEPLOY.md
 • Troubleshooting: TROUBLESHOOTING_AZURE.md
+• Análise Banco: ANALISE_BANCO_DADOS_COMPLETA.md ⭐ NOVO
+• Correções: CORRECAO_BANCO_DADOS.sql ⭐ NOVO
 ```
 
 ---
 
-**Versão**: 5.0 Educacional  
-**Atualizado**: 01/11/2025  
+**Versão**: 5.0 UNIFICADA 🚀  
+**Atualizado**: 09/11/2025 ✅  
 **Alvo**: Apresentação Acadêmica  
 **Custo**: $0,00 (Free Tier)  
+**Novidade**: Banco de dados completo em 1 arquivo!  
+
+---
+
+## 🆕 CHANGELOG v5.0 UNIFICADA (09/11/2025)
+
+### ✨ Melhorias Implementadas
+
+**Banco de Dados:**
+- ✅ Arquivo SQL unificado (INSTALACAO_BANCO_COMPLETO.sql)
+- ✅ 21 tabelas em ordem correta de dependência
+- ✅ Todas as foreign keys configuradas
+- ✅ 7 views de relatórios (custos, estoque, vendas, clientes)
+- ✅ 5 procedures (cálculos, limpeza, geração de códigos)
+- ✅ 5 triggers (custos automáticos, códigos, histórico)
+- ✅ 2 events (limpeza tokens diários, histórico mensal)
+- ✅ Dados iniciais completos
+- ✅ Administrador padrão incluído
+- ✅ Bot WhatsApp pré-configurado
+
+**Backend:**
+- ✅ Pool de conexões MySQL (10 simultâneas)
+- ✅ Eventos do pool (connection, acquire, release, error)
+- ✅ Helper functions (executeQuery, executeTransaction, closePool)
+- ✅ Correção de opções inválidas (acquireTimeout, timeout)
+- ✅ Top-level await corrigido (IIFE assíncrona)
+
+**Funcionalidades Novas:**
+- ✅ Sistema de personalização de produtos
+- ✅ Ingredientes extras customizáveis
+- ✅ Preferências de clientes com histórico
+- ✅ Refresh tokens para sessão persistente
+- ✅ Múltiplas imagens por produto
+- ✅ Estatísticas WhatsApp detalhadas
+- ✅ Webhook WhatsApp com eventos
+- ✅ Comandos do bot configuráveis
+
+**Deploy:**
+- ✅ Instalação simplificada (1 arquivo SQL)
+- ✅ Sem necessidade de múltiplos scripts
+- ✅ Admin já criado (não precisa criar manualmente)
+- ✅ Banco completo em 1 comando
+- ✅ Validação automática após instalação
+
+### 🔧 Correções
+
+- ✅ Opções inválidas do MySQL2 removidas
+- ✅ Top-level await corrigido
+- ✅ Pool de conexões otimizado
+- ✅ Warnings do MySQL eliminados
+- ✅ Mensagens de log melhoradas
+- ✅ Tratamento de erros aprimorado
+
+---
 
 🎓 **BOA SORTE NA APRESENTAÇÃO!** 🎓
