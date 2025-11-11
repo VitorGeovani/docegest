@@ -190,7 +190,7 @@ export default function TermosUso() {
               </ul>
               <p>
                 Para cancelar, entre em contato imediatamente via WhatsApp: 
-                <a href="https://wa.me/5511997661964">(11) 99766-1964</a>
+                <a href="https://wa.me/5511967696744">(11) 96769-6744</a>
               </p>
 
               <h3>5.2 Cancelamento pela Empresa</h3>
@@ -360,7 +360,7 @@ export default function TermosUso() {
               <div className="contato-box">
                 <h3>Segredo do Sabor Confeitaria</h3>
                 <p><strong>E-mail:</strong> <a href="mailto:contato@segredodosabor.com">contato@segredodosabor.com</a></p>
-                <p><strong>WhatsApp:</strong> <a href="https://wa.me/5511997661964">(11) 99766-1964</a></p>
+                <p><strong>WhatsApp:</strong> <a href="https://wa.me/5511967696744">(11) 96769-6744</a></p>
                 <p><strong>Endereço:</strong> Av. Engenheiro Eusébio Stevaux, 600 - Santo Amaro, São Paulo - SP, 04696-000</p>
                 <p><strong>Horário de Atendimento:</strong> Segunda a Sexta, 09:00 - 18:00 | Sábado, 09:00 - 14:00</p>
                 <p><strong>CNPJ:</strong> 00.000.000/0001-00 (exemplo)</p>

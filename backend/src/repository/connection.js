@@ -48,22 +48,22 @@ const pool = mysql.createPool({
 // EVENTOS DO POOL
 // =========================================================
 
-// Evento: nova conexão criada
+// Evento: nova conexão criada (silencioso)
 pool.on('connection', (connection) => {
-  console.log('✅ Nova conexão criada no pool:', connection.threadId);
+  // Conexão criada - log desabilitado para não poluir o terminal
 });
 
-// Evento: conexão adquirida do pool
+// Evento: conexão adquirida do pool (silencioso)
 pool.on('acquire', (connection) => {
-  console.log('🔵 Conexão adquirida do pool:', connection.threadId);
+  // Conexão adquirida - log desabilitado para não poluir o terminal
 });
 
-// Evento: conexão liberada de volta ao pool
+// Evento: conexão liberada de volta ao pool (silencioso)
 pool.on('release', (connection) => {
-  console.log('🟢 Conexão liberada para o pool:', connection.threadId);
+  // Conexão liberada - log desabilitado para não poluir o terminal
 });
 
-// Evento: erro no pool
+// Evento: erro no pool (apenas erros são logados)
 pool.on('error', (err) => {
   console.error('❌ Erro no pool de conexões:', err);
   if (err.code === 'PROTOCOL_CONNECTION_LOST') {

@@ -173,7 +173,7 @@ export default function PoliticaPrivacidade() {
               <p>
                 Para exercer qualquer um desses direitos, entre em contato conosco através do 
                 e-mail: <a href="mailto:privacidade@segredodosabor.com">privacidade@segredodosabor.com</a> 
-                ou WhatsApp: <a href="https://wa.me/5511997661964">(11) 99766-1964</a>
+                ou WhatsApp: <a href="https://wa.me/5511967696744">(11) 96769-6744</a>
               </p>
             </div>
           </section>
@@ -212,7 +212,7 @@ export default function PoliticaPrivacidade() {
               <div className="contato-box">
                 <h3>Segredo do Sabor Confeitaria</h3>
                 <p><strong>E-mail:</strong> <a href="mailto:privacidade@segredodosabor.com">privacidade@segredodosabor.com</a></p>
-                <p><strong>WhatsApp:</strong> <a href="https://wa.me/5511997661964">(11) 99766-1964</a></p>
+                <p><strong>WhatsApp:</strong> <a href="https://wa.me/5511967696744">(11) 96769-6744</a></p>
                 <p><strong>Endereço:</strong> Av. Engenheiro Eusébio Stevaux, 600 - Santo Amaro, São Paulo - SP, 04696-000</p>
                 <p><strong>Horário de Atendimento:</strong> Segunda a Sexta, 09:00 - 18:00</p>
               </div>

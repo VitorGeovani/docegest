@@ -289,7 +289,7 @@ const MeusPedidos = () => {
 
     const contatarWhatsApp = (pedido) => {
         const mensagem = `Olá! Gostaria de obter informações sobre meu pedido #${pedido.numero || pedido.id}.`;
-        const telefone = '5511999999999'; // TODO: Obter do backend
+        const telefone = '5511967696744'; // Número do WhatsApp Business
         window.open(`https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`, '_blank');
     };
 

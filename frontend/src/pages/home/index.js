@@ -134,7 +134,7 @@ export default function Home() {
                 <FaShoppingCart aria-hidden="true" /> Fazer Pedido Agora
               </Link>
               <a 
-                href="https://wa.me/5511999999999" 
+                href="https://wa.me/5511967696744" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="btn-cta-secondary"

@@ -924,7 +924,7 @@ INSERT INTO configuracao (chave, valor, descricao, tipo) VALUES
 ('chave_pix', '', 'Chave PIX para recebimento', 'string'),
 
 -- Contato e Notificações
-('telefone_whatsapp', '', 'Número do WhatsApp para pedidos', 'string'),
+('telefone_whatsapp', '5511967696744', 'Número do WhatsApp para pedidos', 'string'),
 ('email_notificacao', 'contato@segredodosabor.com', 'Email para notificações', 'string'),
 ('whatsapp_ativo', 'false', 'Sistema de WhatsApp ativo', 'boolean'),
 

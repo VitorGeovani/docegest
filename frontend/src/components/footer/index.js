@@ -43,7 +43,7 @@ const Footer = () => (
               <FaInstagram aria-hidden="true" />
             </a>
             <a 
-              href="https://wa.me/5511997661964" 
+              href="https://wa.me/5511967696744" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="social-link"
@@ -76,11 +76,11 @@ const Footer = () => (
             </li>
             <li>
               <FaPhone className="icon" aria-hidden="true" />
-              <a href="tel:5511997661964" aria-label="Ligar para (11) 99766-1964">(11) 99766-1964</a>
+              <a href="tel:5511967696744" aria-label="Ligar para (11) 96769-6744">(11) 96769-6744</a>
             </li>
             <li>
               <FaWhatsapp className="icon" aria-hidden="true" />
-              <a href="https://wa.me/5511997661964" target="_blank" rel="noopener noreferrer" aria-label="Enviar mensagem pelo WhatsApp (abre em nova aba)">WhatsApp</a>
+              <a href="https://wa.me/5511967696744" target="_blank" rel="noopener noreferrer" aria-label="Enviar mensagem pelo WhatsApp (abre em nova aba)">WhatsApp</a>
             </li>
             <li>
               <FaInstagram className="icon" aria-hidden="true" />
