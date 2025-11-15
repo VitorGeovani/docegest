@@ -152,6 +152,13 @@ export default function Home() {
             <h2 className="section-title">O que nossos clientes dizem</h2>
             <div className="depoimentos-grid">
               <div className="depoimento-card">
+                <div className="cliente-foto">
+                  <img 
+                    src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" 
+                    alt="Foto de Maria Silva" 
+                    className="foto-cliente"
+                  />
+                </div>
                 <div className="depoimento-stars" aria-label="Avaliação: 5 de 5 estrelas">
                   <FaStar aria-hidden="true" />
                   <FaStar aria-hidden="true" />
@@ -167,6 +174,13 @@ export default function Home() {
               </div>
               
               <div className="depoimento-card">
+                <div className="cliente-foto">
+                  <img 
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" 
+                    alt="Foto de João Santos" 
+                    className="foto-cliente"
+                  />
+                </div>
                 <div className="depoimento-stars" aria-label="Avaliação: 5 de 5 estrelas">
                   <FaStar aria-hidden="true" />
                   <FaStar aria-hidden="true" />
@@ -182,6 +196,13 @@ export default function Home() {
               </div>
               
               <div className="depoimento-card">
+                <div className="cliente-foto">
+                  <img 
+                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" 
+                    alt="Foto de Ana Paula" 
+                    className="foto-cliente"
+                  />
+                </div>
                 <div className="depoimento-stars" aria-label="Avaliação: 5 de 5 estrelas">
                   <FaStar aria-hidden="true" />
                   <FaStar aria-hidden="true" />
