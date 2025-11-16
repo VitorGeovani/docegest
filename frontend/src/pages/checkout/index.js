@@ -472,10 +472,13 @@ function Checkout() {
             // 1. Criar/buscar cliente
             const enderecoCompleto = `${dadosCliente.endereco}, ${dadosCliente.numero}${dadosCliente.complemento ? ' - ' + dadosCliente.complemento : ''}, ${dadosCliente.bairro}, ${dadosCliente.cidade}/${dadosCliente.uf}`;
             
+            // ✅ CORREÇÃO: Remover formatação do telefone antes de enviar
+            const telefoneLimpo = dadosCliente.telefone.replace(/\D/g, ''); // Remove tudo que não é número
+            
             const clienteResponse = await axios.post('http://localhost:5000/cliente/verificar', {
                 nome: dadosCliente.nome,
                 email: dadosCliente.email,
-                telefone: dadosCliente.telefone
+                telefone: telefoneLimpo // ✅ Enviar apenas números
             });
 
             const idCliente = clienteResponse.data.id_cliente || clienteResponse.data.id;
@@ -511,7 +514,7 @@ function Checkout() {
                 produtosComQuantidade: qtdReserva,
                 clienteId: idCliente,
                 nomeCliente: dadosCliente.nome,
-                telefoneCliente: dadosCliente.telefone,
+                telefoneCliente: telefoneLimpo, // ✅ Usar telefone limpo
                 emailCliente: dadosCliente.email,
                 enderecoEntrega: enderecoCompleto,
                 tipoPedido: "ENTREGA",
@@ -543,7 +546,7 @@ function Checkout() {
             // 6. Salvar informações do cliente para Meus Pedidos
             localStorage.setItem('clienteInfo', JSON.stringify({
                 nome: dadosCliente.nome,
-                telefone: dadosCliente.telefone,
+                telefone: telefoneLimpo, // ✅ Salvar telefone limpo
                 email: dadosCliente.email
             }));
 
@@ -552,7 +555,7 @@ function Checkout() {
                 numero: pedidoResponse.data.numeroPedido,
                 whatsappEnviado: pedidoResponse.data.whatsappEnviado,
                 total: carrinho.total,
-                telefone: dadosCliente.telefone
+                telefone: telefoneLimpo // ✅ Salvar telefone limpo
             }));
 
             // 8. Mostrar sucesso

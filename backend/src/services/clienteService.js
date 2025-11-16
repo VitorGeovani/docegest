@@ -1,6 +1,16 @@
 import * as clienteRepository from '../repository/clienteRepository.js';
 
 /**
+ * Remove formatação do telefone (mantém apenas números)
+ * @param {string} telefone - Telefone formatado
+ * @returns {string} Telefone apenas com números
+ */
+function limparTelefone(telefone) {
+    if (!telefone) return telefone;
+    return telefone.replace(/\D/g, ''); // Remove tudo que não é dígito
+}
+
+/**
  * Valida os dados de um cliente
  * @param {Object} cliente - Dados do cliente a serem validados
  * @throws {Error} Se os dados forem inválidos
@@ -18,6 +28,12 @@ function validarCliente(cliente) {
 
     if (!cliente.telefone || cliente.telefone.trim() === '') {
         erros.push('Telefone é obrigatório');
+    }
+    
+    // ✅ Validar tamanho do telefone (após limpar formatação)
+    const telefoneLimpo = limparTelefone(cliente.telefone);
+    if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
+        erros.push('Telefone deve ter 10 ou 11 dígitos');
     }
 
     if (erros.length > 0) {
@@ -45,7 +61,14 @@ export async function listarClientes() {
 export async function inserirCliente(cliente) {
     try {
         validarCliente(cliente);
-        return await clienteRepository.inserir(cliente);
+        
+        // ✅ Limpar telefone antes de inserir
+        const clienteLimpo = {
+            ...cliente,
+            telefone: limparTelefone(cliente.telefone)
+        };
+        
+        return await clienteRepository.inserir(clienteLimpo);
     } catch (error) {
         throw new Error(`Erro ao inserir cliente: ${error.message}`);
     }
@@ -64,8 +87,14 @@ export async function alterarCliente(id, cliente) {
         }
 
         validarCliente(cliente);
+        
+        // ✅ Limpar telefone antes de atualizar
+        const clienteLimpo = {
+            ...cliente,
+            telefone: limparTelefone(cliente.telefone)
+        };
 
-        const linhasAfetadas = await clienteRepository.alterar(id, cliente);
+        const linhasAfetadas = await clienteRepository.alterar(id, clienteLimpo);
         
         if (linhasAfetadas === 0) {
             throw new Error('Cliente não encontrado');
@@ -109,13 +138,16 @@ export async function removerCliente(id) {
  */
 export async function verificarOuCriarCliente(nome, email, telefone) {
     try {
-        validarCliente({ nome, email, telefone });
+        // ✅ Limpar telefone antes de validar/buscar
+        const telefoneLimpo = limparTelefone(telefone);
+        
+        validarCliente({ nome, email, telefone: telefoneLimpo });
 
-        let cliente = await clienteRepository.buscarPorEmailTelefone(email, telefone);
+        let cliente = await clienteRepository.buscarPorEmailTelefone(email, telefoneLimpo);
 
         if (!cliente) {
-            const idcliente = await clienteRepository.inserirCliente(nome, email, telefone);
-            cliente = { id_cliente: idcliente, id: idcliente, nome, email, telefone };
+            const idcliente = await clienteRepository.inserirCliente(nome, email, telefoneLimpo);
+            cliente = { id_cliente: idcliente, id: idcliente, nome, email, telefone: telefoneLimpo };
         }
 
         return cliente;
