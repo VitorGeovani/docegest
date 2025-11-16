@@ -1,4 +1,4 @@
-import connection from './connection.js';
+import pool from './connection.js';
 
 // Cache para verificação de colunas (evita consultar a cada requisição)
 let colunasNovasExistem = true; // Forçando true já que as colunas existem
@@ -22,7 +22,7 @@ async function verificarColunasNovas() {
             AND COLUMN_NAME IN ('data_pedido', 'numero_pedido', 'data_atualizacao', 'historico_status');
         `;
         
-        const [columns] = await connection.query(query);
+        const [columns] = await pool.query(query);
         colunasNovasExistem = columns.length >= 2; // Pelo menos data_pedido e numero_pedido
         
         if (!colunasNovasExistem) {
@@ -54,7 +54,7 @@ export async function listarReservas() {
       FROM reserva;
     `;
     
-    let resp = await connection.query(comando);
+    let resp = await pool.query(comando);
     let registros = resp[0];
     
     // Parse de campos JSON em cada reserva
@@ -110,7 +110,7 @@ export async function inserirReserva(reserva) {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `;
     
-    let [info] = await connection.query(comando, [
+    let [info] = await pool.query(comando, [
       reserva.data,
       reserva.horario,
       reserva.pontoEntrega,
@@ -135,7 +135,7 @@ export async function atualizarQuantidadeProdutos(produtos) {
           WHERE idproduto = ? AND quantidade >= ?;
       `;
 
-      const [info] = await connection.query(comando, [
+      const [info] = await pool.query(comando, [
           produto.quantidade, // Quantidade a ser subtraída
           produto.id,         // ID do produto
           produto.quantidade  // Verifica se há estoque suficiente
@@ -162,7 +162,7 @@ export async function alterarReserva(id, reserva) {
       WHERE idreserva = ?;
     `;
     
-    let [info] = await connection.query(comando, [
+    let [info] = await pool.query(comando, [
       reserva.dataEntrega,
       reserva.horaEntrega,
       reserva.pontoEntrega,
@@ -183,7 +183,7 @@ export async function removerReserva(id) {
       WHERE idreserva = ?;
     `;
     
-    let [info] = await connection.query(comando, [id]);
+    let [info] = await pool.query(comando, [id]);
     
     return info.affectedRows;
 }
@@ -245,7 +245,7 @@ export async function listarReservasPendentes() {
       `;
   }
   
-  let resp = await connection.query(comando);
+  let resp = await pool.query(comando);
   let registros = resp[0];
   
   // Parse dos campos JSON para garantir que sejam arrays
@@ -341,7 +341,7 @@ export async function listarReservasPorStatus(status) {
       `;
   }
   
-  let resp = await connection.query(comando, [status]);
+  let resp = await pool.query(comando, [status]);
   let registros = resp[0];
   
   // Parse dos campos JSON para garantir que sejam arrays
@@ -436,7 +436,7 @@ export async function listarTodasReservasComCliente() {
       `;
   }
   
-  let resp = await connection.query(comando);
+  let resp = await pool.query(comando);
   let registros = resp[0];
   
   // Parse dos campos JSON para garantir que sejam arrays
@@ -480,7 +480,7 @@ export async function confirmarReserva(id) {
       WHERE idreserva = ? AND status = 'Pendente';
   `;
 
-  const [info] = await connection.query(comando, [id]);
+  const [info] = await pool.query(comando, [id]);
   return info.affectedRows; // Retorna o número de linhas afetadas
 }
 
@@ -496,7 +496,7 @@ export async function cancelarReserva(id, produtos) {
           SET status = 'Cancelado'
           WHERE idreserva = ? AND status = 'Pendente';
       `;
-      const [infoReserva] = await connection.query(comandoReserva, [id]);
+      const [infoReserva] = await pool.query(comandoReserva, [id]);
 
       if (infoReserva.affectedRows === 0) {
           throw new Error(`Reserva com ID ${id} não encontrada ou já foi processada.`);
@@ -509,7 +509,7 @@ export async function cancelarReserva(id, produtos) {
               SET quantidade = quantidade + ?
               WHERE idproduto = ?;
           `;
-          await connection.query(comandoProduto, [produto.quantidadeReservados, produto.id]);
+          await pool.query(comandoProduto, [produto.quantidadeReservados, produto.id]);
       }
 
       // Confirma a transação
@@ -546,7 +546,7 @@ export async function buscarReservaPorId(id) {
         WHERE r.idreserva = ?;
     `;
     
-    const [registros] = await connection.query(comando, [id]);
+    const [registros] = await pool.query(comando, [id]);
     let reserva = registros[0];
     
     // Parse de campos JSON se a reserva existir
@@ -616,7 +616,7 @@ export async function atualizarStatusPedido(id, novoStatus) {
         params = [novoStatus, id];
     }
     
-    const [info] = await connection.query(comando, params);
+    const [info] = await pool.query(comando, params);
     return info.affectedRows;
 }
 
@@ -677,7 +677,7 @@ export async function buscarPedidosPorTelefone(telefone) {
         `;
     }
     
-    const [registros] = await connection.query(comando, [telefone]);
+    const [registros] = await pool.query(comando, [telefone]);
     
     // Parse de campos JSON em cada reserva
     let reservas = registros.map(reserva => {
@@ -782,7 +782,7 @@ export async function buscarDetalhePedidoCompleto(id) {
         `;
     }
     
-    const [registros] = await connection.query(comando, [id]);
+    const [registros] = await pool.query(comando, [id]);
     let reserva = registros[0];
     
     // Parse de campos JSON se a reserva existir
@@ -844,7 +844,7 @@ export async function buscarClientePorReserva(idReserva) {
         WHERE r.idreserva = ?;
     `;
     
-    const [registros] = await connection.query(comando, [idReserva]);
+    const [registros] = await pool.query(comando, [idReserva]);
     return registros[0];
 }
 
@@ -869,6 +869,6 @@ export async function registrarReenvioConfirmacao(idReserva) {
                 )
             WHERE idreserva = ?;
         `;
-        await connection.query(comando, [idReserva]);
+        await pool.query(comando, [idReserva]);
     }
 }

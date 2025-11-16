@@ -1,4 +1,4 @@
-import connection from './connection.js';
+import pool from './connection.js';
 
 export async function obterReceitaTotal() {
     const comando = `
@@ -6,7 +6,7 @@ export async function obterReceitaTotal() {
         FROM reserva
         WHERE status IN ('Confirmado', 'Preparando', 'Pronto', 'Entregue');
     `;
-    const [resultado] = await connection.query(comando);
+    const [resultado] = await pool.query(comando);
     return resultado[0].receitaTotal || 0;
 }
 
@@ -25,7 +25,7 @@ export async function obterCustoTotal() {
         FROM reserva r
         WHERE r.status IN ('Confirmado', 'Preparando', 'Pronto', 'Entregue');
     `;
-    const [resultado] = await connection.query(comando);
+    const [resultado] = await pool.query(comando);
     return resultado[0].custoTotal || 0;
 }
 
@@ -43,7 +43,7 @@ export async function obterTotalPedidos() {
         FROM reserva
         WHERE status IN ('Confirmado', 'Preparando', 'Pronto', 'Entregue');
     `;
-    const [resultado] = await connection.query(comando);
+    const [resultado] = await pool.query(comando);
     return resultado[0].totalPedidos || 0;
 }
 
@@ -60,7 +60,7 @@ export async function obterVendasPorPeriodo() {
         ORDER BY periodo DESC
         LIMIT 7;
     `;
-    const [resultado] = await connection.query(comando);
+    const [resultado] = await pool.query(comando);
     return resultado;
 }
 
@@ -84,7 +84,7 @@ export async function obterProdutosMaisVendidos() {
         ORDER BY quantidadeVendida DESC
         LIMIT 3;
     `;
-    const [resultado] = await connection.query(comando);
+    const [resultado] = await pool.query(comando);
     return resultado;
 }
 
@@ -99,7 +99,7 @@ export async function obterTiposPagamento() {
         GROUP BY pagamento
         ORDER BY porcentagem DESC;
     `;
-    const [resultado] = await connection.query(comando);
+    const [resultado] = await pool.query(comando);
     return resultado;
 }
 
@@ -117,7 +117,7 @@ export async function obterTotalProdutosVendidos() {
         ) AS j
         WHERE r.status IN ('Confirmado', 'Preparando', 'Pronto', 'Entregue');
     `;
-    const [resultado] = await connection.query(comando);
+    const [resultado] = await pool.query(comando);
     return resultado[0].totalProdutosVendidos || 0;
 }
 export async function obterVendasDiarias() {
@@ -132,7 +132,7 @@ export async function obterVendasDiarias() {
         ORDER BY DATE(data_entrega) DESC
         LIMIT 7;
     `;
-    const [resultado] = await connection.query(comando);
+    const [resultado] = await pool.query(comando);
     return resultado;
 }
 
@@ -152,7 +152,7 @@ export async function obterDadosRelatorio(dataInicio, dataFim) {
         LEFT JOIN cliente c ON r.idcliente_fk = c.idcliente
         WHERE DATE(r.data_entrega) BETWEEN ? AND ?
         ORDER BY r.data_entrega DESC;`;
-    const [resultado] = await connection.query(comando, [dataInicio, dataFim]);
+    const [resultado] = await pool.query(comando, [dataInicio, dataFim]);
     return resultado;
 }
 
@@ -165,6 +165,6 @@ export async function obterResumoRelatorio(dataInicio, dataFim) {
             SUM(CASE WHEN status = 'Cancelado' THEN 1 ELSE 0 END) AS pedidosCancelados
         FROM reserva
         WHERE DATE(data_entrega) BETWEEN ? AND ?;`;
-    const [resultado] = await connection.query(comando, [dataInicio, dataFim]);
+    const [resultado] = await pool.query(comando, [dataInicio, dataFim]);
     return resultado[0];
 }

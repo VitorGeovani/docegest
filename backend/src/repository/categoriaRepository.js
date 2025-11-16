@@ -1,4 +1,4 @@
-import connection from './connection.js';
+import pool from './connection.js';
 
 // Listar todas as categorias
 export async function listarCategorias() {
@@ -13,7 +13,7 @@ export async function listarCategorias() {
         FROM categoria
         ORDER BY nome ASC
     `;
-    const [resultado] = await connection.query(comando);
+    const [resultado] = await pool.query(comando);
     return resultado;
 }
 
@@ -28,7 +28,7 @@ export async function listarCategoriasAtivas() {
         WHERE ativo = 1
         ORDER BY nome ASC
     `;
-    const [resultado] = await connection.query(comando);
+    const [resultado] = await pool.query(comando);
     return resultado;
 }
 
@@ -44,7 +44,7 @@ export async function buscarCategoriaPorId(id) {
         FROM categoria
         WHERE idcategoria = ?
     `;
-    const [resultado] = await connection.query(comando, [id]);
+    const [resultado] = await pool.query(comando, [id]);
     return resultado[0];
 }
 
@@ -54,7 +54,7 @@ export async function criarCategoria(categoria) {
         INSERT INTO categoria (nome, descricao, ativo)
         VALUES (?, ?, ?)
     `;
-    const [resultado] = await connection.query(comando, [
+    const [resultado] = await pool.query(comando, [
         categoria.nome,
         categoria.descricao,
         categoria.ativo
@@ -71,7 +71,7 @@ export async function atualizarCategoria(id, categoria) {
             ativo = ?
         WHERE idcategoria = ?
     `;
-    const [resultado] = await connection.query(comando, [
+    const [resultado] = await pool.query(comando, [
         categoria.nome,
         categoria.descricao,
         categoria.ativo,
@@ -83,7 +83,7 @@ export async function atualizarCategoria(id, categoria) {
 // Excluir categoria
 export async function excluirCategoria(id) {
     const comando = `DELETE FROM categoria WHERE idcategoria = ?`;
-    const [resultado] = await connection.query(comando, [id]);
+    const [resultado] = await pool.query(comando, [id]);
     return resultado.affectedRows;
 }
 
@@ -93,6 +93,6 @@ export async function buscarCategoriaPorNome(nome) {
         SELECT * FROM categoria
         WHERE LOWER(nome) = LOWER(?)
     `;
-    const [resultado] = await connection.query(comando, [nome]);
+    const [resultado] = await pool.query(comando, [nome]);
     return resultado[0];
 }

@@ -1,4 +1,4 @@
-import connection from './connection.js'
+import pool from './connection.js'
 
 
 export async function listar() {
@@ -11,7 +11,7 @@ export async function listar() {
       FROM cliente;
     `;
     
-    let resp = await connection.query(comando);
+    let resp = await pool.query(comando);
     let registros = resp[0];
     
     return registros;
@@ -23,7 +23,7 @@ export async function listar() {
       INSERT INTO cliente (nome, email, telefone) 
       VALUES (?, ?, ?);
     `;
-    let [info] = await connection.query(comando, [cliente.nome, cliente.email, cliente.telefone]);
+    let [info] = await pool.query(comando, [cliente.nome, cliente.email, cliente.telefone]);
     return info.insertId;
   }
  
@@ -33,7 +33,7 @@ export async function listar() {
       SET nome = ?, email = ?, telefone = ? 
       WHERE idcliente = ?;
     `;
-    let [info] = await connection.query(comando, [cliente.nome, cliente.email, cliente.telefone, id]);
+    let [info] = await pool.query(comando, [cliente.nome, cliente.email, cliente.telefone, id]);
     return info.affectedRows;
   }
  
@@ -42,7 +42,7 @@ export async function listar() {
       DELETE FROM cliente 
       WHERE idcliente = ?;
     `;
-    let [info] = await connection.query(comando, [id]);
+    let [info] = await pool.query(comando, [id]);
     return info.affectedRows;
   }
 
@@ -57,7 +57,7 @@ export async function listar() {
         WHERE email = ? OR telefone = ?;
       `;
       
-      let resp = await connection.query(comando, [email, telefone]);
+      let resp = await pool.query(comando, [email, telefone]);
       let registros = resp[0];
       
       return registros.length ? registros[0] : null;
@@ -69,6 +69,6 @@ export async function listar() {
         VALUES (?, ?, ?);
       `;
       
-      let resp = await connection.query(comando, [nome, email, telefone]);
+      let resp = await pool.query(comando, [nome, email, telefone]);
       return resp[0].insertId;
   }

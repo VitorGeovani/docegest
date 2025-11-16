@@ -1,4 +1,4 @@
-import connection from './connection.js';
+import pool from './connection.js';
 
 /**
  * Lista todos os ingredientes
@@ -20,7 +20,7 @@ export async function listarIngredientes() {
         ORDER BY nome;
     `;
     
-    const [registros] = await connection.query(comando);
+    const [registros] = await pool.query(comando);
     return registros;
 }
 
@@ -42,7 +42,7 @@ export async function buscarIngredientePorId(id) {
         WHERE idingrediente = ?;
     `;
     
-    const [registros] = await connection.query(comando, [id]);
+    const [registros] = await pool.query(comando, [id]);
     return registros[0];
 }
 
@@ -61,7 +61,7 @@ export async function inserirIngrediente(ingrediente) {
         ) VALUES (?, ?, ?, ?, ?, ?);
     `;
     
-    const [info] = await connection.query(comando, [
+    const [info] = await pool.query(comando, [
         ingrediente.nome,
         ingrediente.unidadeMedida,
         ingrediente.precoUnitario,
@@ -89,7 +89,7 @@ export async function alterarIngrediente(id, ingrediente) {
         WHERE idingrediente = ?;
     `;
     
-    const [info] = await connection.query(comando, [
+    const [info] = await pool.query(comando, [
         ingrediente.nome,
         ingrediente.unidadeMedida,
         ingrediente.precoUnitario,
@@ -112,7 +112,7 @@ export async function removerIngrediente(id) {
         WHERE idingrediente = ?;
     `;
     
-    const [info] = await connection.query(comando, [id]);
+    const [info] = await pool.query(comando, [id]);
     return info.affectedRows;
 }
 
@@ -141,7 +141,7 @@ export async function listarIngredientesEstoqueBaixo() {
         ORDER BY i.quantidade_estoque ASC;
     `;
     
-    const [registros] = await connection.query(comando);
+    const [registros] = await pool.query(comando);
     return registros;
 }
 
@@ -161,7 +161,7 @@ export async function registrarMovimentacao(movimentacao) {
         ) VALUES (?, ?, ?, ?, ?, ?, ?);
     `;
     
-    const [info] = await connection.query(comando, [
+    const [info] = await pool.query(comando, [
         movimentacao.idIngrediente,
         movimentacao.tipo,
         movimentacao.quantidade,
@@ -179,7 +179,7 @@ export async function registrarMovimentacao(movimentacao) {
     `;
     
     const fator = movimentacao.tipo === 'ENTRADA' ? 1 : -1;
-    await connection.query(comandoUpdate, [
+    await pool.query(comandoUpdate, [
         movimentacao.quantidade * fator,
         movimentacao.idIngrediente
     ]);
@@ -231,7 +231,7 @@ export async function listarMovimentacoes(filtros = {}) {
     
     comando += ` ORDER BY m.data_movimentacao DESC LIMIT 100`;
     
-    const [registros] = await connection.query(comando, params);
+    const [registros] = await pool.query(comando, params);
     return registros;
 }
 
@@ -261,6 +261,6 @@ export async function gerarListaCompras() {
             i.nome;
     `;
     
-    const [registros] = await connection.query(comando);
+    const [registros] = await pool.query(comando);
     return registros;
 }

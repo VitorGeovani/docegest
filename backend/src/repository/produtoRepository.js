@@ -1,4 +1,4 @@
-import connection from './connection.js';
+import pool from './connection.js';
 
 export async function listarProdutos() {
     const comando = `
@@ -18,7 +18,7 @@ export async function listarProdutos() {
       ORDER BY p.nome;
     `;
     
-    let resp = await connection.query(comando);
+    let resp = await pool.query(comando);
     let registros = resp[0];
     
     return registros;
@@ -43,7 +43,7 @@ export async function listarProdutosDisponiveis() {
     ORDER BY p.nome;
   `;
   
-  let resp = await connection.query(comando);
+  let resp = await pool.query(comando);
   let registros = resp[0];
   
   return registros;
@@ -64,7 +64,7 @@ export async function listarProdutoPorId(id) {
       WHERE idproduto = ?;
     `;
     
-    let resp = await connection.query(comando, [id]);
+    let resp = await pool.query(comando, [id]);
     let registro = resp[0][0]; // Retorna apenas o primeiro registro encontrado
     
     return registro;
@@ -77,7 +77,7 @@ export async function inserirProduto(produto) {
       INSERT INTO produto (nome, descricao, preco, quantidade, idcategoria, img_Produto, ativo) 
       VALUES (?, ?, ?, ?, ?, ?, ?);
     `;
-    let [info] = await connection.query(comando, [
+    let [info] = await pool.query(comando, [
       produto.nome,
       produto.descricao,
       produto.preco,
@@ -102,7 +102,7 @@ export async function alterarProduto(id, produto) {
         ativo = ?
       WHERE idproduto = ?;
     `;
-    let [info] = await connection.query(comando, [
+    let [info] = await pool.query(comando, [
       produto.nome,
       produto.descricao,
       produto.preco,
@@ -120,7 +120,7 @@ export async function removerProduto(id) {
       DELETE FROM produto 
       WHERE idproduto = ?;
     `;
-    let [info] = await connection.query(comando, [id]);
+    let [info] = await pool.query(comando, [id]);
     return info.affectedRows;
 }
 
@@ -147,7 +147,7 @@ export async function listarTodosProdutos() {
         ORDER BY p.nome;
     `;
     
-    const [registros] = await connection.query(comando);
+    const [registros] = await pool.query(comando);
     return registros;
 }
 
@@ -173,7 +173,7 @@ export async function obterAnaliseEstoque() {
         ORDER BY quantidade ASC, nome;
     `;
     
-    const [registros] = await connection.query(comando);
+    const [registros] = await pool.query(comando);
     return registros;
 }
 
@@ -205,6 +205,6 @@ export async function analiseCustosProdutos() {
         ORDER BY tem_receita DESC, p.nome;
     `;
     
-    const [registros] = await connection.query(comando);
+    const [registros] = await pool.query(comando);
     return registros;
 }

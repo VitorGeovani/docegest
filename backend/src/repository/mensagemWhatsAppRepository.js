@@ -1,4 +1,4 @@
-import connection from './connection.js';
+import pool from './connection.js';
 
 /**
  * Repository para gerenciar mensagens WhatsApp
@@ -13,7 +13,7 @@ class MensagemWhatsAppRepository {
     async registrarMensagemEnviada(dados) {
         const { idReserva, telefone, conteudo, tipoNotificacao, whatsappMessageId } = dados;
         
-        const [resultado] = await connection.query(
+        const [resultado] = await pool.query(
             `CALL sp_registrar_mensagem_enviada(?, ?, ?, ?, ?)`,
             [idReserva, telefone, conteudo, tipoNotificacao, whatsappMessageId]
         );
@@ -25,7 +25,7 @@ class MensagemWhatsAppRepository {
      * RF027: Registrar mensagem recebida
      */
     async registrarMensagemRecebida(telefone, conteudo, whatsappMessageId) {
-        const [resultado] = await connection.query(
+        const [resultado] = await pool.query(
             `CALL sp_registrar_mensagem_recebida(?, ?, ?)`,
             [telefone, conteudo, whatsappMessageId]
         );
@@ -37,7 +37,7 @@ class MensagemWhatsAppRepository {
      * RF029: Buscar histórico de mensagens de um telefone
      */
     async buscarHistorico(telefone, limite = 50) {
-        const [mensagens] = await connection.query(
+        const [mensagens] = await pool.query(
             `CALL sp_buscar_historico_mensagens(?, ?)`,
             [telefone, limite]
         );
@@ -49,7 +49,7 @@ class MensagemWhatsAppRepository {
      * Atualizar status de mensagem (entregue, lido)
      */
     async atualizarStatus(whatsappMessageId, novoStatus) {
-        const [resultado] = await connection.query(
+        const [resultado] = await pool.query(
             `CALL sp_atualizar_status_mensagem(?, ?)`,
             [whatsappMessageId, novoStatus]
         );
@@ -61,7 +61,7 @@ class MensagemWhatsAppRepository {
      * Atualizar status com erro
      */
     async registrarErro(idMensagem, erroMensagem) {
-        await connection.query(
+        await pool.query(
             `UPDATE tb_mensagens_whatsapp 
              SET status_envio = 'falha', erro_mensagem = ?
              WHERE id_mensagem = ?`,
@@ -73,7 +73,7 @@ class MensagemWhatsAppRepository {
      * RF065: Buscar estatísticas de mensagens
      */
     async buscarEstatisticas(dataInicio, dataFim) {
-        const [stats] = await connection.query(
+        const [stats] = await pool.query(
             `SELECT 
                 DATE(data_hora_envio) as data,
                 COUNT(*) as total_mensagens,
@@ -95,7 +95,7 @@ class MensagemWhatsAppRepository {
      * RF065: Status em tempo real do bot
      */
     async buscarStatusBot() {
-        const [status] = await connection.query(
+        const [status] = await pool.query(
             `SELECT * FROM vw_whatsapp_status`
         );
         
@@ -106,7 +106,7 @@ class MensagemWhatsAppRepository {
      * Buscar mensagens por pedido
      */
     async buscarPorPedido(idReserva) {
-        const [mensagens] = await connection.query(
+        const [mensagens] = await pool.query(
             `SELECT * FROM tb_mensagens_whatsapp
              WHERE id_reserva = ?
              ORDER BY data_hora_envio DESC`,
@@ -120,7 +120,7 @@ class MensagemWhatsAppRepository {
      * RF027: Registrar webhook recebido
      */
     async registrarWebhook(eventoTipo, eventoJson, telefoneOrigem) {
-        const [resultado] = await connection.query(
+        const [resultado] = await pool.query(
             `INSERT INTO tb_whatsapp_webhooks (evento_tipo, evento_json, telefone_origem)
              VALUES (?, ?, ?)`,
             [eventoTipo, JSON.stringify(eventoJson), telefoneOrigem]
@@ -133,7 +133,7 @@ class MensagemWhatsAppRepository {
      * Marcar webhook como processado
      */
     async marcarWebhookProcessado(idWebhook, idMensagem = null) {
-        await connection.query(
+        await pool.query(
             `UPDATE tb_whatsapp_webhooks
              SET processado = TRUE, 
                  id_mensagem = ?,
@@ -147,7 +147,7 @@ class MensagemWhatsAppRepository {
      * Registrar erro no processamento do webhook
      */
     async registrarErroWebhook(idWebhook, erro) {
-        await connection.query(
+        await pool.query(
             `UPDATE tb_whatsapp_webhooks
              SET erro_processamento = ?
              WHERE id_webhook = ?`,
@@ -159,7 +159,7 @@ class MensagemWhatsAppRepository {
      * RF027: Buscar comandos do bot
      */
     async buscarComandos() {
-        const [comandos] = await connection.query(
+        const [comandos] = await pool.query(
             `SELECT * FROM tb_whatsapp_comandos
              WHERE ativo = TRUE
              ORDER BY ordem_exibicao`
@@ -172,7 +172,7 @@ class MensagemWhatsAppRepository {
      * Buscar comando por palavra-chave
      */
     async buscarComandoPorPalavra(palavraChave) {
-        const [comandos] = await connection.query(
+        const [comandos] = await pool.query(
             `SELECT * FROM tb_whatsapp_comandos
              WHERE palavra_chave = ? AND ativo = TRUE
              LIMIT 1`,
@@ -186,7 +186,7 @@ class MensagemWhatsAppRepository {
      * RF065: Buscar configuração do bot
      */
     async buscarConfigBot() {
-        const [config] = await connection.query(
+        const [config] = await pool.query(
             `SELECT * FROM tb_whatsapp_bot_config
              ORDER BY id_config DESC
              LIMIT 1`
@@ -201,7 +201,7 @@ class MensagemWhatsAppRepository {
     async atualizarConfigBot(dados) {
         const { statusBot, mensagemBoasVindas, mensagemAusente, respostaAutomaticaAtiva } = dados;
         
-        await connection.query(
+        await pool.query(
             `UPDATE tb_whatsapp_bot_config
              SET status_bot = ?,
                  mensagem_boas_vindas = ?,
@@ -217,14 +217,14 @@ class MensagemWhatsAppRepository {
      * Atualizar estatísticas diárias
      */
     async atualizarEstatisticas() {
-        await connection.query(`CALL sp_atualizar_estatisticas_whatsapp()`);
+        await pool.query(`CALL sp_atualizar_estatisticas_whatsapp()`);
     }
 
     /**
      * Buscar mensagens não lidas
      */
     async buscarMensagensNaoLidas() {
-        const [mensagens] = await connection.query(
+        const [mensagens] = await pool.query(
             `SELECT * FROM tb_mensagens_whatsapp
              WHERE tipo_mensagem = 'recebida' 
              AND status_envio != 'lido'
@@ -239,7 +239,7 @@ class MensagemWhatsAppRepository {
      * Buscar webhooks pendentes
      */
     async buscarWebhooksPendentes() {
-        const [webhooks] = await connection.query(
+        const [webhooks] = await pool.query(
             `SELECT * FROM tb_whatsapp_webhooks
              WHERE processado = FALSE
              ORDER BY data_recebimento ASC

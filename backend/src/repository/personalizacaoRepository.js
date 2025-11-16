@@ -1,4 +1,4 @@
-import connection from './connection.js';
+import pool from './connection.js';
 
 /**
  * RF052 + RF053: Repository para Personalização de Produtos
@@ -27,7 +27,7 @@ export async function listarOpcoes() {
         ORDER BY ordem_exibicao, nome_opcao
     `;
     
-    const [registros] = await connection.query(comando);
+    const [registros] = await pool.query(comando);
     return registros;
 }
 
@@ -48,7 +48,7 @@ export async function buscarOpcaoPorId(idopcao) {
         WHERE idopcao = ?
     `;
     
-    const [registros] = await connection.query(comando, [idopcao]);
+    const [registros] = await pool.query(comando, [idopcao]);
     return registros[0];
 }
 
@@ -66,7 +66,7 @@ export async function criarOpcao(opcao) {
         ) VALUES (?, ?, ?, ?, ?)
     `;
     
-    const [resultado] = await connection.query(comando, [
+    const [resultado] = await pool.query(comando, [
         opcao.nome_opcao,
         opcao.descricao,
         opcao.tipo_selecao || 'radio',
@@ -91,7 +91,7 @@ export async function atualizarOpcao(idopcao, opcao) {
         WHERE idopcao = ?
     `;
     
-    const [resultado] = await connection.query(comando, [
+    const [resultado] = await pool.query(comando, [
         opcao.nome_opcao,
         opcao.descricao,
         opcao.tipo_selecao,
@@ -113,7 +113,7 @@ export async function desativarOpcao(idopcao) {
         WHERE idopcao = ?
     `;
     
-    const [resultado] = await connection.query(comando, [idopcao]);
+    const [resultado] = await pool.query(comando, [idopcao]);
     return resultado.affectedRows > 0;
 }
 
@@ -137,7 +137,7 @@ export async function listarValoresOpcao(idopcao) {
         ORDER BY ordem_exibicao, nome_valor
     `;
     
-    const [registros] = await connection.query(comando, [idopcao]);
+    const [registros] = await pool.query(comando, [idopcao]);
     return registros;
 }
 
@@ -154,7 +154,7 @@ export async function criarValorOpcao(valor) {
         ) VALUES (?, ?, ?, ?)
     `;
     
-    const [resultado] = await connection.query(comando, [
+    const [resultado] = await pool.query(comando, [
         valor.idopcao_fk,
         valor.nome_valor,
         valor.preco_adicional || 0.00,
@@ -176,7 +176,7 @@ export async function atualizarValorOpcao(idvalor, valor) {
         WHERE idvalor = ?
     `;
     
-    const [resultado] = await connection.query(comando, [
+    const [resultado] = await pool.query(comando, [
         valor.nome_valor,
         valor.preco_adicional,
         valor.ordem_exibicao,
@@ -196,7 +196,7 @@ export async function desativarValorOpcao(idvalor) {
         WHERE idvalor = ?
     `;
     
-    const [resultado] = await connection.query(comando, [idvalor]);
+    const [resultado] = await pool.query(comando, [idvalor]);
     return resultado.affectedRows > 0;
 }
 
@@ -208,7 +208,7 @@ export async function desativarValorOpcao(idvalor) {
 export async function buscarOpcoesProduto(idproduto) {
     const comando = `CALL sp_buscar_opcoes_produto(?)`;
     
-    const [result] = await connection.query(comando, [idproduto]);
+    const [result] = await pool.query(comando, [idproduto]);
     const opcoes = result[0];
     
     // Converter valores se necessário
@@ -245,7 +245,7 @@ export async function associarOpcaoProduto(idproduto, idopcao, obrigatorio = fal
         ON DUPLICATE KEY UPDATE obrigatorio = VALUES(obrigatorio)
     `;
     
-    const [resultado] = await connection.query(comando, [
+    const [resultado] = await pool.query(comando, [
         idproduto,
         idopcao,
         obrigatorio
@@ -264,7 +264,7 @@ export async function removerAssociacaoProdutoOpcao(idproduto, idopcao) {
         AND idopcao_fk = ?
     `;
     
-    const [resultado] = await connection.query(comando, [idproduto, idopcao]);
+    const [resultado] = await pool.query(comando, [idproduto, idopcao]);
     return resultado.affectedRows > 0;
 }
 
@@ -277,7 +277,7 @@ export async function listarProdutosComOpcoes() {
         ORDER BY produto_nome, nome_opcao
     `;
     
-    const [registros] = await connection.query(comando);
+    const [registros] = await pool.query(comando);
     return registros;
 }
 
@@ -291,7 +291,7 @@ export async function salvarPersonalizacaoPedido(idreserva, idproduto, personali
     
     const personalizacoesJson = JSON.stringify(personalizacoes);
     
-    const [result] = await connection.query(comando, [
+    const [result] = await pool.query(comando, [
         idreserva,
         idproduto,
         personalizacoesJson
@@ -315,7 +315,7 @@ export async function buscarPersonalizacoesPedido(idreserva) {
         WHERE idreserva_fk = ?
     `;
     
-    const [registros] = await connection.query(comando, [idreserva]);
+    const [registros] = await pool.query(comando, [idreserva]);
     
     // Parse do JSON de personalizações
     return registros.map(reg => ({
@@ -342,7 +342,7 @@ export async function calcularAcrescimoPersonalizacao(personalizacoes) {
           AND disponivel = 1
     `;
     
-    const [rows] = await connection.query(comando);
+    const [rows] = await pool.query(comando);
     
     return parseFloat(rows[0].valor_acrescimo || 0);
 }
@@ -380,7 +380,7 @@ export async function relatorioPersonalizacoes(filtros = {}) {
         params.push(parseInt(filtros.limit));
     }
     
-    const [registros] = await connection.query(comando, params);
+    const [registros] = await pool.query(comando, params);
     
     // Parse do JSON de personalizações
     return registros.map(reg => ({
@@ -404,7 +404,7 @@ export async function vincularValorIngrediente(idvalor, idingrediente, quantidad
         ON DUPLICATE KEY UPDATE quantidade_usada = VALUES(quantidade_usada)
     `;
     
-    const [resultado] = await connection.query(comando, [
+    const [resultado] = await pool.query(comando, [
         idvalor,
         idingrediente,
         quantidadeUsada
@@ -422,7 +422,7 @@ export async function removerVinculoValorIngrediente(idvalor, idingrediente) {
         WHERE idvalor_fk = ? AND idingrediente_fk = ?
     `;
     
-    const [resultado] = await connection.query(comando, [idvalor, idingrediente]);
+    const [resultado] = await pool.query(comando, [idvalor, idingrediente]);
     return resultado.affectedRows > 0;
 }
 
@@ -449,7 +449,7 @@ export async function listarIngredientesValor(idvalor) {
         WHERE pi.idvalor_fk = ?
     `;
     
-    const [registros] = await connection.query(comando, [idvalor]);
+    const [registros] = await pool.query(comando, [idvalor]);
     return registros;
 }
 
@@ -483,7 +483,7 @@ export async function verificarDisponibilidadePersonalizacao(idvalor) {
         GROUP BY v.idvalor, v.nome_valor, o.nome_opcao
     `;
     
-    const [registros] = await connection.query(comando, [idvalor]);
+    const [registros] = await pool.query(comando, [idvalor]);
     return registros[0];
 }
 
@@ -577,7 +577,7 @@ export async function listarOpcoesCompletas() {
         ORDER BY opcao_ordem, valor_ordem
     `;
     
-    const [registros] = await connection.query(comando);
+    const [registros] = await pool.query(comando);
     
     // Agrupar valores por opção
     const opcoesMap = new Map();

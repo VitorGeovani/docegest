@@ -1,9 +1,10 @@
-import connection from './connection.js';
+import pool from './connection.js';
 
 /**
  * Adiciona ingredientes à receita de um produto
  */
 export async function adicionarIngredientesReceita(idproduto, ingredientes) {
+    const connection = await pool.getConnection();
     try {
         await connection.beginTransaction();
 
@@ -37,6 +38,8 @@ export async function adicionarIngredientesReceita(idproduto, ingredientes) {
     } catch (error) {
         await connection.rollback();
         throw error;
+    } finally {
+        connection.release();
     }
 }
 
@@ -61,7 +64,7 @@ export async function listarIngredientesReceita(idproduto) {
         ORDER BY i.nome;
     `;
 
-    const [registros] = await connection.query(comando, [idproduto]);
+    const [registros] = await pool.query(comando, [idproduto]);
     return registros;
 }
 
@@ -69,6 +72,7 @@ export async function listarIngredientesReceita(idproduto) {
  * Dar baixa no estoque de ingredientes ao produzir um produto
  */
 export async function darBaixaIngredientes(idproduto, quantidadeProduzida = 1) {
+    const connection = await pool.getConnection();
     try {
         await connection.beginTransaction();
 
@@ -137,6 +141,8 @@ export async function darBaixaIngredientes(idproduto, quantidadeProduzida = 1) {
     } catch (error) {
         await connection.rollback();
         throw error;
+    } finally {
+        connection.release();
     }
 }
 
@@ -152,7 +158,7 @@ export async function calcularCustoProducao(idproduto) {
         WHERE pi.idproduto = ?
     `;
 
-    const [resultado] = await connection.query(comando, [idproduto]);
+    const [resultado] = await pool.query(comando, [idproduto]);
     return parseFloat(resultado[0].custoTotal || 0);
 }
 
@@ -175,7 +181,7 @@ export async function verificarEstoqueIngredientes(idproduto, quantidadeProduzir
         WHERE pi.idproduto = ?
     `;
 
-    const [registros] = await connection.query(comando, [
+    const [registros] = await pool.query(comando, [
         quantidadeProduzir,
         quantidadeProduzir,
         idproduto
