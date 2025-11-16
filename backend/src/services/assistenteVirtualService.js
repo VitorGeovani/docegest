@@ -578,7 +578,7 @@ class AssistenteVirtualService {
 
             const pedido = pedidos[0];
             const statusEmoji = this.getStatusEmoji(pedido.status);
-            const dataEntrega = new Date(pedido.data_entrega).toLocaleDateString('pt-BR');
+            const dataEntrega = this.formatarData(pedido.data_entrega);
 
             return {
                 resposta: `📦 *Status do Pedido*\n\n` +
@@ -603,6 +603,36 @@ class AssistenteVirtualService {
                 categoria: 'erro',
                 confianca: 0
             };
+        }
+    }
+
+    /**
+     * Formatar data corretamente sem problemas de timezone
+     * @param {string|Date} data - Data no formato YYYY-MM-DD ou objeto Date
+     * @returns {string} Data formatada em DD/MM/YYYY
+     */
+    formatarData(data) {
+        if (!data) return 'Data não disponível';
+        
+        // Se vier como string do MySQL (YYYY-MM-DD), usar diretamente
+        if (typeof data === 'string' && data.includes('-')) {
+            const partes = data.split('T')[0].split('-'); // Remove hora se houver
+            const ano = partes[0];
+            const mes = partes[1];
+            const dia = partes[2];
+            return `${dia}/${mes}/${ano}`;
+        }
+        
+        // Se for Date, usar toLocaleDateString
+        if (data instanceof Date) {
+            return data.toLocaleDateString('pt-BR');
+        }
+        
+        // Fallback: tentar converter
+        try {
+            return new Date(data).toLocaleDateString('pt-BR');
+        } catch {
+            return 'Data inválida';
         }
     }
 
@@ -645,7 +675,7 @@ class AssistenteVirtualService {
                     console.log('✅ Pedido encontrado com formatação alternativa');
                     const pedido = pedidosAlt[0];
                     const statusEmoji = this.getStatusEmoji(pedido.status);
-                    const dataEntrega = new Date(pedido.data_entrega).toLocaleDateString('pt-BR');
+                    const dataEntrega = this.formatarData(pedido.data_entrega);
 
                     return {
                         resposta: `📦 *Encontrei seu pedido!*\n\n` +
@@ -682,7 +712,7 @@ class AssistenteVirtualService {
 
             const pedido = pedidos[0];
             const statusEmoji = this.getStatusEmoji(pedido.status);
-            const dataEntrega = new Date(pedido.data_entrega).toLocaleDateString('pt-BR');
+            const dataEntrega = this.formatarData(pedido.data_entrega);
 
             return {
                 resposta: `📦 *Encontrei seu pedido!*\n\n` +

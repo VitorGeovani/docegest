@@ -9,6 +9,36 @@ import whatsappService from './whatsappService_EVOLUTION.js';
 
 class WhatsAppHistoricoService {
     /**
+     * Formatar data corretamente sem problemas de timezone
+     * @param {string|Date} data - Data no formato YYYY-MM-DD ou objeto Date
+     * @returns {string} Data formatada em DD/MM/YYYY
+     */
+    formatarData(data) {
+        if (!data) return 'Data não disponível';
+        
+        // Se vier como string do MySQL (YYYY-MM-DD), usar diretamente
+        if (typeof data === 'string' && data.includes('-')) {
+            const partes = data.split('T')[0].split('-'); // Remove hora se houver
+            const ano = partes[0];
+            const mes = partes[1];
+            const dia = partes[2];
+            return `${dia}/${mes}/${ano}`;
+        }
+        
+        // Se for Date, usar toLocaleDateString
+        if (data instanceof Date) {
+            return data.toLocaleDateString('pt-BR');
+        }
+        
+        // Fallback: tentar converter
+        try {
+            return new Date(data).toLocaleDateString('pt-BR');
+        } catch {
+            return 'Data inválida';
+        }
+    }
+
+    /**
      * Salva mensagem enviada no histórico
      */
     async salvarMensagem(telefone, mensagem, tipo, idreserva = null) {
@@ -175,8 +205,8 @@ class WhatsAppHistoricoService {
                 tipo: 'status',
                 resposta: `${statusEmoji} *Status do Pedido #${pedido.codigo_pedido}*\n\n` +
                          `Status: *${pedido.status}*\n` +
-                         `Data do Pedido: ${new Date(pedido.data_criacao).toLocaleDateString('pt-BR')}\n` +
-                         `${pedido.data_entrega ? `Previsão: ${new Date(pedido.data_entrega).toLocaleDateString('pt-BR')} às ${pedido.hora_entrega}\n` : ''}` +
+                         `Data do Pedido: ${this.formatarData(pedido.data_criacao)}\n` +
+                         `${pedido.data_entrega ? `Previsão: ${this.formatarData(pedido.data_entrega)} às ${pedido.hora_entrega}\n` : ''}` +
                          `Valor: R$ ${parseFloat(pedido.valor_total).toFixed(2)}\n\n` +
                          this.getStatusDescricao(pedido.status)
             };
