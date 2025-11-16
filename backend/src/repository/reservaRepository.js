@@ -206,7 +206,7 @@ export async function listarReservasPendentes() {
               r.produtos,
               r.qtdReserva,
               r.idcliente_fk AS idCliente,
-              COALESCE(r.numero_pedido, CONCAT('PED', LPAD(r.idreserva, 8, '0'))) AS numero,
+              COALESCE(r.codigo_pedido, r.numero_pedido, CONCAT('PED', LPAD(r.idreserva, 8, '0'))) AS numero,
               r.tipo_pedido AS tipoPedido,
               r.endereco_entrega AS enderecoEntrega,
               r.observacoes,
@@ -231,7 +231,7 @@ export async function listarReservasPendentes() {
               r.produtos,
               r.qtdReserva,
               r.idcliente_fk AS idCliente,
-              CONCAT('PED', LPAD(r.idreserva, 8, '0')) AS numero,
+              COALESCE(r.codigo_pedido, CONCAT('PED', LPAD(r.idreserva, 8, '0'))) AS numero,
               r.tipo_pedido AS tipoPedido,
               r.endereco_entrega AS enderecoEntrega,
               r.observacoes,
@@ -299,7 +299,7 @@ export async function listarReservasPorStatus(status) {
               r.produtos,
               r.qtdReserva,
               r.idcliente_fk AS idCliente,
-              COALESCE(r.numero_pedido, CONCAT('PED', LPAD(r.idreserva, 8, '0'))) AS numero,
+              COALESCE(r.codigo_pedido, r.numero_pedido, CONCAT('PED', LPAD(r.idreserva, 8, '0'))) AS numero,
               r.data_pedido AS dataPedido,
               r.tipo_pedido AS tipoPedido,
               r.endereco_entrega AS enderecoEntrega,
@@ -326,9 +326,8 @@ export async function listarReservasPorStatus(status) {
               r.produtos,
               r.qtdReserva,
               r.idcliente_fk AS idCliente,
-              CONCAT('PED', LPAD(r.idreserva, 6, '0')) AS numero,
+              COALESCE(r.codigo_pedido, CONCAT('PED', LPAD(r.idreserva, 6, '0'))) AS numero,
               r.data_entrega AS dataPedido,
-              CONCAT('PED', LPAD(r.idreserva, 8, '0')) AS numero,
               r.tipo_pedido AS tipoPedido,
               r.endereco_entrega AS enderecoEntrega,
               r.observacoes,
@@ -396,7 +395,7 @@ export async function listarTodasReservasComCliente() {
               r.produtos,
               r.qtdReserva,
               r.idcliente_fk AS idCliente,
-              COALESCE(r.numero_pedido, CONCAT('PED', LPAD(r.idreserva, 8, '0'))) AS numero,
+              COALESCE(r.codigo_pedido, r.numero_pedido, CONCAT('PED', LPAD(r.idreserva, 8, '0'))) AS numero,
               r.data_pedido AS dataPedido,
               r.tipo_pedido AS tipoPedido,
               r.endereco_entrega AS enderecoEntrega,
@@ -422,7 +421,7 @@ export async function listarTodasReservasComCliente() {
               r.produtos,
               r.qtdReserva,
               r.idcliente_fk AS idCliente,
-              CONCAT('PED', LPAD(r.idreserva, 8, '0')) AS numero,
+              COALESCE(r.codigo_pedido, CONCAT('PED', LPAD(r.idreserva, 8, '0'))) AS numero,
               r.data_entrega AS dataPedido,
               r.tipo_pedido AS tipoPedido,
               r.endereco_entrega AS enderecoEntrega,
@@ -630,7 +629,7 @@ export async function buscarPedidosPorTelefone(telefone) {
         comando = `
             SELECT 
                 r.idreserva AS id,
-                COALESCE(r.numero_pedido, CONCAT('PED', LPAD(r.idreserva, 6, '0'))) AS numero,
+                COALESCE(r.codigo_pedido, r.numero_pedido, CONCAT('PED', LPAD(r.idreserva, 6, '0'))) AS numero,
                 COALESCE(r.data_pedido, r.data_entrega) AS dataPedido,
                 r.data_entrega AS dataEntrega,
                 r.hora_entrega AS horaEntrega,
@@ -655,7 +654,7 @@ export async function buscarPedidosPorTelefone(telefone) {
         comando = `
             SELECT 
                 r.idreserva AS id,
-                CONCAT('PED', LPAD(r.idreserva, 6, '0')) AS numero,
+                COALESCE(r.codigo_pedido, CONCAT('PED', LPAD(r.idreserva, 6, '0'))) AS numero,
                 r.data_entrega AS dataPedido,
                 r.data_entrega AS dataEntrega,
                 r.hora_entrega AS horaEntrega,
@@ -733,7 +732,7 @@ export async function buscarDetalhePedidoCompleto(id) {
         comando = `
             SELECT 
                 r.idreserva AS id,
-                COALESCE(r.numero_pedido, CONCAT('PED', LPAD(r.idreserva, 6, '0'))) AS numero,
+                COALESCE(r.codigo_pedido, r.numero_pedido, CONCAT('PED', LPAD(r.idreserva, 6, '0'))) AS numero,
                 COALESCE(r.data_pedido, r.data_entrega) AS dataPedido,
                 r.data_atualizacao AS dataAtualizacao,
                 r.data_entrega AS dataEntrega,
@@ -759,7 +758,7 @@ export async function buscarDetalhePedidoCompleto(id) {
         comando = `
             SELECT 
                 r.idreserva AS id,
-                CONCAT('PED', LPAD(r.idreserva, 6, '0')) AS numero,
+                COALESCE(r.codigo_pedido, CONCAT('PED', LPAD(r.idreserva, 6, '0'))) AS numero,
                 r.data_entrega AS dataPedido,
                 NULL AS dataAtualizacao,
                 r.data_entrega AS dataEntrega,
