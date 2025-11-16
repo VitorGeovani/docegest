@@ -330,8 +330,8 @@ function Reservas() {
       ) : (
         <div className="reservas-grid">
           {reservasFiltradas.map((reserva) => {
-            // Formata a data para o formato brasileiro (DD/MM/AAAA)
-            const dataFormatada = new Date(reserva.dataEntrega).toLocaleDateString("pt-BR", {
+            // Formata a data para o formato brasileiro (DD/MM/AAAA) - usa data do pedido (compra), não data de entrega
+            const dataFormatada = new Date(reserva.dataPedido).toLocaleDateString("pt-BR", {
               day: "2-digit",
               month: "2-digit",
               year: "numeric",

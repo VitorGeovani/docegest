@@ -141,7 +141,7 @@ const ReservaCard = ({
                     <span className="total">
                         {typeof total === 'string' && total.includes('R$') 
                             ? total 
-                            : `R$ ${Number(total).toFixed(2)}`
+                            : `${Number(total).toFixed(2)}`
                         }
                     </span>
                 </div>
@@ -152,14 +152,14 @@ const ReservaCard = ({
                         <>
                             <FaTruck className="tipo-icon" />
                             <span className="tipo-pedido entrega">
-                                🚚 Entrega em Domicílio
+                                Entrega em Domicílio
                             </span>
                         </>
                     ) : (
                         <>
                             <FaStore className="tipo-icon" />
                             <span className="tipo-pedido retirada">
-                                🏪 Retirada na Loja
+                                Retirada na Loja
                             </span>
                         </>
                     )}
@@ -188,8 +188,8 @@ const ReservaCard = ({
             {/* Seção de Dados do Cliente */}
             <div className="dadosCliente">
                 <h3>Informações do Cliente</h3>
-                <span className="nomeCliente">👤 {nomeCliente}</span>
-                <span className="telefoneCliente">📱 {telefoneCliente}</span>
+                <span className="nomeCliente">{nomeCliente}</span>
+                <span className="telefoneCliente">{telefoneCliente}</span>
                 {emailCliente && <span className="emailCliente">📧 {emailCliente}</span>}
             </div>
 
