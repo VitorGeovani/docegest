@@ -155,7 +155,8 @@ export default function Home() {
                 <div className="cliente-foto">
                   <img 
                     src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" 
-                    alt="Foto de Maria Silva" 
+                    alt="Maria Silva - Cliente satisfeita sorrindo" 
+                    title="Maria Silva - Cliente satisfeita sorrindo"
                     className="foto-cliente"
                   />
                 </div>
@@ -177,7 +178,8 @@ export default function Home() {
                 <div className="cliente-foto">
                   <img 
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" 
-                    alt="Foto de João Santos" 
+                    alt="João Santos - Cliente feliz com expressão positiva" 
+                    title="João Santos - Cliente feliz com expressão positiva"
                     className="foto-cliente"
                   />
                 </div>
@@ -199,7 +201,8 @@ export default function Home() {
                 <div className="cliente-foto">
                   <img 
                     src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" 
-                    alt="Foto de Ana Paula" 
+                    alt="Ana Paula - Cliente satisfeita e contente" 
+                    title="Ana Paula - Cliente satisfeita e contente"
                     className="foto-cliente"
                   />
                 </div>
