@@ -15,6 +15,7 @@ import reenvioConfirmacao from './controller/reenvioConfirmacaoController.js'
 import simulacao from './controller/simulacaoController.js'
 import whatsappHistorico from './controller/whatsappHistoricoController.js'
 import { adicionarRotas as personalizacaoRotas } from './controller/personalizacaoController.js'
+import assistenteVirtual from './controller/assistenteVirtualController.js'
 import express from 'express'
 
 
@@ -36,5 +37,6 @@ export default function adicionarRotas(servidor) {
     servidor.use(simulacao);
     servidor.use(whatsappHistorico);
     personalizacaoRotas(servidor);
+    servidor.use(assistenteVirtual);
     servidor.use('/storage', express.static('./storage'));
 }

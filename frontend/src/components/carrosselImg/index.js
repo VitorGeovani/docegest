@@ -19,7 +19,7 @@ function PauseOnHover() {
     
     const images = [
         { 
-            src: `${process.env.PUBLIC_URL}/imgs/cones 3.jpg`, 
+            src: `${process.env.PUBLIC_URL}/imgs/cones3.jpg`, 
             alt: "Cones recheados de chocolate e outros sabores artesanais dispostos em forma de apresentação"
         },
         { 
@@ -27,11 +27,11 @@ function PauseOnHover() {
             alt: "Cones artesanais trufados com cobertura de chocolate e decoração sofisticada"
         },
         { 
-            src: `${process.env.PUBLIC_URL}/imgs/limão chocolate.jpg`, 
+            src: `${process.env.PUBLIC_URL}/imgs/limao-chocolate.jpg`, 
             alt: "Cone de limão siciliano com cobertura de chocolate meio amargo e raspas de limão"
         },
         { 
-            src: `${process.env.PUBLIC_URL}/imgs/cones 2.jpg`, 
+            src: `${process.env.PUBLIC_URL}/imgs/cones2.jpg`, 
             alt: "Variedade de cones recheados com diferentes sabores e coberturas gourmet"
         }
     ];

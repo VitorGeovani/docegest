@@ -10,6 +10,7 @@ import './index.css';
 // CSS de acessibilidade REMOVIDO - Estilos aplicados via JS no AccessibilityMenu
 import AccessibilityMenu from './components/accessibilityMenu/AccessibilityMenu';
 import SkipLinks from './components/skipLinks/SkipLinks';
+import ChatAssistente from './components/ChatAssistente/ChatAssistente';
 import Home from './pages/home';
 import NotFound from './pages/notfound';
 import Reserva from './pages/reserva';
@@ -42,6 +43,7 @@ function App() {
                 <BrowserRouter>
                     <SkipLinks />
                     <AccessibilityMenu />
+                    <ChatAssistente />
                     <ToastContainer
                         position="top-right"
                         autoClose={3000}

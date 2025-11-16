@@ -5,11 +5,11 @@ import "./index.scss";
 function SwipeToSlide() {
   const images = [
     { 
-      src: "/imgs/cone ilustre 2.jpg", 
+      src: "/imgs/cone-ilustre-2.jpg", 
       alt: "Cone Ilustre premium com recheio especial e cobertura artesanal, produto exclusivo da marca"
     },
     { 
-      src: "/imgs/kinder bueno.jpg", 
+      src: "/imgs/kinder-bueno.jpg", 
       alt: "Cone sabor Kinder Bueno com chocolate ao leite, avelã crocante e wafer, inspirado no famoso chocolate"
     }
   ];
