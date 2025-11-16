@@ -27,7 +27,12 @@ function CardProdutoCatalogo({ produto, onAdicionarCarrinho }) {
         }
 
         // Adicionar direto ao carrinho
-        onAdicionarCarrinho({ ...produto, quantidade });
+        onAdicionarCarrinho({ 
+            ...produto, 
+            quantidade,
+            personalizacoes: [],
+            valor_acrescimo: 0
+        });
         toast.success(`${produto.nome} adicionado ao carrinho!`);
         setQuantidade(1);
     };

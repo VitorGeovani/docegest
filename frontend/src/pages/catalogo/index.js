@@ -35,6 +35,14 @@ function Catalogo() {
         aplicarFiltros();
     }, [produtos, busca, categoriaFiltro, ordenacao]);
 
+    // Salvar carrinho no localStorage sempre que mudar
+    useEffect(() => {
+        if (carrinho.length > 0) {
+            localStorage.setItem('carrinho', JSON.stringify({ itens: carrinho }));
+            console.log('💾 Carrinho salvo no localStorage:', carrinho);
+        }
+    }, [carrinho]);
+
     // Abrir carrinho automaticamente se vier do checkout
     useEffect(() => {
         if (location.state?.abrirCarrinho) {
@@ -153,13 +161,23 @@ function Catalogo() {
         const itemExistente = carrinho.find(item => item.id === produto.id);
 
         if (itemExistente) {
+            // Se o item já existe, apenas aumenta a quantidade mas PRESERVA as personalizações
             setCarrinho(carrinho.map(item =>
                 item.id === produto.id
-                    ? { ...item, quantidade: item.quantidade + produto.quantidade }
+                    ? { 
+                        ...item, 
+                        quantidade: item.quantidade + produto.quantidade
+                        // NÃO sobrescrever personalizacoes e valor_acrescimo
+                    }
                     : item
             ));
         } else {
-            setCarrinho([...carrinho, produto]);
+            // Novo item - garantir que tem as propriedades de personalização
+            setCarrinho([...carrinho, {
+                ...produto,
+                personalizacoes: produto.personalizacoes || [],
+                valor_acrescimo: produto.valor_acrescimo || 0
+            }]);
         }
     };
 
@@ -185,18 +203,23 @@ function Catalogo() {
             valorAcrescimo
         });
 
-        setCarrinho(carrinho.map(item => {
-            if (item.id === produtoId) {
-                return {
-                    ...item,
-                    personalizacoes: personalizacoes,
-                    valor_acrescimo: valorAcrescimo || 0
-                };
-            }
-            return item;
-        }));
-
-        console.log('✅ Item atualizado no carrinho!');
+        setCarrinho(prevCarrinho => {
+            const novoCarrinho = prevCarrinho.map(item => {
+                if (item.id === produtoId) {
+                    const itemAtualizado = {
+                        ...item,
+                        personalizacoes: personalizacoes,
+                        valor_acrescimo: valorAcrescimo || 0
+                    };
+                    console.log('✅ Item atualizado:', itemAtualizado);
+                    return itemAtualizado;
+                }
+                return item;
+            });
+            
+            console.log('🛒 Novo carrinho completo:', novoCarrinho);
+            return novoCarrinho;
+        });
     };
 
     const finalizarPedido = (dadosPedido) => {
