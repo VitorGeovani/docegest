@@ -28,8 +28,22 @@ class AssistenteVirtualService {
                 palavrasChave: ['pedido', 'comprar', 'encomendar', 'reservar', 'fazer pedido', 'quero', 'gostaria', 'consultar', 'status', 'rastrear', 'acompanhar'],
                 intencoes: [
                     {
-                        // PRIORIDADE 1: Consultar status (antes de "fazer pedido")
-                        pergunta: /(consultar|ver|checar|verificar|qual|quero ver|quero consultar|rastrear|acompanhar)?\s*(o\s*)?(status|onde está)/i,
+                        // PRIORIDADE 1: Fazer pedido (exato)
+                        pergunta: /^(fazer um pedido|quero fazer pedido|fazer pedido)$/i,
+                        resposta: `🛒 *Como fazer um pedido:*\n\n` +
+                            `1️⃣ Acesse nosso catálogo: http://localhost:3000/catalogo\n` +
+                            `2️⃣ Escolha seus produtos favoritos\n` +
+                            `3️⃣ Adicione ao carrinho\n` +
+                            `4️⃣ Personalize (se desejar)\n` +
+                            `5️⃣ Finalize o pedido\n\n` +
+                            `💡 Você também pode fazer pedidos pelo WhatsApp!\n` +
+                            `📱 (11) 96769-6744`,
+                        categoria: 'pedido',
+                        prioridade: 10
+                    },
+                    {
+                        // PRIORIDADE 2: Consultar status (exato)
+                        pergunta: /^(consultar status|ver status|consultar pedido|status do pedido|rastrear pedido)$/i,
                         resposta: `📦 *Consultar status do pedido:*\n\n` +
                             `Para consultar seu pedido, informe:\n` +
                             `• O código do pedido (ex: #PED000037), OU\n` +
@@ -38,20 +52,36 @@ class AssistenteVirtualService {
                             `Exemplo: #PED000037\n\n` +
                             `📱 Dúvidas? (11) 96769-6744`,
                         categoria: 'status',
-                        acaoEspecial: 'buscarPedido'
+                        acaoEspecial: 'buscarPedido',
+                        prioridade: 10
                     },
                     {
-                        // PRIORIDADE 2: Fazer pedido
+                        // PRIORIDADE 3: Consultar status (variações)
+                        pergunta: /(consultar|ver|checar|verificar|qual|quero ver|quero consultar|rastrear|acompanhar)?\s*(o\s*)?(status|onde está|meu pedido)/i,
+                        resposta: `📦 *Consultar status do pedido:*\n\n` +
+                            `Para consultar seu pedido, informe:\n` +
+                            `• O código do pedido (ex: #PED000037), OU\n` +
+                            `• Seu telefone/email de cadastro\n\n` +
+                            `💡 *Dica:* Você pode digitar o código diretamente!\n` +
+                            `Exemplo: #PED000037\n\n` +
+                            `📱 Dúvidas? (11) 96769-6744`,
+                        categoria: 'status',
+                        acaoEspecial: 'buscarPedido',
+                        prioridade: 7
+                    },
+                    {
+                        // PRIORIDADE 4: Fazer pedido (variações)
                         pergunta: /como (fazer|realizar|faço).*(pedido|encomenda)/i,
                         resposta: `🛒 *Como fazer um pedido:*\n\n` +
-                            `1️⃣ Acesse nosso catálogo: https://segredodosabor.com/catalogo\n` +
+                            `1️⃣ Acesse nosso catálogo: http://localhost:3000/catalogo\n` +
                             `2️⃣ Escolha seus produtos favoritos\n` +
                             `3️⃣ Adicione ao carrinho\n` +
                             `4️⃣ Personalize (se desejar)\n` +
                             `5️⃣ Finalize o pedido\n\n` +
                             `💡 Você também pode fazer pedidos pelo WhatsApp!\n` +
                             `📱 (11) 96769-6744`,
-                        categoria: 'pedido'
+                        categoria: 'pedido',
+                        prioridade: 7
                     },
                     {
                         pergunta: /(cancelar|desistir|não quero).*(pedido|encomenda)/i,
@@ -260,13 +290,17 @@ class AssistenteVirtualService {
         try {
             const mensagemLower = mensagem.toLowerCase().trim();
             
+            console.log('💬 Processando mensagem:', { mensagem, mensagemLower });
+            
             // 1. Verificar saudações
             if (this.ehSaudacao(mensagemLower)) {
+                console.log('👋 Detectou saudação');
                 return this.gerarSaudacao(contexto);
             }
 
             // 2. Verificar menu/ajuda
             if (mensagemLower.includes('menu') || mensagemLower.includes('opções') || mensagemLower === '?') {
+                console.log('📋 Detectou requisição de menu');
                 return this.gerarMenuPrincipal();
             }
 
@@ -274,6 +308,7 @@ class AssistenteVirtualService {
             const codigoPedidoMatch = mensagem.match(/#?PED\d{6}/i);
             if (codigoPedidoMatch) {
                 const codigoPedido = codigoPedidoMatch[0].replace('#', '').toUpperCase();
+                console.log('🔖 Detectou código de pedido:', codigoPedido);
                 return await this.buscarPedidoPorCodigo(codigoPedido);
             }
 
@@ -281,8 +316,15 @@ class AssistenteVirtualService {
             const intencao = await this.detectarIntencao(mensagemLower);
             
             if (intencao) {
+                console.log('🎯 Intenção detectada:', { 
+                    categoria: intencao.categoria, 
+                    confianca: intencao.confianca,
+                    prioridade: intencao.prioridade 
+                });
+                
                 // Ação especial (buscar pedido, etc)
                 if (intencao.acaoEspecial) {
+                    console.log('⚡ Executando ação especial:', intencao.acaoEspecial);
                     return await this.executarAcaoEspecial(intencao.acaoEspecial, contexto);
                 }
                 
@@ -293,17 +335,19 @@ class AssistenteVirtualService {
                 };
             }
 
-            // 4. Buscar por palavras-chave
+            // 5. Buscar por palavras-chave
             const respostaPalavraChave = this.buscarPorPalavrasChave(mensagemLower);
             if (respostaPalavraChave) {
+                console.log('🔑 Encontrou por palavra-chave');
                 return respostaPalavraChave;
             }
 
-            // 5. Resposta padrão com sugestões
+            // 6. Resposta padrão com sugestões
+            console.log('❓ Não entendeu a mensagem');
             return this.gerarRespostaPadrao();
 
         } catch (error) {
-            console.error('Erro ao processar mensagem:', error);
+            console.error('❌ Erro ao processar mensagem:', error);
             return {
                 resposta: `😔 Desculpe, tive um problema ao processar sua mensagem.\n\n` +
                     `Por favor, tente novamente ou fale com um atendente:\n` +
@@ -319,7 +363,7 @@ class AssistenteVirtualService {
      */
     async detectarIntencao(mensagem) {
         let melhorIntencao = null;
-        let maiorConfianca = 0;
+        let maiorPontuacao = 0;
 
         for (const categoria in this.baseConhecimento) {
             const dados = this.baseConhecimento[categoria];
@@ -327,9 +371,13 @@ class AssistenteVirtualService {
             for (const intencao of dados.intencoes) {
                 if (intencao.pergunta.test(mensagem)) {
                     const confianca = this.calcularConfianca(mensagem, intencao.pergunta);
+                    const prioridade = intencao.prioridade || 5; // prioridade padrão = 5
                     
-                    if (confianca > maiorConfianca) {
-                        maiorConfianca = confianca;
+                    // Pontuação = prioridade * confiança (quanto maior, melhor)
+                    const pontuacao = prioridade * confianca;
+                    
+                    if (pontuacao > maiorPontuacao) {
+                        maiorPontuacao = pontuacao;
                         melhorIntencao = { ...intencao, confianca };
                     }
                 }
@@ -563,6 +611,8 @@ class AssistenteVirtualService {
      */
     async buscarPedidoPorCodigo(codigoPedido) {
         try {
+            console.log('🔍 Buscando pedido:', codigoPedido);
+            
             const query = `
                 SELECT r.*, c.nome as nome_cliente, c.telefone, c.email
                 FROM reserva r
@@ -572,8 +622,47 @@ class AssistenteVirtualService {
             `;
 
             const [pedidos] = await connection.execute(query, [codigoPedido]);
+            
+            console.log('📊 Resultado da busca:', {
+                codigo: codigoPedido,
+                encontrados: pedidos.length,
+                pedidos: pedidos.map(p => ({ codigo: p.codigo_pedido, status: p.status }))
+            });
 
             if (pedidos.length === 0) {
+                // Vamos verificar se o pedido existe com qualquer formatação
+                const queryAlternativa = `
+                    SELECT r.*, c.nome as nome_cliente, c.telefone, c.email
+                    FROM reserva r
+                    JOIN cliente c ON r.idcliente_fk = c.idcliente
+                    WHERE UPPER(REPLACE(r.codigo_pedido, '#', '')) = UPPER(REPLACE(?, '#', ''))
+                    LIMIT 1
+                `;
+                
+                const [pedidosAlt] = await connection.execute(queryAlternativa, [codigoPedido]);
+                
+                if (pedidosAlt.length > 0) {
+                    console.log('✅ Pedido encontrado com formatação alternativa');
+                    const pedido = pedidosAlt[0];
+                    const statusEmoji = this.getStatusEmoji(pedido.status);
+                    const dataEntrega = new Date(pedido.data_entrega).toLocaleDateString('pt-BR');
+
+                    return {
+                        resposta: `📦 *Encontrei seu pedido!*\n\n` +
+                            `👤 Cliente: *${pedido.nome_cliente}*\n` +
+                            `🔖 Código: *${pedido.codigo_pedido}*\n` +
+                            `${statusEmoji} Status: *${pedido.status}*\n` +
+                            `📅 Data da Entrega: ${dataEntrega}\n` +
+                            `⏰ Horário: ${pedido.hora_entrega}\n` +
+                            `💰 Valor Total: R$ ${parseFloat(pedido.valor_total).toFixed(2)}\n\n` +
+                            `${this.getStatusMensagem(pedido.status)}\n\n` +
+                            `💬 Posso ajudar em algo mais? 🤖`,
+                        categoria: 'statusPedido',
+                        confianca: 1,
+                        dadosPedido: pedido
+                    };
+                }
+                
                 return {
                     resposta: `🔍 *Pedido não encontrado!*\n\n` +
                         `Não encontrei nenhum pedido com o código *${codigoPedido}*.\n\n` +
@@ -611,7 +700,7 @@ class AssistenteVirtualService {
             };
 
         } catch (error) {
-            console.error('Erro ao buscar pedido por código:', error);
+            console.error('❌ Erro ao buscar pedido por código:', error);
             return {
                 resposta: `😔 Desculpe, tive um problema ao buscar o pedido.\n\n` +
                     `Por favor, tente novamente ou fale com um atendente:\n` +
