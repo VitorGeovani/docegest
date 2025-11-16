@@ -209,6 +209,37 @@
         resize: vertical;
         min-height: 100px;
     }
+
+    // ===== ESTILOS DE VALIDAÇÃO =====
+    &.erro {
+        input, textarea {
+            border-color: #e74c3c !important;
+            background-color: #fff5f5;
+        }
+    }
+
+    &.valido {
+        input, textarea {
+            border-color: #27ae60 !important;
+            background-color: #f0fff4;
+        }
+    }
+
+    .erro-mensagem {
+        display: block;
+        margin-top: 5px;
+        color: #e74c3c;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .sucesso-mensagem {
+        display: block;
+        margin-top: 5px;
+        color: #27ae60;
+        font-size: 13px;
+        font-weight: 500;
+    }
 }
 
 /* Métodos de Pagamento */
