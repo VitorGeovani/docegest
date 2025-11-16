@@ -50,6 +50,47 @@ function Dashboard() {
     carregarDados();
   }, []);
 
+  // Função para formatar datas de forma legível
+  const formatarData = (dataISO) => {
+    if (!dataISO) return 'N/A';
+    
+    const data = new Date(dataISO);
+    
+    // Verificar se é data válida
+    if (isNaN(data.getTime())) return 'Data inválida';
+    
+    const hoje = new Date();
+    const ontem = new Date(hoje);
+    ontem.setDate(ontem.getDate() - 1);
+    
+    // Comparar apenas as datas (sem hora)
+    const dataStr = data.toDateString();
+    const hojeStr = hoje.toDateString();
+    const ontemStr = ontem.toDateString();
+    
+    if (dataStr === hojeStr) {
+      return 'Hoje';
+    } else if (dataStr === ontemStr) {
+      return 'Ontem';
+    } else {
+      // Formato: 15/Nov ou 15 de Nov
+      const dia = data.getDate();
+      const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+      const mes = meses[data.getMonth()];
+      return `${dia}/${mes}`;
+    }
+  };
+
+  // Função para formatar valores monetários
+  const formatarMoeda = (valor) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(valor);
+  };
+
   const carregarDados = async () => {
     try {
       setLoading(true);
@@ -99,10 +140,10 @@ function Dashboard() {
 
   // Configuração do gráfico de linha (Vendas Diárias)
   const vendasDiariasChart = {
-    labels: dashboardData.vendasDiarias.map(v => v.data),
+    labels: dashboardData.vendasDiarias.map(v => formatarData(v.data)),
     datasets: [
       {
-        label: 'Receita Diária (R$)',
+        label: 'Receita Diária',
         data: dashboardData.vendasDiarias.map(v => v.receita),
         borderColor: 'rgb(75, 192, 192)',
         backgroundColor: 'rgba(75, 192, 192, 0.1)',
@@ -152,7 +193,7 @@ function Dashboard() {
 
   // Configuração do gráfico de barras (Vendas por Período)
   const periodosChart = {
-    labels: dashboardData.vendasPorPeriodo.map(p => p.periodo),
+    labels: dashboardData.vendasPorPeriodo.map(p => formatarData(p.periodo)),
     datasets: [
       {
         label: 'Vendas por Período',
@@ -169,6 +210,43 @@ function Dashboard() {
     plugins: {
       legend: {
         position: 'bottom',
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            let label = context.dataset.label || '';
+            if (label) {
+              label += ': ';
+            }
+            
+            // Formatar valores monetários nos tooltips dos gráficos de vendas
+            if (context.dataset.label && context.dataset.label.includes('Receita')) {
+              label += formatarMoeda(context.parsed.y);
+            } else if (context.dataset.label && context.dataset.label.includes('Vendas')) {
+              label += context.parsed.y + ' pedidos';
+            } else if (context.dataset.label && context.dataset.label.includes('Quantidade')) {
+              label += context.parsed.y + ' unidades';
+            } else {
+              label += context.parsed.y;
+            }
+            
+            return label;
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: function(value) {
+            // Formatar eixo Y para valores monetários quando apropriado
+            if (this.chart?.config?._config?.data?.datasets?.[0]?.label?.includes('Receita')) {
+              return formatarMoeda(value);
+            }
+            return value;
+          }
+        }
       }
     }
   };
@@ -201,7 +279,7 @@ function Dashboard() {
           </div>
           <div className="metric-content">
             <h3>Receita Total</h3>
-            <p className="metric-value">R$ {dashboardData.receitaTotal.toFixed(2)}</p>
+            <p className="metric-value">{formatarMoeda(dashboardData.receitaTotal)}</p>
           </div>
         </div>
 
@@ -211,7 +289,8 @@ function Dashboard() {
           </div>
           <div className="metric-content">
             <h3>Lucro Líquido</h3>
-            <p className="metric-value">R$ {dashboardData.lucroLiquido.toFixed(2)}</p>
+            <p className="metric-value">{formatarMoeda(dashboardData.lucroLiquido)}</p>
+            <span className="metric-subtitle">~{((dashboardData.lucroLiquido / dashboardData.receitaTotal) * 100 || 0).toFixed(1)}% de margem</span>
           </div>
         </div>
 
@@ -220,8 +299,9 @@ function Dashboard() {
             <FaShoppingCart />
           </div>
           <div className="metric-content">
-            <h3>Total Pedidos</h3>
+            <h3>Total de Pedidos</h3>
             <p className="metric-value">{dashboardData.totalPedidos}</p>
+            <span className="metric-subtitle">{dashboardData.totalPedidos === 1 ? 'pedido' : 'pedidos'} confirmados</span>
           </div>
         </div>
 
@@ -231,7 +311,8 @@ function Dashboard() {
           </div>
           <div className="metric-content">
             <h3>Ticket Médio</h3>
-            <p className="metric-value">R$ {dashboardData.ticketMedio.toFixed(2)}</p>
+            <p className="metric-value">{formatarMoeda(dashboardData.ticketMedio)}</p>
+            <span className="metric-subtitle">por pedido</span>
           </div>
         </div>
       </div>

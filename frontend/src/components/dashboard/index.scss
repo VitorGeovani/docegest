@@ -177,13 +177,22 @@
         }
 
         .metric-value {
-          margin: 0;
+          margin: 0 0 0.25rem 0;
           color: #1a202c;
           font-size: 1.5rem;
           font-weight: 700;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          line-height: 1.2;
+        }
+
+        .metric-subtitle {
+          display: block;
+          color: #a0aec0;
+          font-size: 0.75rem;
+          font-weight: 500;
+          margin-top: 0.25rem;
         }
       }
     }
