@@ -1,0 +1,227 @@
+version: '3.8'
+
+################################################################################
+# Docker Compose - Evolution API + Docegest
+# 
+# COMO USAR:
+#   1. Copie este arquivo para sua VM Azure
+#   2. Edite as variáveis de ambiente abaixo
+#   3. Execute: docker compose up -d
+#   4. Acesse: http://SEU_IP:8080 para conectar WhatsApp
+#
+# PORTAS:
+#   - 8080: Evolution API (WhatsApp)
+#   - 5000: Backend Node.js
+#   - 3306: MySQL
+#
+################################################################################
+
+services:
+  
+  ##############################################################################
+  # MySQL Database
+  ##############################################################################
+  mysql:
+    container_name: docegest-mysql
+    image: mysql:8.0
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: P@$$w0rd
+      MYSQL_DATABASE: segredodosabor
+      MYSQL_USER: docegest
+      MYSQL_PASSWORD: Docegest@2025
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d:ro
+    command: 
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+    networks:
+      - docegest-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pP@$$w0rd"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ##############################################################################
+  # Evolution API (WhatsApp)
+  ##############################################################################
+  evolution-api:
+    container_name: docegest-evolution-api
+    image: atendai/evolution-api:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      # ⚠️ IMPORTANTE: Troque SEU_IP_AZURE pelo IP público da sua VM!
+      - SERVER_URL=http://SEU_IP_AZURE:8080
+      
+      # CORS - Permite acesso de qualquer origem
+      - CORS_ORIGIN=*
+      - CORS_METHODS=GET,POST,PUT,DELETE
+      - CORS_CREDENTIALS=true
+      
+      # ⚠️ IMPORTANTE: Troque por uma senha forte única!
+      # Gere uma com: openssl rand -base64 32
+      - AUTHENTICATION_API_KEY=docegest_evolution_super_secret_key_change_me_12345
+      - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=false
+      
+      # Configurações de Sessão
+      - CONFIG_SESSION_PHONE_CLIENT=Docegest
+      - CONFIG_SESSION_PHONE_NAME=Chrome
+      
+      # Armazenamento - Mantém mensagens e contatos
+      - STORE_MESSAGES=true
+      - STORE_MESSAGE_UP=true
+      - STORE_CONTACTS=true
+      - STORE_CHATS=true
+      
+      # Database SQLite Local
+      - DATABASE_ENABLED=true
+      - DATABASE_CONNECTION=sqlite
+      - DATABASE_CONNECTION_SQLITE_DB_NAME=evolution.sqlite3
+      
+      # Logs - ERROR para produção (menos verboso)
+      - LOG_LEVEL=ERROR
+      - LOG_COLOR=true
+      - LOG_BAILEYS=false
+      
+      # Webhooks - Configurar depois se necessário
+      - WEBHOOK_GLOBAL_ENABLED=false
+      - WEBHOOK_GLOBAL_URL=
+      - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
+      
+      # QR Code
+      - QRCODE_LIMIT=30
+      - QRCODE_COLOR=#198754
+      
+      # Timeout de Conexão
+      - CONNECTION_TIMEOUT=60000
+      
+    volumes:
+      # Dados persistentes - NÃO perderá conexão ao reiniciar
+      - evolution-instances:/evolution/instances
+      - evolution-store:/evolution/store
+    
+    networks:
+      - docegest-network
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  ##############################################################################
+  # Backend Node.js (Docegest API)
+  ##############################################################################
+  backend:
+    container_name: docegest-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      # Server
+      - PORT=5000
+      - NODE_ENV=production
+      
+      # Database - Conecta no container MySQL
+      - DB_HOST=mysql
+      - DB_DATABASE=segredodosabor
+      - DB_USER=docegest
+      - DB_PASSWORD=Docegest@2025
+      - DB_PORT=3306
+      
+      # JWT
+      - JWT_SECRET=segredodosabor_secret_2025_change_me
+      - JWT_EXPIRES_IN=7d
+      - JWT_REFRESH_SECRET=segredodosabor_refresh_2025_change_me
+      - JWT_REFRESH_EXPIRES_IN=30d
+      
+      # WhatsApp - Conecta no container Evolution API
+      - WHATSAPP_PROVIDER=evolution
+      - EVOLUTION_API_URL=http://evolution-api:8080
+      # ⚠️ IMPORTANTE: Mesma API Key do Evolution acima!
+      - EVOLUTION_API_KEY=docegest_evolution_super_secret_key_change_me_12345
+      - EVOLUTION_INSTANCE=docegest-whatsapp
+      
+      # Geral
+      - WHATSAPP_BUSINESS_PHONE=5511967696744
+      - WHATSAPP_VERIFY_TOKEN=segredodosabor2025
+      
+    volumes:
+      # Logs e uploads
+      - ./backend/logs:/app/logs
+      - ./backend/uploads:/app/uploads
+    
+    depends_on:
+      mysql:
+        condition: service_healthy
+      evolution-api:
+        condition: service_healthy
+    
+    networks:
+      - docegest-network
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  ##############################################################################
+  # Frontend React (Opcional)
+  ##############################################################################
+  frontend:
+    container_name: docegest-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # ⚠️ IMPORTANTE: Troque SEU_IP_AZURE pelo IP público da sua VM!
+        - REACT_APP_API_URL=http://SEU_IP_AZURE:5000
+        - REACT_APP_WHATSAPP_NUMBER=5511967696744
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - docegest-network
+
+################################################################################
+# Networks
+################################################################################
+networks:
+  docegest-network:
+    driver: bridge
+    name: docegest-network
+
+################################################################################
+# Volumes Persistentes
+################################################################################
+volumes:
+  # MySQL - Banco de dados
+  mysql-data:
+    name: docegest-mysql-data
+    driver: local
+  
+  # Evolution API - Instâncias WhatsApp
+  evolution-instances:
+    name: docegest-evolution-instances
+    driver: local
+  
+  # Evolution API - Mensagens e contatos
+  evolution-store:
+    name: docegest-evolution-store
+    driver: local
