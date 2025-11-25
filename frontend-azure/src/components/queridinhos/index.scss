@@ -1,0 +1,207 @@
+.secao-queridinhos {
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #f8f9ff 0%, #e9ecff 100%);
+  overflow: hidden;
+
+  .queridinhos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    align-items: center;
+    overflow: hidden;
+
+    .queridinhos-content {
+      .badge-destaque {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 16px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 15px;
+
+        svg {
+          color: #fbbf24;
+          font-size: 14px;
+        }
+      }
+
+      .titulo-queridinhos {
+        font-size: 32px;
+        font-weight: 900;
+        color: #2d3748;
+        line-height: 1.2;
+        margin-bottom: 15px;
+
+        .destaque {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+      }
+
+      .descricao-queridinhos {
+        font-size: 15px;
+        color: #718096;
+        line-height: 1.6;
+        margin-bottom: 25px;
+      }
+
+      .btn-ver-produtos {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 28px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 50px;
+        font-size: 15px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        svg {
+          font-size: 16px;
+        }
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 25px;
+
+        .stat-item {
+          text-align: center;
+
+          .stat-numero {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+          }
+
+          .stat-label {
+            font-size: 12px;
+            color: #718096;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .queridinhos-carrossel {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        left: -6px;
+        right: -6px;
+        bottom: -6px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        z-index: 0;
+        opacity: 0.12;
+      }
+
+      .slider-container {
+        position: relative;
+        z-index: 1;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 968px) {
+    padding: 40px 20px;
+
+    .queridinhos-container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+
+      .queridinhos-content {
+        .titulo-queridinhos {
+          font-size: 28px;
+        }
+
+        .stats-grid {
+          gap: 12px;
+          
+          .stat-item .stat-numero {
+            font-size: 20px;
+          }
+        }
+      }
+
+      .queridinhos-carrossel {
+        width: 100%;
+        max-width: 450px;
+        height: 300px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    padding: 35px 20px;
+    
+    .queridinhos-container {
+      gap: 25px;
+      
+      .queridinhos-content {
+        .titulo-queridinhos {
+          font-size: 24px;
+        }
+
+        .descricao-queridinhos {
+          font-size: 14px;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+          margin-top: 20px;
+          
+          .stat-item .stat-numero {
+            font-size: 18px;
+          }
+        }
+
+        .btn-ver-produtos {
+          width: 100%;
+          justify-content: center;
+          padding: 11px 24px;
+          font-size: 14px;
+        }
+      }
+      
+      .queridinhos-carrossel {
+        height: 250px;
+        max-width: 100%;
+      }
+    }
+  }
+}

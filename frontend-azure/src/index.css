@@ -1,0 +1,103 @@
+/**
+ * Estilos Base - WCAG 2.2 AAA Compliant
+ * Importa variáveis de acessibilidade e aplica estilos globais
+ */
+
+/* Importar variáveis WCAG */
+@import './styles/wcag-variables.css';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  
+  /* Valores WCAG AAA para acessibilidade */
+  font-size: var(--font-size-base);           /* 16px */
+  line-height: var(--line-height-normal);     /* 1.6 */
+  color: var(--text-primary);                 /* #1a202c - Contraste 16.1:1 */
+  background-color: var(--bg-primary);        /* #ffffff */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Garante que imagens sejam responsivas */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Remove estilos de lista padrão quando usando role */
+[role="list"] {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Focus visível WCAG AAA - 3px mínimo */
+*:focus-visible {
+  outline: 3px solid var(--primary-dark);    /* #4c5fd5 - Visível e acessível */
+  outline-offset: 2px;
+  border-radius: var(--border-radius-sm);    /* 8px */
+}
+
+/* Garantir que links sejam identificáveis */
+a {
+  color: var(--primary-dark);
+  text-decoration: underline;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  color: var(--secondary-dark);
+  text-decoration: none;
+}
+
+/* Títulos com hierarquia visual clara */
+/* NOTA: Não definimos cor aqui para permitir que componentes específicos 
+   definam suas próprias cores (branco em fundos escuros, preto em fundos claros) */
+h1, h2, h3, h4, h5, h6 {
+  line-height: var(--line-height-tight);
+  margin-top: 0;
+  font-weight: 700;
+}
+
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+h4 { font-size: var(--font-size-h4); }
+h5 { font-size: var(--font-size-h5); }
+h6 { font-size: var(--font-size-h6); }
+
+/* Parágrafos com espaçamento adequado */
+p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-normal);
+}
+
+/* ===================================================
+   TOOLTIPS EM IMAGENS
+   Melhora a aparência do tooltip nativo ao passar 
+   o mouse sobre imagens com atributo title
+   =================================================== */
+img[title] {
+  cursor: help;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img[title]:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+

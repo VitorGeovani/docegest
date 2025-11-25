@@ -1,0 +1,46 @@
+.fundo-produtos {
+    position: absolute;
+    max-width: 1512px;
+    height: 780px;
+    top: 1557.1px;
+    left: 25px;
+    font-size: 0px;
+    background: #41629f;
+    background-size: cover;
+    z-index: 73;
+
+
+
+    .nossos-produtos {
+        display: block;
+        position: relative;
+        height: 62px;
+        margin: 24px 0 0 83px;
+        color: #ffffff;
+        font-family:'Princess Sofia', cursive;
+        font-size: 40px;
+        font-weight: 400;
+        line-height: 61.875px;
+        text-align: left;
+        white-space: nowrap;
+        z-index: 75;
+      }
+      .exclusivos-selecionados-apresentacao {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: relative;
+        width: 649px;
+        height: 63px;
+        margin: 18px 0 0 99px;
+        color: #ffffff;
+        font-family: 'Playfair Display', serif;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 21.328px;
+        text-align: left;
+        z-index: 76;
+      }
+
+  }
+  

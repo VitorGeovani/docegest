@@ -38,13 +38,20 @@ O **Segredo do Sabor (DoceGest)** é uma solução empresarial completa desenvol
 
 ### 🆕 Recursos Implementados
 
-#### 1. 🤖 **Bot WhatsApp Inteligente** (RF027, RF029, RF065)
-- Atendimento automático 24/7 com processamento de linguagem natural
-- Consulta de status de pedidos por código
-- Reenvio automático de confirmações
-- Histórico completo de conversas
-- Estatísticas e métricas de atendimento
-- Integração Evolution API (sem custos de API oficial)
+#### 1. 🤖 **Bot WhatsApp Inteligente + Notificações Automáticas** (RF027, RF029, RF065)
+- ✅ Atendimento automático 24/7 com processamento de linguagem natural
+- ✅ Consulta de status de pedidos por código
+- ✅ Reenvio automático de confirmações
+- ✅ **Notificações automáticas de mudança de status**
+  - Confirmado → Notifica pagamento confirmado
+  - Preparando → Notifica início da preparação
+  - Pronto → Notifica pedido pronto para retirada
+  - Entregue → Envia agradecimento
+  - Cancelado → Notifica cancelamento
+- ✅ Histórico completo de conversas
+- ✅ Estatísticas e métricas de atendimento
+- ✅ **Integração Evolution API v1.8.0** (gratuita, Docker)
+- ✅ **100% funcional em produção na Azure**
 
 #### 2. 🎯 **Simulador de Custos** (RF020)
 - Teste cenários sem alterar dados reais
@@ -76,6 +83,17 @@ O **Segredo do Sabor (DoceGest)** é uma solução empresarial completa desenvol
 - Validação de opções obrigatórias
 - Múltiplas personalizações por pedido
 - Gestão visual no painel administrativo
+
+#### 6. ☁️ **Infraestrutura Azure em Produção**
+- ✅ **VM Ubuntu 22.04 LTS** (Standard D2s v3 - 2 vCPUs, 8GB RAM)
+- ✅ **SSL/HTTPS** Let's Encrypt (renovação automática)
+- ✅ **DNS Configurado** - segredodosabor.westus3.cloudapp.azure.com
+- ✅ **PM2 Process Manager** (restart automático, logs centralizados)
+- ✅ **Nginx** como reverse proxy
+- ✅ **Docker** para Evolution API
+- ✅ **MySQL 8.0** otimizado para produção
+- ✅ **Backup automático** e monitoramento
+- ✅ **Deploy automatizado** com scripts prontos
 
 ---
 
@@ -131,10 +149,16 @@ O **Segredo do Sabor (DoceGest)** é uma solução empresarial completa desenvol
 - ✅ Atendimento automático 24/7
 - ✅ Consulta de status por código
 - ✅ Reenvio de confirmações
-- ✅ Notificações automáticas
+- ✅ **Notificações automáticas de status**
+  - Status Confirmado → Cliente recebe confirmação de pagamento
+  - Status Preparando → Cliente é notificado do início da produção
+  - Status Pronto → Cliente recebe aviso que o pedido está pronto
+  - Status Entregue → Cliente recebe mensagem de agradecimento
+  - Status Cancelado → Cliente é informado do cancelamento
 - ✅ Histórico de conversas
 - ✅ Estatísticas de atendimento
-- ✅ Integração Evolution API (gratuita)
+- ✅ **Integração Evolution API v1.8.0** (Docker, gratuita)
+- ✅ **100% funcional em produção**
 
 ### 💰 Controle Financeiro (RF014-RF018, RF020, RF040-RF045)
 - ✅ Dashboard executivo com gráficos
@@ -197,14 +221,21 @@ O **Segredo do Sabor (DoceGest)** é uma solução empresarial completa desenvol
 │  • SASS                • React Icons                        │
 │  • Slick Carousel      • React Toastify                     │
 └────────────────┬────────────────────────────────────────────┘
-                 │ REST API
+                 │ REST API (HTTPS)
+┌────────────────▼────────────────────────────────────────────┐
+│                     NGINX (Reverse Proxy)                    │
+│  • SSL/TLS (Let's Encrypt)  • Gzip Compression             │
+│  • Static Files Serving     • Rate Limiting                 │
+│  • /api → Backend Proxy     • Security Headers              │
+└────────────────┬────────────────────────────────────────────┘
+                 │
 ┌────────────────▼────────────────────────────────────────────┐
 │                     BACKEND (Node.js)                        │
 │  • Express 5.1.0       • JWT (Auth)                         │
 │  • MySQL2              • Bcrypt                             │
 │  • Multer (Upload)     • Axios (WhatsApp)                   │
 │  • jsPDF               • XLSX (Excel)                       │
-│  • Nodemon             • Jest (Testes)                      │
+│  • PM2 (Process Mgmt)  • Jest (Testes)                      │
 └────────────────┬────────────────────────────────────────────┘
                  │ SQL Queries
 ┌────────────────▼────────────────────────────────────────────┐
@@ -216,9 +247,17 @@ O **Segredo do Sabor (DoceGest)** é uma solução empresarial completa desenvol
                  │
 ┌────────────────▼────────────────────────────────────────────┐
 │                  INTEGRAÇÕES EXTERNAS                        │
-│  • Evolution API (WhatsApp)                                 │
+│  • Evolution API (WhatsApp) - Docker Container              │
 │  • VLibras (Acessibilidade)                                 │
 │  • Chart.js (Gráficos)                                      │
+└─────────────────────────────────────────────────────────────┘
+
+                 INFRAESTRUTURA AZURE
+┌─────────────────────────────────────────────────────────────┐
+│         VM Ubuntu 22.04 (Standard D2s v3)                   │
+│  • 2 vCPUs • 8GB RAM • 30GB SSD • West US 3                 │
+│  • IP: 20.168.13.56                                         │
+│  • DNS: segredodosabor.westus3.cloudapp.azure.com           │
 └─────────────────────────────────────────────────────────────┘
 ```
 

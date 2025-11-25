@@ -1,0 +1,16 @@
+
+export async function obterVendasDiarias(dias = 7) {
+    const comando = `
+        SELECT 
+            DATE_FORMAT(data_reserva, '%d/%m') AS data,
+            COUNT(*) AS pedidos,
+            SUM(valor_total) AS receita
+        FROM reserva
+        WHERE status = 'Confirmado'
+            AND data_reserva >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
+        GROUP BY DATE(data_reserva)
+        ORDER BY DATE(data_reserva) ASC;
+    `;
+    const [resultado] = await connection.query(comando, [dias]);
+    return resultado;
+}

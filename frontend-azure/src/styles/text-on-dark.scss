@@ -1,0 +1,125 @@
+/**
+ * UTILITÁRIOS DE TEXTO EM FUNDOS ESCUROS
+ * 
+ * Classes helper para garantir que texto em fundos escuros
+ * permaneça branco e visível (WCAG AAA)
+ */
+
+// =========================================================
+// MIXIN: Texto Branco em Fundo Escuro
+// =========================================================
+@mixin text-on-dark-background {
+  color: #ffffff !important;
+  
+  // Garantir que textos sejam brancos, mas preservar ícones
+  h1, h2, h3, h4, h5, h6,
+  p, span, div, a, button {
+    color: #ffffff !important;
+  }
+  
+  // Preservar funcionamento de ícones SVG
+  svg {
+    color: inherit;
+    fill: currentColor;
+  }
+  
+  // Links em fundo escuro
+  a {
+    color: #ffffff !important;
+    text-decoration: underline;
+    
+    // Preservar cor de ícones dentro de links
+    svg {
+      color: inherit !important;
+    }
+    
+    &:hover {
+      color: #f7fafc !important;
+      opacity: 0.9;
+      
+      svg {
+        color: inherit !important;
+      }
+    }
+  }
+}
+
+// =========================================================
+// CLASSE: Fundo Gradiente Roxo com Texto Branco
+// =========================================================
+.hero-gradient,
+.gradient-background {
+  background: linear-gradient(135deg, #4c5fd5 0%, #5d3a7a 100%);
+  @include text-on-dark-background;
+}
+
+// =========================================================
+// CLASSE: Qualquer Fundo Escuro
+// =========================================================
+.dark-background {
+  @include text-on-dark-background;
+}
+
+// =========================================================
+// CLASSE: Seção Hero Padrão
+// =========================================================
+.hero-section,
+.hero-content {
+  @include text-on-dark-background;
+}
+
+// =========================================================
+// FORÇA ESPECÍFICA: Para componentes que precisam
+// =========================================================
+.force-white-text {
+  &,
+  & * {
+    color: #ffffff !important;
+  }
+}
+
+// =========================================================
+// GRADIENTES WCAG-COMPLIANT
+// =========================================================
+@mixin gradient-primary-wcag {
+  background: linear-gradient(135deg, #4c5fd5 0%, #5d3a7a 100%);
+  color: #ffffff;
+}
+
+@mixin gradient-success-wcag {
+  background: linear-gradient(135deg, #1e7e34 0%, #28a745 100%);
+  color: #ffffff;
+}
+
+@mixin gradient-danger-wcag {
+  background: linear-gradient(135deg, #c82333 0%, #dc3545 100%);
+  color: #ffffff;
+}
+
+// =========================================================
+// BOTÕES EM FUNDOS ESCUROS
+// =========================================================
+@mixin button-on-dark {
+  // Botão primário (branco com texto roxo)
+  &.btn-primary {
+    background: #ffffff;
+    color: #4c5fd5 !important;
+    
+    &:hover {
+      background: #f7fafc;
+      color: #4c5fd5 !important;
+    }
+  }
+  
+  // Botão secundário (transparente com texto branco)
+  &.btn-secondary {
+    background: transparent;
+    color: #ffffff !important;
+    border: 2px solid #ffffff;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff !important;
+    }
+  }
+}

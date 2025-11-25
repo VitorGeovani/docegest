@@ -1,0 +1,308 @@
+/**
+ * WCAG 2.2 - Estilos de Acessibilidade OPCIONAIS E NÃO-INVASIVOS
+ * 
+ * ⚠️ IMPORTANTE: Este arquivo NÃO afeta o layout ou espaçamento padrão!
+ * ⚠️ Estilos aplicados APENAS quando o usuário ativa recursos específicos.
+ * 
+ * Classes aplicadas dinamicamente pelo AccessibilityMenu.js:
+ * - .wcag-font-[size] (50% a 200%)
+ * - .wcag-contrast-[mode] (normal, high, dark, light)
+ * - .wcag-spacing-[size] (normal, comfortable, compact)
+ * - .wcag-no-animations
+ * - .wcag-links-[style] (underline, bold, both)
+ * - .wcag-cursor-[size] (normal, large, xlarge)
+ */
+
+/* ========================================
+   1. VARIÁVEIS - Sempre disponíveis
+   ======================================== */
+
+:root {
+  --wcag-primary: #6366f1;
+  --wcag-focus-color: #6366f1;
+  --wcag-focus-width: 3px;
+}
+
+/* ========================================
+   2. SKIP LINKS - Sempre ativos mas invisíveis
+   ======================================== */
+
+.skip-links {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 10000;
+  background: #000;
+  color: #fff;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.skip-links:focus {
+  top: 0;
+  outline: 3px solid var(--wcag-focus-color);
+}
+
+/* ========================================
+   3. FOCUS INDICATORS - Melhorados (não afeta layout)
+   ======================================== */
+
+*:focus-visible {
+  outline: var(--wcag-focus-width) solid var(--wcag-focus-color) !important;
+  outline-offset: 2px !important;
+}
+
+/* ========================================
+   4. REDUÇÃO DE MOVIMENTO - Sempre respeitado
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   5. AJUSTE DE FONTE - Apenas quando ativado
+   ======================================== */
+
+html.wcag-font-xs {
+  font-size: 8px !important; /* 50% */
+}
+
+html.wcag-font-sm {
+  font-size: 12px !important; /* 75% */
+}
+
+html.wcag-font-md {
+  font-size: 16px !important; /* 100% - padrão */
+}
+
+html.wcag-font-lg {
+  font-size: 20px !important; /* 125% */
+}
+
+html.wcag-font-xl {
+  font-size: 24px !important; /* 150% */
+}
+
+html.wcag-font-2xl {
+  font-size: 28px !important; /* 175% */
+}
+
+html.wcag-font-3xl {
+  font-size: 32px !important; /* 200% */
+}
+
+/* ========================================
+   6. MODO DE CONTRASTE - Apenas quando ativado
+   ======================================== */
+
+/* Alto Contraste */
+html.wcag-contrast-high {
+  filter: contrast(1.5) !important;
+}
+
+html.wcag-contrast-high * {
+  border-color: #000 !important;
+}
+
+/* Modo Escuro */
+html.wcag-contrast-dark {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+html.wcag-contrast-dark * {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+html.wcag-contrast-dark img {
+  filter: brightness(0.8) contrast(1.2);
+}
+
+/* Modo Claro */
+html.wcag-contrast-light {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+html.wcag-contrast-light * {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+/* ========================================
+   7. ESPAÇAMENTO - Apenas quando ativado (SEM AFETAR LAYOUT)
+   ======================================== */
+
+/* Espaçamento confortável - afeta apenas texto, NÃO padding/margin de containers */
+html.wcag-spacing-comfortable p,
+html.wcag-spacing-comfortable li,
+html.wcag-spacing-comfortable span:not(.badge):not(.icon),
+html.wcag-spacing-comfortable label,
+html.wcag-spacing-comfortable h1,
+html.wcag-spacing-comfortable h2,
+html.wcag-spacing-comfortable h3,
+html.wcag-spacing-comfortable h4,
+html.wcag-spacing-comfortable h5,
+html.wcag-spacing-comfortable h6 {
+  line-height: 1.8 !important;
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.1em !important;
+}
+
+/* Espaçamento compacto - afeta apenas texto, NÃO padding/margin de containers */
+html.wcag-spacing-compact p,
+html.wcag-spacing-compact li,
+html.wcag-spacing-compact span:not(.badge):not(.icon),
+html.wcag-spacing-compact label,
+html.wcag-spacing-compact h1,
+html.wcag-spacing-compact h2,
+html.wcag-spacing-compact h3,
+html.wcag-spacing-compact h4,
+html.wcag-spacing-compact h5,
+html.wcag-spacing-compact h6 {
+  line-height: 1.3 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* ========================================
+   8. ANIMAÇÕES - Apenas quando desativado
+   ======================================== */
+
+html.wcag-no-animations *,
+html.wcag-no-animations *::before,
+html.wcag-no-animations *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ========================================
+   9. ESTILO DE LINKS - Apenas quando ativado
+   ======================================== */
+
+html.wcag-links-underline a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+  text-decoration-thickness: 2px !important;
+}
+
+html.wcag-links-bold a {
+  font-weight: 700 !important;
+}
+
+html.wcag-links-both a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+  text-decoration-thickness: 2px !important;
+  font-weight: 700 !important;
+}
+
+/* ========================================
+   10. TAMANHO DO CURSOR - Apenas quando ativado
+   ======================================== */
+
+html.wcag-cursor-large * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="10" fill="black"/><circle cx="16" cy="16" r="8" fill="white"/></svg>') 16 16, auto !important;
+}
+
+html.wcag-cursor-xlarge * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><circle cx="24" cy="24" r="16" fill="black"/><circle cx="24" cy="24" r="14" fill="white"/></svg>') 24 24, auto !important;
+}
+
+/* ========================================
+   11. DARK MODE NATIVO - Sempre respeitado
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wcag-focus-color: #818cf8;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --wcag-focus-width: 4px;
+  }
+  
+  *:focus-visible {
+    outline-width: 4px !important;
+  }
+}
+
+/* ========================================
+   12. IMPRESSÃO ACESSÍVEL
+   ======================================== */
+
+@media print {
+  .accessibility-toggle,
+  .accessibility-panel,
+  .skip-links {
+    display: none !important;
+  }
+  
+  * {
+    background: white !important;
+    color: black !important;
+  }
+  
+  a {
+    text-decoration: underline !important;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+}
+
+/* ========================================
+   13. UTILITÁRIOS ACESSÍVEIS
+   ======================================== */
+
+/* Screen reader only */
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+}
+
+/* ========================================
+   FIM - Sistema não-invasivo e seguro
+   ======================================== */
+
+/*
+ * ✅ GARANTIAS:
+ * - NÃO afeta padding, margin ou height de elementos estruturais
+ * - NÃO altera layout de header, footer, cards, containers
+ * - NÃO aplica box-sizing ou outros resets globais
+ * - Estilos aplicam-se APENAS quando classes específicas existem no <html>
+ * - Design original preservado 100%
+ * 
+ * Para ativar recursos: Clique no botão roxo de acessibilidade (canto inferior esquerdo)
+ */

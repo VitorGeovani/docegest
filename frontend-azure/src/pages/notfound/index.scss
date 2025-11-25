@@ -1,0 +1,20 @@
+.pagina-not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+   
+    .titulo {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+   
+    .imagem-erro {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+  }
