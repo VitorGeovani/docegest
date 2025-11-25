@@ -926,12 +926,12 @@ SOFTWARE.
 - LinkedIn: [Vitor Geovani](https://linkedin.com/in/vitor-geovani)
 
 ### 🎓 Projeto Acadêmico
-Desenvolvido como **Projeto Integrador** do curso de **Tecnologia em Análise e Desenvolvimento de Sistemas** da **FATEC**.
+Desenvolvido como **Projeto Integrador** do curso de **Tecnologia em Análise e Desenvolvimento de Sistemas** do **Centro Unversitário SENAC - Santo Amaro**.
 
 ### 🙏 Agradecimentos
 
 - **Prof. Orientador** - Pela mentoria e feedback
-- **FATEC** - Pela estrutura e suporte
+- **Centro Universitário SENAC - Santo Amaro** - Pela estrutura e suporte
 - **Comunidade Open Source** - Pelas bibliotecas incríveis
 - **Evolution API Team** - Pela solução WhatsApp gratuita
 - **Você** - Por usar e contribuir com o DoceGest!
@@ -987,38 +987,25 @@ Adoraríamos ouvir! Abra uma [discussion](https://github.com/VitorGeovani/docege
 
 ---
 
-## 🌟 Depoimentos
-
-> *"O DoceGest revolucionou minha confeitaria! Agora tenho controle total de custos, estoque e vendas. O bot do WhatsApp é sensacional!"*  
-> — **Maria Silva**, Proprietária da Doce Tentação
-
-> *"Sistema completo e fácil de usar. A acessibilidade é perfeita, uso com leitor de tela sem problemas."*  
-> — **João Santos**, Cliente
-
-> *"Implementação impecável dos requisitos. Código limpo, arquitetura sólida. Parabéns!"*  
-> — **Prof. Dr. Carlos Oliveira**, Orientador FATEC
-
----
-
-## 🎬 Vídeo Demonstração
+##  Vídeo Demonstração
 
 <div align="center">
 
-[![Vídeo Demonstração DoceGest](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID/maxresdefault.jpg)](https://youtube.com/watch?v=YOUTUBE_VIDEO_ID)
+### 📹 Apresentação Completa
 
-*Clique para assistir a demonstração completa (5 minutos)*
+[![Vídeo Demonstração DoceGest](https://img.youtube.com/vi/xMwUbydlUZI/maxresdefault.jpg)](https://youtu.be/xMwUbydlUZI)
 
-</div>
+**[▶️ Assistir Vídeo Completo](https://youtu.be/xMwUbydlUZI)**
 
 ---
 
-## 🏆 Conquistas e Certificações
+### ⚡ Apresentação Acelerada
 
-- 🥇 **Melhor Projeto Integrador 2025** - FATEC
-- ♿ **WCAG 2.2 AAA Certificado** - Acessibilidade Web
-- 🔒 **Selo de Segurança** - OWASP Compliance
-- 🌍 **Open Source Contributor** - GitHub
-- 📚 **Documentação Exemplar** - Community Choice
+[![Vídeo Demonstração DoceGest (Acelerado)](https://img.youtube.com/vi/9F-jHmxK78U/maxresdefault.jpg)](https://youtu.be/9F-jHmxK78U)
+
+**[▶️ Assistir Vídeo Acelerado](https://youtu.be/9F-jHmxK78U)**
+
+</div>
 
 ---
 
@@ -1046,7 +1033,7 @@ Adoraríamos ouvir! Abra uma [discussion](https://github.com/VitorGeovani/docege
 
 ---
 
-**📅 Última atualização:** 16 de novembro de 2025  
+**📅 Última atualização:** 25 de novembro de 2025  
 **🔖 Versão:** 5.0.0  
 **📜 Licença:** MIT
 
