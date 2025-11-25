@@ -308,8 +308,12 @@ export async function atualizarStatusPedido(id, novoStatus) {
             throw new Error('Reserva não encontrada');
         }
 
-        // TODO: Enviar notificação WhatsApp sobre mudança de status
-        // await whatsappService.notificarMudancaStatus(id, novoStatus);
+        // Enviar notificação WhatsApp sobre mudança de status
+        try {
+            await enviarNotificacaoMudancaStatus(id, novoStatus);
+        } catch (notifError) {
+            console.error('Erro ao enviar notificação, mas status foi atualizado:', notifError.message);
+        }
 
         return linhasAfetadas;
     } catch (error) {
@@ -397,4 +401,91 @@ export async function buscarClienteDoPedido(idReserva) {
  */
 export async function registrarReenvioConfirmacao(idReserva) {
     await reservaRepository.registrarReenvioConfirmacao(idReserva);
+}
+
+/**
+ * Envia notificação WhatsApp quando o status do pedido muda
+ * @param {number} idReserva - ID da reserva
+ * @param {string} novoStatus - Novo status do pedido
+ */
+async function enviarNotificacaoMudancaStatus(idReserva, novoStatus) {
+    try {
+        // Buscar dados completos da reserva com cliente
+        const reserva = await reservaRepository.buscarReservaPorId(idReserva);
+        
+        if (!reserva) {
+            console.log(`Reserva ${idReserva} não encontrada para notificação`);
+            return;
+        }
+
+        // Buscar dados do cliente
+        const cliente = await reservaRepository.buscarClientePorReserva(idReserva);
+        
+        if (!cliente || !cliente.telefone) {
+            console.log(`Cliente sem telefone para reserva ${idReserva}`);
+            return;
+        }
+
+        // Montar objeto pedido no formato esperado pelo WhatsAppService
+        const pedido = {
+            id: reserva.id,
+            idreserva: reserva.id,
+            numero: reserva.numero_pedido || `PED${String(idReserva).padStart(6, '0')}`,
+            total: reserva.valor_total || 0,
+            metodoPagamento: reserva.pagamento || 'PIX',
+            pontoEntrega: reserva.ponto_entrega || reserva.endereco_entrega || 'Loja principal',
+            itens: [], // Não precisa para notificações de status
+            cliente: {
+                nome: cliente.nome || 'Cliente',
+                telefone: cliente.telefone
+            }
+        };
+
+        // Enviar notificação de acordo com o status
+        switch (novoStatus) {
+            case 'Confirmado':
+                console.log(`📱 Enviando notificação de pagamento confirmado para ${cliente.telefone}`);
+                await whatsappService.notificarPagamentoConfirmado(pedido);
+                break;
+            
+            case 'Preparando':
+                console.log(`📱 Enviando notificação de pedido em preparação para ${cliente.telefone}`);
+                const mensagemPreparando = `⏳ *Pedido em Preparação!*\n\n` +
+                    `Olá *${pedido.cliente.nome}*!\n\n` +
+                    `Seu pedido *#${pedido.numero}* está sendo preparado com muito carinho! 🧁\n\n` +
+                    `Em breve você receberá uma notificação quando estiver pronto.\n\n` +
+                    `Obrigado pela preferência! 💜`;
+                await whatsappService.enviarMensagem(
+                    pedido.cliente.telefone,
+                    mensagemPreparando,
+                    pedido.idreserva,
+                    'pedido_preparando'
+                );
+                break;
+            
+            case 'Pronto':
+                console.log(`📱 Enviando notificação de pedido pronto para ${cliente.telefone}`);
+                await whatsappService.notificarPedidoPronto(pedido);
+                break;
+            
+            case 'Entregue':
+                console.log(`📱 Enviando notificação de pedido entregue para ${cliente.telefone}`);
+                await whatsappService.enviarAgradecimento(pedido);
+                break;
+            
+            case 'Cancelado':
+                console.log(`📱 Enviando notificação de cancelamento para ${cliente.telefone}`);
+                await whatsappService.notificarCancelamento(pedido, 'Solicitado pelo cliente ou estabelecimento');
+                break;
+            
+            default:
+                console.log(`Status ${novoStatus} não requer notificação`);
+        }
+        
+        console.log(`✅ Notificação de status ${novoStatus} processada para reserva ${idReserva}`);
+        
+    } catch (error) {
+        console.error(`❌ Erro ao enviar notificação para reserva ${idReserva}:`, error.message);
+        throw error;
+    }
 }

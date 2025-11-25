@@ -2,30 +2,30 @@ import axios from 'axios';
 import mensagemRepository from '../repository/mensagemWhatsAppRepository.js';
 
 /**
- * Serviço de integração com WhatsApp Business API
+ * Serviço de integração com WhatsApp via Evolution API
  * RF027, RF029, RF065 - Sistema completo de mensageria
  * 
- * CONFIGURAÇÃO NECESSÁRIA:
- * 1. Criar conta no WhatsApp Business API (https://business.whatsapp.com/)
- * 2. Obter token de acesso e phone_number_id
- * 3. Configurar variáveis de ambiente:
- *    - WHATSAPP_API_TOKEN
- *    - WHATSAPP_PHONE_NUMBER_ID
- *    - WHATSAPP_BUSINESS_PHONE (número formatado: 5511999999999)
+ * CONFIGURAÇÃO (via Evolution API):
+ * Variáveis de ambiente necessárias:
+ *    - EVOLUTION_API_URL (ex: http://localhost:8080)
+ *    - EVOLUTION_API_KEY (chave de API)
+ *    - EVOLUTION_INSTANCE_NAME (nome da instância)
  */
 
 class WhatsAppService {
     constructor() {
-        this.apiUrl = 'https://graph.facebook.com/v18.0';
-        this.token = process.env.WHATSAPP_API_TOKEN || '';
-        this.phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID || '';
-        this.businessPhone = process.env.WHATSAPP_BUSINESS_PHONE || '5511967696744';
+        // Configurações Evolution API
+        this.evolutionApiUrl = process.env.EVOLUTION_API_URL || 'http://localhost:8080';
+        this.evolutionApiKey = process.env.EVOLUTION_API_KEY || '';
+        this.evolutionInstance = process.env.EVOLUTION_INSTANCE_NAME || '';
         
-        // Se não houver configuração, modo de demonstração
-        this.demoMode = !this.token || !this.phoneNumberId;
+        // Se não houver configuração completa, modo de demonstração
+        this.demoMode = !this.evolutionApiKey || !this.evolutionInstance;
         
         if (this.demoMode) {
-            console.warn('⚠️  WhatsApp Service rodando em MODO DEMO (variáveis de ambiente não configuradas)');
+            console.warn('⚠️  WhatsApp Service rodando em MODO DEMO (Evolution API não configurado)');
+        } else {
+            console.log('✅ WhatsApp conectado via Evolution API');
         }
     }
 
@@ -42,23 +42,26 @@ class WhatsAppService {
                 console.log(`📱 [DEMO] WhatsApp para ${telefoneFormatado}: ${mensagem}`);
                 whatsappMessageId = `demo_${Date.now()}`;
             } else {
+                // Enviar via Evolution API
                 const response = await axios.post(
-                    `${this.apiUrl}/${this.phoneNumberId}/messages`,
+                    `${this.evolutionApiUrl}/message/sendText/${this.evolutionInstance}`,
                     {
-                        messaging_product: 'whatsapp',
-                        to: telefoneFormatado,
-                        type: 'text',
-                        text: { body: mensagem }
+                        number: telefoneFormatado,
+                        textMessage: {
+                            text: mensagem
+                        },
+                        delay: 1200
                     },
                     {
                         headers: {
-                            'Authorization': `Bearer ${this.token}`,
+                            'apikey': this.evolutionApiKey,
                             'Content-Type': 'application/json'
                         }
                     }
                 );
                 
-                whatsappMessageId = response.data.messages?.[0]?.id || null;
+                console.log(`✅ Mensagem WhatsApp enviada para ${telefoneFormatado}`);
+                whatsappMessageId = response.data?.key?.id || `evo_${Date.now()}`;
             }
 
             // RF029: Registrar mensagem no histórico
@@ -72,7 +75,7 @@ class WhatsAppService {
 
             return { success: true, messageId: whatsappMessageId, demo: this.demoMode };
         } catch (error) {
-            console.error('Erro ao enviar WhatsApp:', error.response?.data || error.message);
+            console.error('❌ Erro ao enviar WhatsApp:', error.response?.data?.error || error.message);
             
             // Registrar erro no banco
             try {
