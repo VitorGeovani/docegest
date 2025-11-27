@@ -1,6 +1,9 @@
-# � Segredo do Sabor (DoceGest) - Sistema Completo de Gestão
-
 <div align="center">
+
+![Logo DoceGest](https://github.com/VitorGeovani/docegest/blob/main/logo-docegest.png?raw=true)
+
+# 🍰 Segredo do Sabor (DoceGest)
+## Sistema Completo de Gestão para Confeitarias
 
 [![Status](https://img.shields.io/badge/Status-100%25%20Completo-success?style=for-the-badge)]()
 [![Requisitos](https://img.shields.io/badge/RFs-65%2F65-brightgreen?style=for-the-badge)]()
