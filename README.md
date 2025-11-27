@@ -1,6 +1,6 @@
 <div align="center">
 
-![Logo DoceGest](https://github.com/VitorGeovani/docegest/blob/main/logo-docegest.png?raw=true)
+![Logo DoceGest](./docegest-logo-nobg.png)
 
 # 🍰 Segredo do Sabor (DoceGest)
 ## Sistema Completo de Gestão para Confeitarias
