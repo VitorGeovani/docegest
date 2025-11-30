@@ -1,22 +1,22 @@
 {
-  "short_name": "DoceGest",
-  "name": "DoceGest - Sistema de Gestão para Confeitarias",
-  "description": "Sistema completo de gestão para confeitarias artesanais. E-commerce, controle de estoque, pedidos e muito mais.",
+  "short_name": "Segredo do Sabor",
+  "name": "Segredo do Sabor - Doces Artesanais",
+  "description": "Doces artesanais feitos com amor e ingredientes selecionados. Faça seu pedido online de forma rápida e fácil.",
   "icons": [
     {
-      "src": "imgs/docegest-logo-nobg.png",
+      "src": "imgs/logo_segredo_branca-removebg.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "imgs/docegest-logo-nobg.png",
+      "src": "imgs/logo_segredo_branca-removebg.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "imgs/docegest-logo-nobg.png",
+      "src": "imgs/logo_segredo_branca-removebg.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
@@ -38,14 +38,14 @@
       "short_name": "Catálogo",
       "description": "Ver produtos disponíveis",
       "url": "/catalogo",
-      "icons": [{ "src": "imgs/docegest-logo-nobg.png", "sizes": "96x96" }]
+      "icons": [{ "src": "imgs/logo_segredo_branca-removebg.png", "sizes": "96x96" }]
     },
     {
       "name": "Meus Pedidos",
       "short_name": "Pedidos",
       "description": "Acompanhar meus pedidos",
       "url": "/meus-pedidos",
-      "icons": [{ "src": "imgs/docegest-logo-nobg.png", "sizes": "96x96" }]
+      "icons": [{ "src": "imgs/logo_segredo_branca-removebg.png", "sizes": "96x96" }]
     }
   ]
 }

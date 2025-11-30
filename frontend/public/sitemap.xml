@@ -6,7 +6,7 @@
   
   <!-- Página Principal -->
   <url>
-    <loc>https://docegest.com.br/</loc>
+    <loc>https://segredodosabor.com.br/</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -14,7 +14,7 @@
   
   <!-- Cardápio -->
   <url>
-    <loc>https://docegest.com.br/cardapio</loc>
+    <loc>https://segredodosabor.com.br/cardapio</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -22,7 +22,7 @@
   
   <!-- Contato -->
   <url>
-    <loc>https://docegest.com.br/contato</loc>
+    <loc>https://segredodosabor.com.br/contato</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -30,7 +30,7 @@
   
   <!-- Sobre -->
   <url>
-    <loc>https://docegest.com.br/sobre</loc>
+    <loc>https://segredodosabor.com.br/sobre</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -38,7 +38,7 @@
   
   <!-- Login (para usuários que buscam acesso) -->
   <url>
-    <loc>https://docegest.com.br/login</loc>
+    <loc>https://segredodosabor.com.br/login</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
@@ -46,7 +46,7 @@
   
   <!-- Cadastro -->
   <url>
-    <loc>https://docegest.com.br/cadastro</loc>
+    <loc>https://segredodosabor.com.br/cadastro</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

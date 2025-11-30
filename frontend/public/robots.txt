@@ -1,5 +1,5 @@
-# DoceGest - Robots.txt
-# Sistema de Gestão para Confeitarias
+# Segredo do Sabor - Robots.txt
+# Doces Artesanais
 # https://www.robotstxt.org/robotstxt.html
 
 # Permitir todos os crawlers
@@ -31,7 +31,7 @@ Disallow: /static/css/*.map
 Crawl-delay: 1
 
 # Sitemap (quando disponível)
-Sitemap: https://docegest.com.br/sitemap.xml
+Sitemap: https://segredodosabor.com.br/sitemap.xml
 
 # Regras específicas para o Google
 User-agent: Googlebot

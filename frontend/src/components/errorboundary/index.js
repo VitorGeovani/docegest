@@ -151,11 +151,11 @@ class ErrorBoundary extends Component {
             </p>
             <div className="contact-options">
               <a 
-                href="mailto:suporte@docegest.com.br" 
+                href="mailto:contato@segredodosabor.com.br" 
                 className="contact-link"
-                aria-label="Enviar email para suporte"
+                aria-label="Enviar email para contato"
               >
-                📧 suporte@docegest.com.br
+                📧 contato@segredodosabor.com.br
               </a>
               <a 
                 href="https://wa.me/5511999999999" 
