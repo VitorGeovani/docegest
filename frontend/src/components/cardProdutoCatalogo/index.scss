@@ -152,10 +152,14 @@
 
 .produto-nome {
     margin: 0;
-    font-size: 18px;
+    font-size: 18px !important;
     font-weight: 700;
-    color: #333;
+    color: #333 !important;
     line-height: 1.3;
+    -webkit-text-fill-color: #333 !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
 }
 
 .produto-descricao {
@@ -165,6 +169,7 @@
     line-height: 1.5;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -308,7 +313,9 @@
     }
 
     .produto-nome {
-        font-size: 16px;
+        font-size: 16px !important;
+        color: #333 !important;
+        -webkit-text-fill-color: #333 !important;
     }
 
     .preco-valor {

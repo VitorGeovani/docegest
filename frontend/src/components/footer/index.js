@@ -62,7 +62,9 @@ const Footer = () => (
             <li><a href="#produtos" aria-label="Ir para seção Produtos">Produtos</a></li>
             <li><a href="#nossaMarca" aria-label="Ir para seção Nossa Marca">Nossa Marca</a></li>
             <li><Link to="/catalogo" aria-label="Ver catálogo completo de produtos">Catálogo Completo</Link></li>
+            <li><Link to="/favoritos" aria-label="Ver meus produtos favoritos">Meus Favoritos</Link></li>
             <li><Link to="/meus-pedidos" aria-label="Ver meus pedidos">Meus Pedidos</Link></li>
+            <li><Link to="/sobre" aria-label="Conhecer nossa história">Sobre Nós</Link></li>
           </ul>
         </div>
 

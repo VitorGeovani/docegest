@@ -1,0 +1,553 @@
+/**
+ * Segredo do Sabor - Página de Favoritos
+ * Estilos profissionais com animações
+ */
+
+// Variáveis
+$primary: #667eea;
+$primary-dark: #5a67d8;
+$secondary: #764ba2;
+$heart-red: #e74c3c;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background: #f8fafc;
+$card-bg: #ffffff;
+$shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+$shadow-hover: 0 8px 30px rgba(102, 126, 234, 0.2);
+
+// ==========================================
+// PÁGINA PRINCIPAL
+// ==========================================
+
+.pagina-favoritos {
+  min-height: 100vh;
+  background: $background;
+  display: flex;
+  flex-direction: column;
+}
+
+.favoritos-container {
+  flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+// ==========================================
+// HEADER DA PÁGINA
+// ==========================================
+
+.favoritos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn-voltar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: white;
+  border: 2px solid $primary;
+  color: $primary;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $primary;
+    color: white;
+    transform: translateX(-3px);
+  }
+}
+
+.titulo-container {
+  text-align: center;
+  flex: 1;
+
+  h1 {
+    font-size: 2rem;
+    color: $text-dark;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.5rem;
+
+    .heart-icon {
+      color: $heart-red;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+  }
+
+  p {
+    color: $text-light;
+    font-size: 1rem;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.btn-limpar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: 2px solid $heart-red;
+  color: $heart-red;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $heart-red;
+    color: white;
+  }
+}
+
+// ==========================================
+// ESTADO VAZIO
+// ==========================================
+
+.favoritos-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  background: white;
+  border-radius: 24px;
+  box-shadow: $shadow;
+
+  .empty-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    color: $text-dark;
+    margin-bottom: 0.75rem;
+    font-family: 'Playfair Display', serif;
+  }
+
+  p {
+    color: $text-light;
+    max-width: 400px;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .btn-explorar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba($primary, 0.3);
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+// ==========================================
+// LOADING STATE
+// ==========================================
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  text-align: center;
+
+  .loading-heart {
+    font-size: 4rem;
+    animation: heartbeat 1s ease-in-out infinite, float 2s ease-in-out infinite;
+  }
+
+  p {
+    margin-top: 1rem;
+    color: $text-light;
+    font-size: 1.125rem;
+  }
+}
+
+// ==========================================
+// GRID DE FAVORITOS
+// ==========================================
+
+.favoritos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+// ==========================================
+// CARD DE FAVORITO
+// ==========================================
+
+.favorito-card {
+  position: relative;
+  background: $card-bg;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: $shadow;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.5s ease-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-hover;
+
+    .produto-imagem img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Botão remover favorito
+.btn-remover-favorito {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+
+  svg {
+    color: $heart-red;
+    font-size: 1.25rem;
+  }
+
+  &:hover {
+    background: $heart-red;
+    transform: scale(1.1);
+
+    svg {
+      color: white;
+    }
+  }
+}
+
+// Imagem do produto
+.produto-imagem {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .tag-destaque {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);
+    color: #1f2937;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(255, 183, 0, 0.4);
+  }
+}
+
+// Info do produto
+.produto-info {
+  padding: 1.25rem;
+
+  h3 {
+    font-size: 1.25rem;
+    color: $text-dark;
+    margin-bottom: 0.5rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+  }
+
+  .produto-descricao {
+    color: $text-light;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  .produto-preco {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary;
+  }
+}
+
+// Ações do produto
+.produto-acoes {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1.25rem 1.25rem;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-compartilhar,
+  .btn-whatsapp {
+    width: 44px;
+    background: #f3f4f6;
+    color: $text-light;
+
+    &:hover {
+      background: $primary;
+      color: white;
+    }
+  }
+
+  .btn-whatsapp:hover {
+    background: #25d366;
+  }
+
+  .btn-adicionar-carrinho {
+    flex: 1;
+    background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+    color: white;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba($primary, 0.3);
+    }
+  }
+}
+
+// ==========================================
+// SUGESTÃO
+// ==========================================
+
+.sugestao-container {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba($primary, 0.1) 0%, rgba($secondary, 0.1) 100%);
+  border-radius: 16px;
+  text-align: center;
+  border: 2px dashed rgba($primary, 0.3);
+
+  p {
+    color: $text-dark;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-ver-mais {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: $primary;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: $primary-dark;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// ==========================================
+// RESPONSIVO
+// ==========================================
+
+@media (max-width: 768px) {
+  .favoritos-container {
+    padding: 1rem;
+  }
+
+  .favoritos-header {
+    flex-direction: column;
+    text-align: center;
+
+    .btn-voltar,
+    .btn-limpar {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .titulo-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .favoritos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .favoritos-vazio {
+    padding: 2rem 1rem;
+
+    .empty-icon {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .produto-acoes {
+    flex-wrap: wrap;
+
+    .btn-adicionar-carrinho {
+      width: 100%;
+      order: -1;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-compartilhar,
+    .btn-whatsapp {
+      flex: 1;
+    }
+  }
+}
+
+// ==========================================
+// ACESSIBILIDADE
+// ==========================================
+
+@media (prefers-reduced-motion: reduce) {
+  .favorito-card,
+  .btn-voltar,
+  .btn-limpar,
+  .btn-remover-favorito,
+  .produto-imagem img,
+  .btn-explorar,
+  .btn-adicionar-carrinho,
+  .loading-heart,
+  .heart-icon,
+  .empty-icon {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+// ==========================================
+// TEMA ESCURO
+// ==========================================
+
+@media (prefers-color-scheme: dark) {
+  .pagina-favoritos {
+    background: #111827;
+  }
+
+  .favorito-card {
+    background: #1f2937;
+  }
+
+  .produto-info {
+    h3 {
+      color: white;
+    }
+
+    .produto-descricao {
+      color: #9ca3af;
+    }
+  }
+
+  .favoritos-vazio {
+    background: #1f2937;
+
+    h2 {
+      color: white;
+    }
+
+    p {
+      color: #9ca3af;
+    }
+  }
+
+  .titulo-container {
+    h1 {
+      color: white;
+    }
+  }
+
+  .btn-voltar {
+    background: #1f2937;
+    border-color: #a5b4fc;
+    color: #a5b4fc;
+
+    &:hover {
+      background: #a5b4fc;
+      color: #1f2937;
+    }
+  }
+
+  .sugestao-container {
+    background: rgba(#a5b4fc, 0.1);
+    border-color: rgba(#a5b4fc, 0.3);
+
+    p {
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,670 @@
+// ========================================
+// Componente AvaliarProduto - Estilos
+// Sistema de avaliação e review de produtos
+// ========================================
+
+.avaliar-produto-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.avaliar-produto-modal {
+  background: var(--bg-card, #ffffff);
+  border-radius: 16px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+  
+  // Scrollbar personalizada
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-light, #f8a5c2);
+    border-radius: 4px;
+  }
+}
+
+// ========================================
+// Header do Modal
+// ========================================
+
+.avaliar-produto-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  position: sticky;
+  top: 0;
+  background: var(--bg-card, #ffffff);
+  z-index: 10;
+  border-radius: 16px 16px 0 0;
+  
+  h3 {
+    margin: 0;
+    color: var(--text-primary, #333);
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    svg {
+      color: var(--primary-color, #e84393);
+    }
+  }
+}
+
+.avaliar-produto-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background: var(--bg-hover, #f5f5f5);
+    color: var(--text-primary, #333);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--primary-color, #e84393);
+    outline-offset: 2px;
+  }
+}
+
+// ========================================
+// Conteúdo do Modal
+// ========================================
+
+.avaliar-produto-content {
+  padding: 1.5rem;
+}
+
+// ========================================
+// Informações do Produto
+// ========================================
+
+.avaliar-produto-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary, #f9f9f9);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  
+  img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid var(--border-color, #e0e0e0);
+  }
+}
+
+.avaliar-produto-detalhes {
+  flex: 1;
+  
+  h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    color: var(--text-primary, #333);
+    font-weight: 600;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary, #666);
+  }
+}
+
+// ========================================
+// Seção de Estrelas
+// ========================================
+
+.avaliar-produto-stars-section {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  
+  label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary, #333);
+    font-size: 0.95rem;
+  }
+}
+
+.avaliar-produto-stars {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.avaliar-produto-star-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  
+  svg {
+    font-size: 2.25rem;
+    transition: all 0.2s ease;
+  }
+  
+  &.empty svg {
+    color: var(--border-color, #ddd);
+    stroke: var(--text-secondary, #999);
+    stroke-width: 15;
+  }
+  
+  &.filled svg {
+    color: #ffc107;
+    filter: drop-shadow(0 2px 4px rgba(255, 193, 7, 0.4));
+  }
+  
+  &:hover {
+    transform: scale(1.15);
+    
+    svg {
+      color: #ffc107;
+    }
+  }
+  
+  &:focus {
+    outline: 2px solid var(--primary-color, #e84393);
+    outline-offset: 2px;
+  }
+}
+
+.avaliar-produto-rating-text {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--primary-color, #e84393);
+  font-weight: 500;
+  min-height: 1.5em;
+}
+
+// ========================================
+// Área de Comentário
+// ========================================
+
+.avaliar-produto-comentario {
+  margin-bottom: 1.5rem;
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary, #333);
+    font-size: 0.95rem;
+  }
+  
+  textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 1rem;
+    border: 2px solid var(--border-color, #e0e0e0);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: var(--bg-input, #fff);
+    color: var(--text-primary, #333);
+    
+    &::placeholder {
+      color: var(--text-placeholder, #aaa);
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color, #e84393);
+      box-shadow: 0 0 0 3px rgba(232, 67, 147, 0.15);
+    }
+  }
+}
+
+.avaliar-produto-char-count {
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--text-secondary, #999);
+  margin-top: 0.5rem;
+}
+
+// ========================================
+// Checkbox de Recomendação
+// ========================================
+
+.avaliar-produto-recomendacao {
+  margin-bottom: 1.5rem;
+}
+
+.avaliar-produto-recomendacao-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 1rem;
+  background: var(--bg-secondary, #f9f9f9);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: var(--bg-hover, #f0f0f0);
+    border-color: var(--primary-light, #f8a5c2);
+  }
+  
+  input {
+    display: none;
+    
+    &:checked + .avaliar-produto-checkbox {
+      background: var(--success-color, #27ae60);
+      border-color: var(--success-color, #27ae60);
+      
+      svg {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.avaliar-produto-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border-color, #ddd);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  
+  svg {
+    color: white;
+    font-size: 0.875rem;
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.2s ease;
+  }
+}
+
+.avaliar-produto-recomendacao-text {
+  flex: 1;
+  
+  strong {
+    display: block;
+    color: var(--text-primary, #333);
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  span {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #666);
+  }
+}
+
+// ========================================
+// Botões de Ação
+// ========================================
+
+.avaliar-produto-actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+}
+
+.avaliar-produto-btn-cancelar {
+  flex: 1;
+  padding: 0.875rem 1.5rem;
+  border: 2px solid var(--border-color, #ddd);
+  background: transparent;
+  color: var(--text-secondary, #666);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: var(--text-secondary, #666);
+    background: var(--bg-hover, #f5f5f5);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--primary-color, #e84393);
+    outline-offset: 2px;
+  }
+}
+
+.avaliar-produto-btn-enviar {
+  flex: 1;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  background: linear-gradient(135deg, var(--primary-color, #e84393), var(--primary-dark, #c23677));
+  color: white;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  
+  svg {
+    font-size: 1rem;
+  }
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 67, 147, 0.4);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  &:focus {
+    outline: 2px solid var(--primary-color, #e84393);
+    outline-offset: 2px;
+  }
+}
+
+// ========================================
+// Animações
+// ========================================
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// ========================================
+// Dark Mode
+// ========================================
+
+[data-theme="dark"] {
+  .avaliar-produto-overlay {
+    background: rgba(0, 0, 0, 0.85);
+  }
+  
+  .avaliar-produto-modal {
+    background: var(--bg-card, #1e1e1e);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+  
+  .avaliar-produto-header {
+    background: var(--bg-card, #1e1e1e);
+    border-bottom-color: var(--border-color, #333);
+    
+    h3 {
+      color: var(--text-primary, #e0e0e0);
+    }
+  }
+  
+  .avaliar-produto-close {
+    color: var(--text-secondary, #aaa);
+    
+    &:hover {
+      background: var(--bg-hover, #2a2a2a);
+      color: var(--text-primary, #e0e0e0);
+    }
+  }
+  
+  .avaliar-produto-info {
+    background: var(--bg-secondary, #2a2a2a);
+    
+    img {
+      border-color: var(--border-color, #444);
+    }
+    
+    h4 {
+      color: var(--text-primary, #e0e0e0);
+    }
+    
+    p {
+      color: var(--text-secondary, #aaa);
+    }
+  }
+  
+  .avaliar-produto-stars-section label,
+  .avaliar-produto-comentario label {
+    color: var(--text-primary, #e0e0e0);
+  }
+  
+  .avaliar-produto-star-btn.empty svg {
+    color: var(--border-color, #444);
+    stroke: var(--text-secondary, #666);
+  }
+  
+  .avaliar-produto-comentario textarea {
+    background: var(--bg-input, #2a2a2a);
+    border-color: var(--border-color, #444);
+    color: var(--text-primary, #e0e0e0);
+    
+    &::placeholder {
+      color: var(--text-placeholder, #666);
+    }
+    
+    &:focus {
+      border-color: var(--primary-color, #e84393);
+    }
+  }
+  
+  .avaliar-produto-recomendacao-label {
+    background: var(--bg-secondary, #2a2a2a);
+    
+    &:hover {
+      background: var(--bg-hover, #333);
+    }
+  }
+  
+  .avaliar-produto-checkbox {
+    border-color: var(--border-color, #555);
+  }
+  
+  .avaliar-produto-recomendacao-text {
+    strong {
+      color: var(--text-primary, #e0e0e0);
+    }
+    
+    span {
+      color: var(--text-secondary, #aaa);
+    }
+  }
+  
+  .avaliar-produto-actions {
+    border-top-color: var(--border-color, #333);
+  }
+  
+  .avaliar-produto-btn-cancelar {
+    border-color: var(--border-color, #444);
+    color: var(--text-secondary, #aaa);
+    
+    &:hover {
+      border-color: var(--text-secondary, #888);
+      background: var(--bg-hover, #2a2a2a);
+    }
+  }
+}
+
+// ========================================
+// Responsividade
+// ========================================
+
+@media (max-width: 480px) {
+  .avaliar-produto-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+  
+  .avaliar-produto-modal {
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: 20px 20px 0 0;
+    animation: slideUpMobile 0.3s ease;
+  }
+  
+  .avaliar-produto-header {
+    padding: 1rem 1.25rem;
+    border-radius: 20px 20px 0 0;
+    
+    h3 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .avaliar-produto-content {
+    padding: 1.25rem;
+  }
+  
+  .avaliar-produto-info {
+    padding: 0.875rem;
+    
+    img {
+      width: 60px;
+      height: 60px;
+    }
+    
+    h4 {
+      font-size: 0.95rem;
+    }
+  }
+  
+  .avaliar-produto-star-btn svg {
+    font-size: 1.875rem;
+  }
+  
+  .avaliar-produto-comentario textarea {
+    min-height: 100px;
+    padding: 0.875rem;
+  }
+  
+  .avaliar-produto-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+    
+    button {
+      width: 100%;
+    }
+  }
+}
+
+@keyframes slideUpMobile {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ========================================
+// Acessibilidade - Modo de Alto Contraste
+// ========================================
+
+@media (prefers-contrast: high) {
+  .avaliar-produto-modal {
+    border: 2px solid var(--text-primary, #000);
+  }
+  
+  .avaliar-produto-star-btn {
+    &:focus {
+      outline-width: 3px;
+    }
+    
+    &.filled svg {
+      filter: none;
+    }
+  }
+  
+  .avaliar-produto-comentario textarea:focus {
+    outline: 3px solid var(--primary-color, #e84393);
+    outline-offset: 2px;
+  }
+  
+  .avaliar-produto-btn-enviar,
+  .avaliar-produto-btn-cancelar {
+    &:focus {
+      outline-width: 3px;
+    }
+  }
+}
+
+// ========================================
+// Redução de Movimento
+// ========================================
+
+@media (prefers-reduced-motion: reduce) {
+  .avaliar-produto-overlay,
+  .avaliar-produto-modal,
+  .avaliar-produto-star-btn,
+  .avaliar-produto-star-btn svg,
+  .avaliar-produto-checkbox svg {
+    animation: none;
+    transition: none;
+  }
+  
+  .avaliar-produto-btn-enviar:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .avaliar-produto-star-btn:hover {
+    transform: none;
+  }
+}

@@ -21,6 +21,8 @@ import Catalogo from './pages/catalogo';
 import Checkout from './pages/checkout';
 import PedidoConfirmado from './pages/pedidoConfirmado';
 import MeusPedidos from './pages/meusPedidos';
+import Favoritos from './pages/favoritos';
+import SobreNos from './pages/sobre';
 import PoliticaPrivacidade from './pages/politicaPrivacidade';
 import TermosUso from './pages/termosUso';
 import { AuthProvider } from './context/AuthContext';
@@ -71,6 +73,8 @@ function App() {
                         <Route path="/checkout" element={<Checkout />} />
                         <Route path="/pedido-confirmado" element={<PedidoConfirmado />} />
                         <Route path="/meus-pedidos" element={<MeusPedidos />} />
+                        <Route path="/favoritos" element={<Favoritos />} />
+                        <Route path="/sobre" element={<SobreNos />} />
                         <Route path="/politica-privacidade" element={<PoliticaPrivacidade />} />
                         <Route path="/termos-uso" element={<TermosUso />} />
                         <Route path="/login" element={<Login />} />
