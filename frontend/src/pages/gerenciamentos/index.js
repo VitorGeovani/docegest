@@ -71,8 +71,8 @@ export default function Login() {
       <header>
         <div className="header-logo">
           <img
-            src="/imgs/logo_segredo_branca-removebg.png"
-            alt="Segredo do Sabor"
+            src="/imgs/docegest-logo-nobg.png"
+            alt="DoceGest"
           />
         </div>
 

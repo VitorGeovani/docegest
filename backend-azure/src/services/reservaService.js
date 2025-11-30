@@ -428,6 +428,9 @@ async function enviarNotificacaoMudancaStatus(idReserva, novoStatus) {
             total: reserva.valor_total || 0,
             metodoPagamento: reserva.pagamento || 'PIX',
             pontoEntrega: reserva.ponto_entrega || reserva.endereco_entrega || 'Loja principal',
+            // inclui tipo do pedido e endereço de entrega quando disponível
+            tipoPedido: reserva.tipo_pedido || reserva.tipoPedido || null,
+            enderecoEntrega: reserva.endereco_entrega || reserva.enderecoEntrega || null,
             itens: [], // Não precisa para notificações de status
             cliente: {
                 nome: cliente.nome || 'Cliente',

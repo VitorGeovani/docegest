@@ -202,14 +202,31 @@ class WhatsAppService {
      * RF028: Pedido pronto para retirada
      */
     async notificarPedidoPronto(pedido) {
-        const mensagem = `🎊 *Pedido Pronto!*\n\n` +
-            `Olá *${pedido.cliente.nome}*!\n\n` +
-            `Seu pedido *#${pedido.numero}* está prontinho e esperando por você! 😍\n\n` +
-            `📍 *Local de Retirada:*\n${pedido.pontoEntrega}\n\n` +
-            `Estamos te esperando!\n\n` +
-            `_Lembre-se de trazer este número do pedido: *#${pedido.numero}*_`;
+        const isEntrega = (pedido.tipoPedido && String(pedido.tipoPedido).toUpperCase() === 'ENTREGA') || !!pedido.enderecoEntrega;
 
-        return await this.enviarMensagem(pedido.cliente.telefone, mensagem);
+        let mensagem = `🎊 *Pedido Pronto!*\n\n` +
+            `Olá *${pedido.cliente.nome}*!\n\n` +
+            `Seu pedido *#${pedido.numero}* `;
+
+        if (isEntrega) {
+            const endereco = pedido.enderecoEntrega || pedido.pontoEntrega || 'Endereço não informado';
+            mensagem += `está a caminho e será entregue no endereço abaixo: 🛵\n\n` +
+                `📍 *Endereço de Entrega:*\n${endereco}\n\n` +
+                `Caso precise, responda esta mensagem para falar conosco.`;
+        } else {
+            mensagem += `está prontinho e esperando por você! 😍\n\n` +
+                `📍 *Local de Retirada:*\n${pedido.pontoEntrega}\n\n` +
+                `Estamos te esperando!`;
+        }
+
+        mensagem += `\n\n_Lembre-se de trazer este número do pedido: *#${pedido.numero}*_`;
+
+        return await this.enviarMensagem(
+            pedido.cliente.telefone,
+            mensagem,
+            pedido.idreserva || pedido.id || pedido.numero,
+            'pedido_pronto'
+        );
     }
 
     /**
