@@ -1,0 +1,463 @@
+/**
+ * DoceGest - Error Boundary Styles
+ * Interface amigável para erros da aplicação
+ */
+
+// Variáveis
+$primary: #667eea;
+$primary-dark: #5a67d8;
+$danger: #ef4444;
+$text-dark: #1f2937;
+$text-light: #6b7280;
+$background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+// ==========================================
+// CONTAINER PRINCIPAL
+// ==========================================
+
+.error-boundary {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: $background;
+  text-align: center;
+}
+
+.error-boundary-content {
+  max-width: 600px;
+  background: white;
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ==========================================
+// ILUSTRAÇÃO DE ERRO (Bolo quebrado)
+// ==========================================
+
+.error-illustration {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 2rem;
+}
+
+.broken-cake {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px) rotate(-2deg); }
+  75% { transform: translateX(5px) rotate(2deg); }
+}
+
+.cake-layer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  
+  &.cake-layer-1 {
+    bottom: 10%;
+    width: 100px;
+    height: 35px;
+    background: linear-gradient(180deg, #d4a574 0%, #c4956a 100%);
+  }
+  
+  &.cake-layer-2 {
+    bottom: 35%;
+    width: 80px;
+    height: 30px;
+    background: linear-gradient(180deg, #f8a5c2 0%, #f78fb3 100%);
+  }
+  
+  &.cake-layer-3 {
+    bottom: 55%;
+    width: 60px;
+    height: 25px;
+    background: linear-gradient(180deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 8px 8px 50% 50%;
+  }
+}
+
+.cake-crack {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 3px;
+  height: 60%;
+  background: linear-gradient(180deg, $danger 0%, transparent 100%);
+  transform: translateX(-50%) rotate(15deg);
+  z-index: 10;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: $danger;
+  }
+  
+  &::before {
+    top: 20%;
+    left: -8px;
+    transform: rotate(-30deg);
+  }
+  
+  &::after {
+    top: 40%;
+    right: -8px;
+    transform: rotate(25deg);
+  }
+}
+
+.cake-crumbs {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 20px;
+  
+  span {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #d4a574;
+    border-radius: 2px;
+    animation: crumb-fall 2s ease-in-out infinite;
+    
+    &:nth-child(1) { left: 10%; animation-delay: 0s; }
+    &:nth-child(2) { left: 35%; animation-delay: 0.3s; }
+    &:nth-child(3) { left: 60%; animation-delay: 0.6s; }
+    &:nth-child(4) { left: 85%; animation-delay: 0.9s; }
+  }
+}
+
+@keyframes crumb-fall {
+  0%, 100% { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% { 
+    transform: translateY(5px);
+    opacity: 0.7;
+  }
+}
+
+.error-icon {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background: $danger;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba($danger, 0.4);
+  animation: pulse-error 2s ease-in-out infinite;
+  
+  span {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+@keyframes pulse-error {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+// ==========================================
+// TEXTOS
+// ==========================================
+
+.error-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: $text-dark;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  font-size: 1rem;
+  color: $text-light;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+// ==========================================
+// BOTÕES DE AÇÃO
+// ==========================================
+
+.error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  
+  button, a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 12px;
+    font-size: 0.938rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: none;
+    
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba($primary, 0.3);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($primary, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  background: white;
+  color: $primary;
+  border: 2px solid $primary !important;
+  
+  &:hover {
+    background: rgba($primary, 0.05);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-tertiary {
+  background: transparent;
+  color: $text-light;
+  
+  &:hover {
+    color: $primary;
+    background: rgba($primary, 0.05);
+  }
+}
+
+// ==========================================
+// DETALHES TÉCNICOS
+// ==========================================
+
+.error-details {
+  text-align: left;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+  
+  summary {
+    cursor: pointer;
+    color: $text-light;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+    
+    &:hover {
+      background: #f9fafb;
+    }
+  }
+}
+
+.error-stack {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #1f2937;
+  border-radius: 12px;
+  overflow-x: auto;
+  
+  h4 {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
+  }
+  
+  pre {
+    color: #e5e7eb;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+  }
+}
+
+// ==========================================
+// FOOTER
+// ==========================================
+
+.error-footer {
+  margin-top: 2rem;
+  color: rgba(white, 0.9);
+  
+  p {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.contact-options {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.contact-link {
+  color: white;
+  text-decoration: none;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  background: rgba(white, 0.1);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: rgba(white, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+// ==========================================
+// RESPONSIVO
+// ==========================================
+
+@media (max-width: 640px) {
+  .error-boundary {
+    padding: 1rem;
+  }
+  
+  .error-boundary-content {
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .error-illustration {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .error-title {
+    font-size: 1.5rem;
+  }
+  
+  .error-actions {
+    flex-direction: column;
+    
+    button, a {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  .contact-options {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+// ==========================================
+// ACESSIBILIDADE
+// ==========================================
+
+@media (prefers-reduced-motion: reduce) {
+  .error-boundary-content,
+  .broken-cake,
+  .cake-crumbs span,
+  .error-icon,
+  .error-actions button,
+  .error-actions a,
+  .contact-link {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+// ==========================================
+// TEMA ESCURO
+// ==========================================
+
+@media (prefers-color-scheme: dark) {
+  .error-boundary-content {
+    background: #1f2937;
+  }
+  
+  .error-title {
+    color: white;
+  }
+  
+  .error-message {
+    color: #9ca3af;
+  }
+  
+  .error-details summary {
+    color: #9ca3af;
+    
+    &:hover {
+      background: #374151;
+    }
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    color: #a5b4fc;
+    border-color: #a5b4fc !important;
+    
+    &:hover {
+      background: rgba(#a5b4fc, 0.1);
+    }
+  }
+  
+  .btn-tertiary {
+    color: #9ca3af;
+    
+    &:hover {
+      color: #a5b4fc;
+      background: rgba(#a5b4fc, 0.1);
+    }
+  }
+}

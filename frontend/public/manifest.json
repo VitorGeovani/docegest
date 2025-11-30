@@ -1,25 +1,51 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "DoceGest",
+  "name": "DoceGest - Sistema de Gestão para Confeitarias",
+  "description": "Sistema completo de gestão para confeitarias artesanais. E-commerce, controle de estoque, pedidos e muito mais.",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "imgs/docegest-logo-nobg.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "logo192.png",
+      "src": "imgs/docegest-logo-nobg.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
-      "src": "logo512.png",
+      "src": "imgs/docegest-logo-nobg.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "orientation": "portrait-primary",
+  "theme_color": "#667eea",
+  "background_color": "#ffffff",
+  "categories": ["food", "shopping", "business"],
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Catálogo",
+      "short_name": "Catálogo",
+      "description": "Ver produtos disponíveis",
+      "url": "/catalogo",
+      "icons": [{ "src": "imgs/docegest-logo-nobg.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Meus Pedidos",
+      "short_name": "Pedidos",
+      "description": "Acompanhar meus pedidos",
+      "url": "/meus-pedidos",
+      "icons": [{ "src": "imgs/docegest-logo-nobg.png", "sizes": "96x96" }]
+    }
+  ]
 }

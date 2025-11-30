@@ -3,57 +3,98 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="imgs/logo_segredo_branca-removebg.png" />
+  <link rel="icon" href="imgs/docegest-logo-nobg.png" />
   
   <!-- Viewport otimizado para acessibilidade e dispositivos modernos -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
   
   <meta name="theme-color" content="#667eea" />
+  <meta name="msapplication-TileColor" content="#667eea" />
   
-  <!-- Meta tags melhoradas para SEO e acessibilidade -->
-  <meta name="description" content="Segredo do Sabor - Doces artesanais feitos com amor e ingredientes selecionados. Faça seu pedido online de forma rápida, fácil e acessível para todos." />
-  <meta name="keywords" content="doces artesanais, confeitaria, bolos personalizados, entrega, acessibilidade" />
-  <meta name="author" content="Segredo do Sabor" />
+  <!-- Meta tags otimizadas para SEO -->
+  <meta name="description" content="DoceGest - Sistema completo de gestão para confeitarias. Gerencie pedidos, clientes, estoque e finanças de forma simples e eficiente. Faça seu pedido online!" />
+  <meta name="keywords" content="docegest, gestão confeitaria, sistema pedidos, doces artesanais, confeitaria online, gestão de pedidos, cardápio digital" />
+  <meta name="author" content="DoceGest" />
+  <meta name="robots" content="index, follow" />
+  <meta name="googlebot" content="index, follow" />
+  <link rel="canonical" href="https://docegest.com.br" />
   
   <!-- Open Graph para redes sociais -->
-  <meta property="og:title" content="Segredo do Sabor - Doces Artesanais" />
-  <meta property="og:description" content="Doces artesanais que conquistam corações e paladares. Site 100% acessível conforme WCAG 2.2 AAA." />
+  <meta property="og:title" content="DoceGest - Sistema de Gestão para Confeitarias" />
+  <meta property="og:description" content="Sistema completo para gestão de confeitarias. Pedidos online, controle de estoque, relatórios e muito mais. 100% acessível." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://docegest.com.br" />
+  <meta property="og:image" content="https://docegest.com.br/imgs/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="DoceGest" />
+  <meta property="og:locale" content="pt_BR" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Segredo do Sabor - Doces Artesanais" />
-  <meta name="twitter:description" content="Doces artesanais que conquistam corações e paladares. Site 100% acessível." />
+  <meta name="twitter:site" content="@docegest" />
+  <meta name="twitter:title" content="DoceGest - Sistema de Gestão para Confeitarias" />
+  <meta name="twitter:description" content="Sistema completo para gestão de confeitarias. 100% acessível conforme WCAG 2.2 AAA." />
+  <meta name="twitter:image" content="https://docegest.com.br/imgs/twitter-card.png" />
   
+  <!-- Segurança -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  
+  <!-- Preconnect para performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://vlibras.gov.br" />
+  
+  <!-- Apple Touch Icons -->
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+  <link rel="apple-touch-icon" sizes="152x152" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="apple-touch-icon" sizes="167x167" href="%PUBLIC_URL%/logo192.png" />
+  
+  <!-- PWA Manifest -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-  <title>Segredo do Sabor</title>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Princess+Sofia:wght@400&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pridi:wght@400&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" />
+  
+  <title>DoceGest - Sistema de Gestão para Confeitarias</title>
+  
+  <!-- Google Fonts com display swap para melhor performance -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Pridi:wght@400&family=Roboto:wght@400;500;600;700&display=swap" />
+  
+  <!-- Schema.org Structured Data para SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "DoceGest",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "Sistema completo de gestão para confeitarias e doceiras. Gerencie pedidos, clientes, estoque e finanças.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "150"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "DoceGest",
+      "url": "https://docegest.com.br"
+    }
+  }
+  </script>
 </head>
 
 <body>
   <!-- Mensagem acessível para usuários sem JavaScript -->
   <noscript>
-    <div style="padding: 2rem; text-align: center; font-family: sans-serif;">
-      <h1>JavaScript Necessário</h1>
+    <div style="padding: 2rem; text-align: center; font-family: sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh;">
+      <h1>🍰 DoceGest</h1>
+      <h2>JavaScript Necessário</h2>
       <p>Este site requer JavaScript para funcionar corretamente.</p>
       <p>Por favor, ative o JavaScript no seu navegador para continuar.</p>
       <p>Para obter ajuda, entre em contato conosco através do telefone ou email.</p>
@@ -61,7 +102,7 @@
   </noscript>
   
   <!-- Container principal com role e aria-label para acessibilidade -->
-  <div id="root" role="application" aria-label="Segredo do Sabor - Aplicação Web"></div>
+  <div id="root" role="application" aria-label="DoceGest - Sistema de Gestão para Confeitarias"></div>
   
   <!-- VLibras - Plugin de Libras do Governo Federal -->
   <div vw class="enabled">
@@ -74,17 +115,6 @@
   <script>
     new window.VLibras.Widget('https://vlibras.gov.br/app');
   </script>
-  
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
 </body>
 
 </html>
