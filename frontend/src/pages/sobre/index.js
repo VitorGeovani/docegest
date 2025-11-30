@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaHeart, FaCookie, FaBirthdayCake, FaTruck, FaUsers, FaAward, FaStar, FaInstagram, FaFacebook, FaWhatsapp, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
 import HeaderCatalogo from '../../components/headerCatalogo';
 import Footer from '../../components/footer';
+import BotaoVoltarTopo from '../../components/botaoVoltarTopo';
 import './index.scss';
 
 const SobreNos = () => {
@@ -291,6 +292,7 @@ const SobreNos = () => {
                 </section>
             </main>
 
+            <BotaoVoltarTopo />
             <Footer />
         </div>
     );

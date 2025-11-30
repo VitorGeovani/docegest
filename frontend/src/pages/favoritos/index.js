@@ -227,6 +227,7 @@ const Favoritos = () => {
                                         aria-label={`Compartilhar ${produto.nome}`}
                                     >
                                         <FaShare />
+                                        <span>Compartilhar</span>
                                     </button>
                                     <button 
                                         className="btn-whatsapp"
@@ -234,12 +235,13 @@ const Favoritos = () => {
                                         aria-label={`Compartilhar ${produto.nome} no WhatsApp`}
                                     >
                                         <FaWhatsapp />
+                                        <span>WhatsApp</span>
                                     </button>
                                     <button 
                                         className="btn-adicionar-carrinho"
                                         onClick={() => handleAdicionarCarrinho(produto)}
                                     >
-                                        <FaShoppingCart /> Adicionar
+                                        <FaShoppingCart /> <span>Adicionar ao Carrinho</span>
                                     </button>
                                 </div>
                             </div>
